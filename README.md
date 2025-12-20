@@ -1,2 +1,3 @@
-# skypro-kanban
-Учебный проект по React
+# Kanban
+
+Учебный проект на React
