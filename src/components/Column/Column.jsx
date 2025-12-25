@@ -1,13 +1,15 @@
 import Card from "../Card/Card";
 
-const Column = () => {
+const Column = ({ title, cards }) => {
   return (
     <div className="main__column column">
       <div className="column__title">
-        <p>Без статуса</p>
+        <p>{title.toUpperCase()}</p>
       </div>
       <div className="cards">
-        <Card />
+        {cards.map((card) => (
+          <Card key={card.id} card={card} />
+        ))}
       </div>
     </div>
   );

@@ -1,6 +1,15 @@
 import PopUser from "../PopUser/PopUser";
+import { useState } from "react";
 
 const Header = () => {
+  const [userShown, setUserShown] = useState(false);
+
+  const toggleUser = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    userShown ? setUserShown(false) : setUserShown(true);
+  };
+
   return (
     <header className="header">
       <div className="container">
@@ -19,10 +28,16 @@ const Header = () => {
             <button className="header__btn-main-new _hover01" id="btnMainNew">
               <a href="#popNewCard">Создать новую задачу</a>
             </button>
-            <a href="#user-set-target" className="header__user _hover02">
+            <a href="#" className="header__user _hover02" onClick={toggleUser}>
               Ivan Ivanov
             </a>
-            <PopUser />
+            {userShown && (
+              <PopUser
+                onClose={() => {
+                  setUserShown(false);
+                }}
+              />
+            )}
           </nav>
         </div>
       </div>

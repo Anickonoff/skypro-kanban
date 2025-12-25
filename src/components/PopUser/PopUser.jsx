@@ -1,6 +1,29 @@
-const PopUser = () => {
+import { useEffect, useRef } from "react";
+
+const useClickOutside = (ref, handler) => {
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (!ref.current && ref.current.contains(e.target)) {
+        return;
+      }
+      handler();
+    };
+    document.addEventListener("click", handleOutsideClick);
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, [ref, handler]);
+};
+
+const PopUser = ({ onClose }) => {
+  const ref = useRef();
+  useClickOutside(ref, onClose);
   return (
-    <div className="header__pop-user-set pop-user-set" id="user-set-target">
+    <div
+      className="header__pop-user-set pop-user-set"
+      id="user-set-target"
+      ref={ref}
+    >
       <p className="pop-user-set__name">Ivan Ivanov</p>
       <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
       <div className="pop-user-set__theme">
