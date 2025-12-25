@@ -9,15 +9,6 @@ const Main = () => {
     "тестирование",
     "готово",
   ];
-  // const groupByKey = (cards, key = "status") => {
-  //   return cards.reduce((acc, card) => {
-  //     if (!acc[card[key]]) {
-  //       acc[card[key]] = [];
-  //     }
-  //     acc[card[key]].push(card);
-  //     return acc;
-  //   }, {});
-  // };
 
   return (
     <main className="main">
