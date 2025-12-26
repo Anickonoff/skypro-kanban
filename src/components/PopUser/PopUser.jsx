@@ -3,10 +3,9 @@ import { useEffect, useRef } from "react";
 const useClickOutside = (ref, handler) => {
   useEffect(() => {
     const handleOutsideClick = (e) => {
-      if (!ref.current && ref.current.contains(e.target)) {
-        return;
+      if (ref.current && !ref.current.contains(e.target)) {
+        handler();
       }
-      handler();
     };
     document.addEventListener("click", handleOutsideClick);
     return () => {
