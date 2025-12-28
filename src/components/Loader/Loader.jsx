@@ -1,13 +1,13 @@
-import { Sloader, Sspan1, Sspan2, Sspan3, Sspan4 } from "./Loader.styled";
+import { Sloader, Sspan } from "./Loader.styled";
 
 // import './Loader.css';
 const Loader = () => {
   return (
     <Sloader>
-      <Sspan1></Sspan1>
-      <Sspan2></Sspan2>
-      <Sspan3></Sspan3>
-      <Sspan4></Sspan4>
+      <Sspan></Sspan>
+      <Sspan $delay="0.15s"></Sspan>
+      <Sspan $delay="0.3s"></Sspan>
+      <Sspan $delay="0.45s"></Sspan>
     </Sloader>
   );
 };

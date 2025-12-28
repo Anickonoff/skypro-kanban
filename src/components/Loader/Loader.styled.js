@@ -28,22 +28,7 @@ const Sspan = styled.span`
   width: 5px;
   height: 20px;
   background-color: #565eef;
+  animation: ${grow} 1s ease-in-out ${(props) => props.$delay || ""} infinite;
 `;
 
-const Sspan1 = styled(Sspan)`
-  animation: ${grow} 1s ease-in-out infinite;
-`;
-
-const Sspan2 = styled(Sspan)`
-  animation: ${grow} 1s ease-in-out 0.15s infinite;
-`;
-
-const Sspan3 = styled(Sspan)`
-  animation: ${grow} 1s ease-in-out 0.3s infinite;
-`;
-
-const Sspan4 = styled(Sspan)`
-  animation: ${grow} 1s ease-in-out 0.45s infinite;
-`;
-
-export { Sloader, Sspan1, Sspan2, Sspan3, Sspan4 };
+export { Sloader, Sspan };
