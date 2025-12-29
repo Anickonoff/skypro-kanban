@@ -1,27 +1,37 @@
-import { themes } from "../../data";
+// import { themes } from "../../data";
+
+import {
+  SCard,
+  SCardBtn,
+  SCardContent,
+  SCardDate,
+  SCardHeader,
+  SCardItem,
+  SCardTheme,
+  SCardTitle,
+} from "./Card.styled";
 
 const Card = ({ card }) => {
-  const themeClass = themes[card.theme] || "_gray";
   return (
-    <div className="cards__item">
-      <div className="cards__card card">
-        <div className="card__group">
-          <div className={`card__theme ${themeClass}`}>
-            <p className={themeClass}>{card.theme}</p>
-          </div>
+    <SCardItem>
+      <SCard>
+        <SCardHeader>
+          <SCardTheme theme={card.theme}>
+            <p>{card.theme}</p>
+          </SCardTheme>
           <a href="#popBrowse" target="_self">
-            <div className="card__btn">
+            <SCardBtn>
               <div></div>
               <div></div>
               <div></div>
-            </div>
+            </SCardBtn>
           </a>
-        </div>
-        <div className="card__content">
+        </SCardHeader>
+        <SCardContent>
           <a href="" target="_blank">
-            <h3 className="card__title">{card.title}</h3>
+            <SCardTitle>{card.title}</SCardTitle>
           </a>
-          <div className="card__date">
+          <SCardDate>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="13"
@@ -51,10 +61,10 @@ const Card = ({ card }) => {
               </defs>
             </svg>
             <p>{card.date}</p>
-          </div>
-        </div>
-      </div>
-    </div>
+          </SCardDate>
+        </SCardContent>
+      </SCard>
+    </SCardItem>
   );
 };
 

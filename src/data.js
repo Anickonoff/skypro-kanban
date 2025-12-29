@@ -43,8 +43,8 @@ export const cardList = [
   },
 ];
 
-export const themes = {
-  "Новый год": "_green",
-  Здоровье: "_orange",
-  Ремонт: "_purple",
-};
+// export const themes = {
+//   "Новый год": "_green",
+//   Здоровье: "_orange",
+//   Ремонт: "_purple",
+// };

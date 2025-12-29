@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import Calendar from "./components/Calendar/Calendar";
-import Card from "./components/Card/Card";
-import Column from "./components/Column/Column";
 import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
 import PopBrowse from "./components/PopBrowse/PopBrowse";
