@@ -9,6 +9,7 @@ import Loader from "./components/Loader/Loader";
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [exit, setExit] = useState(false);
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -17,7 +18,7 @@ function App() {
   return (
     <>
       <div className="wrapper">
-        <PopExit />
+        {exit && <PopExit />}
         <PopNewCard />
         <PopBrowse />
         <Header />
