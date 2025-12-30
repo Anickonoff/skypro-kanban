@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import { devices } from "../../breakpoints";
 
 const StyledHeader = styled.header`
   width: 100%;
   margin: 0 auto;
   background-color: #ffffff;
 `;
-
+//add container style here
 const HeaderBlock = styled.div`
   max-width: 1260px;
   width: 100%;
@@ -19,6 +20,9 @@ const HeaderBlock = styled.div`
   position: relative;
   top: 0;
   left: 0;
+  @media screen and (${devices.sm}) {
+    padding: 0 26px;
+  }
 `;
 
 const HeaderLogo = styled.div`
@@ -54,6 +58,17 @@ const HeaderBtn = styled.button`
   }
   &:hover {
     background-color: #33399b;
+  }
+  @media screen and (${devices.sm}) {
+    z-index: 3;
+    position: fixed;
+    left: 16px;
+    bottom: 30px;
+    top: auto;
+    width: calc(100vw - 32px);
+    height: 40px;
+    border-radius: 4px;
+    margin-right: 0;
   }
 `;
 

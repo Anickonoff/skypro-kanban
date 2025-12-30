@@ -1,9 +1,15 @@
 import styled from "styled-components";
+import { devices } from "../../breakpoints";
 
 const StyledColumn = styled.div`
   width: 20%;
   margin: 0 auto;
   display: block;
+  @media screen and (${devices.lg}) {
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+  }
 `;
 
 const ColumnTitle = styled.div`
@@ -20,10 +26,10 @@ const ColumnCards = styled.div`
   width: 100%;
   display: block;
   position: relative;
+  @media screen and (${devices.lg}) {
+    display: flex;
+    overflow-y: auto;
+  }
 `;
 
-export {
-    StyledColumn,
-    ColumnTitle,
-    ColumnCards
-}
+export { StyledColumn, ColumnTitle, ColumnCards };

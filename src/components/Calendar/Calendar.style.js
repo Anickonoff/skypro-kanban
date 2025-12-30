@@ -1,4 +1,14 @@
 import styled from "styled-components";
+import { devices } from "../../breakpoints";
+
+const StyledCalendar = styled.div`
+  width: 182px;
+  margin-bottom: 20px;
+  @media screen and (${devices.md}) {
+    max-width: 340px;
+    width: 100%;
+  }
+`;
 
 const CalendarTitle = styled.p`
   color: #000;
@@ -7,6 +17,9 @@ const CalendarTitle = styled.p`
   line-height: 1;
   margin-bottom: 14px;
   padding: 0 7px;
+  @media screen and (${devices.md}) {
+    padding: 0;
+  }
 `;
 
 const CalendarBlock = styled.div`
@@ -20,6 +33,9 @@ const CalendarNav = styled.div`
   justify-content: space-between;
   margin-top: 14px;
   padding: 0 7px;
+  @media screen and (${devices.md}) {
+    padding: 0;
+  }
 `;
 
 const CalendarMonth = styled.div`
@@ -67,6 +83,9 @@ const CalendarDayName = styled.div`
   font-weight: 500;
   line-height: normal;
   letter-spacing: -0.2px;
+  @media screen and (${devices.md}) {
+    font-size: 14px;
+  }
 `;
 
 const CalendarDayNameWeekend = styled(CalendarDayName)`
@@ -78,6 +97,11 @@ const CalendarCells = styled.div`
   height: 126px;
   display: flex;
   flex-wrap: wrap;
+  @media screen and (${devices.md}) {
+    width: 344px;
+    height: auto;
+    justify-content: space-around;
+  }
 `;
 
 const CalendarCell = styled.div`
@@ -90,10 +114,10 @@ const CalendarCell = styled.div`
   align-items: center;
   justify-content: center;
   color: ${(props) =>
-    props.isActive ? "#fff" : props.isWeekend ? "#94a6be" : "#94a6be"};
-  font-weight: ${(props) => (props.isCurrent ? "700" : "normal")};
-  background-color: ${(props) => (props.isActive ? "#94a6be" : "transparent")};
-  opacity: ${(props) => (props.isOtherMonth ? "0" : "1")};
+    props.$isActive ? "#fff" : props.$isWeekend ? "#94a6be" : "#94a6be"};
+  font-weight: ${(props) => (props.$isCurrent ? "700" : "normal")};
+  background-color: ${(props) => (props.$isActive ? "#94a6be" : "transparent")};
+  opacity: ${(props) => (props.$isOtherMonth ? "0" : "1")};
   font-size: 10px;
   line-height: 1;
   letter-spacing: -0.2px;
@@ -102,10 +126,18 @@ const CalendarCell = styled.div`
     background-color: #eaeef6;
     color: #94a6be;
   }
+  @media screen and (${devices.md}) {
+    font-size: 14px;
+    width: 42px;
+    height: 42px;
+  }
 `;
 
 const CalendarDeadline = styled.div`
   padding: 0 7px;
+  @media screen and (${devices.md}) {
+    padding: 0;
+  }
 `;
 
 const CalendarDeadlineText = styled.p`
@@ -115,10 +147,14 @@ const CalendarDeadlineText = styled.p`
   span {
     color: #000;
   }
+  @media screen and (${devices.md}) {
+    font-size: 14px;
+  }
 `;
 
 
 export {
+  StyledCalendar,
   CalendarTitle,
   CalendarBlock,
   CalendarNav,

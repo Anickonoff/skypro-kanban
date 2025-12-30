@@ -1,4 +1,4 @@
-import { CalendarAction, CalendarActions, CalendarBlock, CalendarCell, CalendarCells, CalendarContent, CalendarDayName, CalendarDayNameWeekend, CalendarDaysNames, CalendarDeadline, CalendarDeadlineText, CalendarMonth, CalendarNav, CalendarTitle } from "./Calendar.style";
+import { CalendarAction, CalendarActions, CalendarBlock, CalendarCell, CalendarCells, CalendarContent, CalendarDayName, CalendarDayNameWeekend, CalendarDaysNames, CalendarDeadline, CalendarDeadlineText, CalendarMonth, CalendarNav, CalendarTitle, StyledCalendar } from "./Calendar.style";
 
 const Calendar = () => {
   const daysName = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"];
@@ -40,7 +40,7 @@ const Calendar = () => {
     { day: 1, isOtherMonth: true, isWeekend: true },
   ];
   return (
-    <>
+    <StyledCalendar>
       <CalendarTitle>Даты</CalendarTitle>
       <CalendarBlock>
         <CalendarNav>
@@ -78,10 +78,10 @@ const Calendar = () => {
             {days.map((day) => (
               <CalendarCell 
                 key={`${day.isOtherMonth ? 'other' : 'current'}-${day.day}`}
-                isOtherMonth={day.isOtherMonth}
-                isWeekend={day.isWeekend}
-                isCurrent={day.isCurrent}
-                isActive={day.isActive}
+                $isOtherMonth={day.isOtherMonth}
+                $isWeekend={day.isWeekend}
+                $isCurrent={day.isCurrent}
+                $isActive={day.isActive}
                 >
                   {day.day}
                 </CalendarCell>
@@ -96,7 +96,7 @@ const Calendar = () => {
           </CalendarDeadlineText>
         </CalendarDeadline>
       </CalendarBlock>
-    </>
+    </StyledCalendar>
   );
 };
 

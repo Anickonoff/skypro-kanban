@@ -51,9 +51,7 @@ const PopBrowse = () => {
                   ></textarea>
                 </div>
               </form>
-              <div className="pop-new-card__calendar calendar">
-                <Calendar />
-              </div>
+              <Calendar />
             </div>
             <div className="theme-down__categories theme-down">
               <p className="categories__p subttl">Категория</p>

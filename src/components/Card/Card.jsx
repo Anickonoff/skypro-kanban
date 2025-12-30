@@ -1,37 +1,37 @@
 // import { themes } from "../../data";
 
 import {
-  SCard,
-  SCardBtn,
-  SCardContent,
-  SCardDate,
-  SCardHeader,
-  SCardItem,
-  SCardTheme,
-  SCardTitle,
+  StyledCard,
+  CardBtn,
+  CardContent,
+  CardDate,
+  CardHeader,
+  CardItem,
+  CardTheme,
+  CardTitle,
 } from "./Card.styled";
 
 const Card = ({ card }) => {
   return (
-    <SCardItem>
-      <SCard>
-        <SCardHeader>
-          <SCardTheme theme={card.theme}>
+    <CardItem>
+      <StyledCard>
+        <CardHeader>
+          <CardTheme theme={card.theme}>
             <p>{card.theme}</p>
-          </SCardTheme>
+          </CardTheme>
           <a href="#popBrowse" target="_self">
-            <SCardBtn>
+            <CardBtn>
               <div></div>
               <div></div>
               <div></div>
-            </SCardBtn>
+            </CardBtn>
           </a>
-        </SCardHeader>
-        <SCardContent>
+        </CardHeader>
+        <CardContent>
           <a href="" target="_blank">
-            <SCardTitle>{card.title}</SCardTitle>
+            <CardTitle>{card.title}</CardTitle>
           </a>
-          <SCardDate>
+          <CardDate>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="13"
@@ -61,10 +61,10 @@ const Card = ({ card }) => {
               </defs>
             </svg>
             <p>{card.date}</p>
-          </SCardDate>
-        </SCardContent>
-      </SCard>
-    </SCardItem>
+          </CardDate>
+        </CardContent>
+      </StyledCard>
+    </CardItem>
   );
 };
 

@@ -19,14 +19,14 @@ const themes = {
   `,
 };
 
-const SCardItem = styled.div`
+const CardItem = styled.div`
   padding: 5px;
   animation-name: card-animation;
   animation-duration: 500ms;
   animation-timing-function: linear;
 `;
 
-const SCard = styled.div`
+const StyledCard = styled.div`
   width: 220px;
   height: 130px;
   background-color: #ffffff;
@@ -38,7 +38,7 @@ const SCard = styled.div`
   padding: 15px 13px 19px;
 `;
 
-const SCardHeader = styled.div`
+const CardHeader = styled.div`
   width: 100%;
   height: 20px;
   margin-bottom: 12px;
@@ -47,7 +47,7 @@ const SCardHeader = styled.div`
   justify-content: space-between;
 `;
 
-const SCardTheme = styled.div`
+const CardTheme = styled.div`
   width: auto;
   height: 20px;
   padding: 5px 14px;
@@ -60,7 +60,7 @@ const SCardTheme = styled.div`
   }
 `;
 
-const SCardBtn = styled.div`
+const CardBtn = styled.div`
   width: 24px;
   height: 24px;
   display: flex;
@@ -75,7 +75,7 @@ const SCardBtn = styled.div`
   }
 `;
 
-const SCardContent = styled.div`
+const CardContent = styled.div`
   height: 64px;
   display: flex;
   flex-direction: column;
@@ -83,7 +83,7 @@ const SCardContent = styled.div`
   justify-content: space-between;
 `;
 
-const SCardTitle = styled.h3`
+const CardTitle = styled.h3`
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
@@ -91,7 +91,7 @@ const SCardTitle = styled.h3`
   margin-bottom: 10px;
 `;
 
-const SCardDate = styled.div`
+const CardDate = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -108,12 +108,12 @@ const SCardDate = styled.div`
 `;
 
 export {
-  SCardItem,
-  SCard,
-  SCardHeader,
-  SCardTheme,
-  SCardBtn,
-  SCardContent,
-  SCardTitle,
-  SCardDate,
+  CardItem,
+  StyledCard,
+  CardHeader,
+  CardTheme,
+  CardBtn,
+  CardContent,
+  CardTitle,
+  CardDate,
 };
