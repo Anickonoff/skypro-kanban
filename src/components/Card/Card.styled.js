@@ -1,27 +1,25 @@
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
-const themes = {
-  "Новый год": css`
-    background-color: #b4fdd1;
-    color: #06b16e;
-  `,
-  Здоровье: css`
-    background-color: #ffe4c2;
-    color: #ff6d00;
-  `,
-  Ремонт: css`
-    background-color: #e9d4ff;
-    color: #9a48f1;
-  `,
-  Другое: css`
-    background: #94a6be;
-    color: #ffffff;
-  `,
+const categoryMap = {
+  "Новый год": "newYear",
+  Здоровье: "health",
+  Ремонт: "repair",
 };
+
+const cardAnimation = keyframes`
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  100% {
+    height: auto;
+    opacity: 1;
+  }
+`;
 
 const CardItem = styled.div`
   padding: 5px;
-  animation-name: card-animation;
+  animation-name: ${cardAnimation};
   animation-duration: 500ms;
   animation-timing-function: linear;
 `;
@@ -29,7 +27,7 @@ const CardItem = styled.div`
 const StyledCard = styled.div`
   width: 220px;
   height: 130px;
-  background-color: #ffffff;
+  background-color: ${({theme}) => theme.colors.background.surface}; 
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -52,7 +50,15 @@ const CardTheme = styled.div`
   height: 20px;
   padding: 5px 14px;
   border-radius: 18px;
-  ${(props) => (themes[props.theme] ? themes[props.theme] : themes["Другое"])}
+  ${({theme, $category}) => {
+    const key = categoryMap[$category] ?? "other";
+    const colors = theme.colors.categories[key];
+    return css`
+      background-color: ${colors.bg};
+      color: ${colors.text};
+    `;
+    }
+  }
   p {
     font-size: 10px;
     font-weight: 600;
@@ -71,7 +77,7 @@ const CardBtn = styled.div`
     width: 4px;
     height: 4px;
     border-radius: 50%;
-    background-color: #94a6be;
+    background-color: ${({theme}) => theme.colors.text.secondary};
   }
 `;
 
@@ -84,10 +90,10 @@ const CardContent = styled.div`
 `;
 
 const CardTitle = styled.h3`
-  font-size: 14px;
+  font-size: ${({theme}) => theme.fonts.size.sm};
   font-weight: 500;
   line-height: 18px;
-  color: #000000;
+  color: ${({theme})=> theme.colors.text.primary};
   margin-bottom: 10px;
 `;
 
@@ -102,7 +108,7 @@ const CardDate = styled.div`
     margin-left: 6px;
     font-size: 10px;
     line-height: 13px;
-    color: #94a6be;
+    color: ${({theme}) => theme.colors.text.secondary};
     letter-spacing: 0.2px;
   }
 `;

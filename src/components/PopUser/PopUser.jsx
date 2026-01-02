@@ -23,9 +23,14 @@ const useClickOutside = (ref, handler) => {
   }, [ref, handler]);
 };
 
-const PopUser = ({ onClose }) => {
+const PopUser = ({ onClose, onExitClick }) => {
   const ref = useRef();
   useClickOutside(ref, onClose);
+  const handleExit = () => {
+    onClose();
+    onExitClick();
+  };
+
   return (
     <PopUserSet id="user-set-target" ref={ref}>
       <UserName>Ivan Ivanov</UserName>
@@ -34,8 +39,8 @@ const PopUser = ({ onClose }) => {
         <UserThemeTitle>Темная тема</UserThemeTitle>
         <UserThemeBtn type="checkbox" name="checkbox" />
       </UserTheme>
-      <UserExitBtn type="button">
-        <a href="#popExit">Выйти</a>
+      <UserExitBtn type="button" onClick={handleExit}>
+        Выйти
       </UserExitBtn>
     </PopUserSet>
   );

@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { devices } from "../../breakpoints";
 
 const StyledHeader = styled.header`
   width: 100%;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: ${({theme}) => theme.colors.background.surface};
 `;
+
 //add container style here
 const HeaderBlock = styled.div`
   max-width: 1260px;
@@ -20,7 +20,7 @@ const HeaderBlock = styled.div`
   position: relative;
   top: 0;
   left: 0;
-  @media screen and (${devices.sm}) {
+  @media screen and (${({theme}) => theme.devices.sm}) {
     padding: 0 26px;
   }
 `;
@@ -37,29 +37,27 @@ const HeaderNav = styled.nav`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 `;
 
 const HeaderBtn = styled.button`
   width: 178px;
   height: 30px;
   border-radius: 4px;
-  background-color: #565eef;
-  color: #ffffff;
+  background-color: ${({theme}) => theme.colors.button.main};
+  color: ${({theme}) => theme.colors.button.text};
   border: none;
-  font-size: 14px;
+  font-size: ${({theme}) => theme.fonts.size.sm};
   line-height: 1;
   font-weight: 500;
   margin-right: 20px;
   a {
-    color: #ffffff;
-    &:hover {
-      color: #ffffff;
-    }
+    color: ${({theme}) => theme.colors.button.text};
   }
   &:hover {
-    background-color: #33399b;
+    background-color: ${({theme}) => theme.colors.button.hover};
   }
-  @media screen and (${devices.sm}) {
+  @media screen and (${({theme}) => theme.devices.sm}) {
     z-index: 3;
     position: fixed;
     left: 16px;
@@ -73,13 +71,13 @@ const HeaderBtn = styled.button`
 `;
 
 const HeaderUser = styled.a`
-  color: #565eef;
+  color: ${({theme}) => theme.colors.button.main};
   display: flex;
   align-items: center;
   height: 20px;
   flex-wrap: nowrap;
   justify-content: center;
-  font-size: 14px;
+  font-size: ${({theme}) => theme.fonts.size.sm};
   line-height: 20px;
   &:after {
     content: "";
@@ -87,17 +85,17 @@ const HeaderUser = styled.a`
     width: 6px;
     height: 6px;
     border-radius: 1px;
-    border-left: 1.9px solid #565eef;
-    border-bottom: 1.9px solid #565eef;
+    border-left: 1.9px solid ${({theme}) => theme.colors.button.main};
+    border-bottom: 1.9px solid ${({theme}) => theme.colors.button.main};
     transform: rotate(-45deg);
     margin: -6px 0 0 5px;
     padding: 0;
   }
   &:hover {
-    color: #33399b;
+    color: ${({theme}) => theme.colors.button.hover};
     &:after {
-      border-left-color: #33399b;
-      border-bottom-color: #33399b;
+      border-left-color: ${({theme}) => theme.colors.button.hover};
+      border-bottom-color: ${({theme}) => theme.colors.button.hover};
     }
   }
 `;

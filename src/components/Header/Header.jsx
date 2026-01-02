@@ -9,7 +9,7 @@ import {
   StyledHeader,
 } from "./Header.styled";
 
-const Header = ({ theme = "light" }) => {
+const Header = ({ theme = "light", onExitClick }) => {
   const [userShown, setUserShown] = useState(false);
 
   const toggleUser = (e) => {
@@ -41,6 +41,7 @@ const Header = ({ theme = "light" }) => {
               onClose={() => {
                 setUserShown(false);
               }}
+              onExitClick={onExitClick}
             />
           )}
         </HeaderNav>

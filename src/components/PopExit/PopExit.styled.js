@@ -21,24 +21,24 @@ const ExitContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.4);
+  background: ${({theme}) => theme.colors.background.overlay};
 `;
 
 const ExitBlock = styled.div`
   display: block;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: ${({theme}) => theme.colors.background.surface};
   max-width: 370px;
   width: 100%;
   padding: 50px 60px;
   border-radius: 10px;
-  border: 0.7px solid #d4dbe5;
-  box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.13);
+  border: 0.7px solid ${({theme}) => theme.colors.border.pop};
+  box-shadow: ${({theme}) => theme.shadows.popExit};
 `;
 
 const ExitPrompt = styled.h2`
   text-align: center;
-  font-size: 20px;
+  font-size: ${({theme}) => theme.fonts.size.md};
   font-weight: 700;
   line-height: 30px;
   letter-spacing: -0.4px;
@@ -61,15 +61,15 @@ const ExitBtn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: ${({theme}) => theme.fonts.size.sm};
   line-height: 21px;
   font-weight: 500;
   letter-spacing: -0.14px;
   &:hover {
-    background-color: #33399b;
-    color: #ffffff;
+    background-color: ${({theme}) => theme.colors.button.hover};
+    color: ${({theme}) => theme.colors.button.text};
     a {
-      color: #ffffff;
+      color: ${({theme}) => theme.colors.button.text};
     }
   }
   a {
@@ -82,19 +82,20 @@ const ExitBtn = styled.button`
 `;
 
 const ExitBtnNo = styled(ExitBtn)`
-    background-color: transparent;
-    border: 0.7px solid var(--palette-navy-60, #565eef);
-    color: #565eef;
+    background-color: ${({theme}) => theme.colors.button.secondary};
+    border: 0.7px solid ${({theme}) => theme.colors.button.main};
+    color: ${({theme}) => theme.colors.button.main};
     a {
-        color: #565eef;
+        color: ${({theme}) => theme.colors.button.main};
     }
 `;
 
 const ExitBtnYes = styled(ExitBtn)`
-    background-color: #565eef;
-    color: #ffffff;
+    background-color: ${({theme}) => theme.colors.button.main};
+    border: none;
+    color: ${({theme}) => theme.colors.button.text};
     a {
-        color: #ffffff;
+        color: ${({theme}) => theme.colors.button.text};
     }
 `;
 

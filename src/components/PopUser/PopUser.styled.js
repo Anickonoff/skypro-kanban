@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 const fontStyles = css`
-  font-size: 14px;
+  font-size: ${({theme})=>theme.fonts.size.sm};
   line-height: 21px;
   letter-spacing: -0.14px;
 `;
@@ -9,14 +9,14 @@ const fontStyles = css`
 const PopUserSet = styled.div`
   display: block;
   position: absolute;
-  top: 61px;
+  top: 41px;
   right: 0;
   width: 213px;
   height: 205px;
   border-radius: 10px;
-  border: 0.7px solid rgba(148, 166, 190, 0.4);
-  background: #fff;
-  box-shadow: 0px 10px 39px 0px rgba(26, 56, 101, 0.21);
+  border: 0.7px solid ${({theme}) => theme.colors.border.default};
+  background: ${({theme}) => theme.colors.background.surface};
+  box-shadow: ${({theme})=>theme.shadows.popUser};
   padding: 34px;
   text-align: center;
   z-index: 2;
@@ -24,14 +24,14 @@ const PopUserSet = styled.div`
 
 const UserName = styled.p`
   ${fontStyles}
-  color: #000;
+  color: ${({theme}) => theme.colors.text.primary};
   margin-bottom: 4px;
   font-weight: 500;
 `;
 
 const UserMail = styled.p`
   ${fontStyles}
-  color: #94a6be;
+  color: ${({theme}) => theme.colors.text.secondary};
   margin-bottom: 10px;
 `;
 
@@ -44,7 +44,7 @@ const UserTheme = styled.div`
 
 const UserThemeTitle = styled.p`
   ${fontStyles}
-  color: #000;
+  color: ${({theme}) => theme.colors.text.primary};
 `;
 
 const UserThemeBtn = styled.input`
@@ -52,7 +52,7 @@ const UserThemeBtn = styled.input`
   width: 24px;
   height: 13px;
   border-radius: 100px;
-  background: #eaeef6;
+  background: ${({theme}) => theme.colors.background.secondary};
   outline: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -65,7 +65,7 @@ const UserThemeBtn = styled.input`
     width: 11px;
     height: 11px;
     border-radius: 50%;
-    background-color: #94a6be;
+    background-color: ${({theme}) => theme.colors.text.secondary};
     transition: 0.5s;
   }
   &:checked:before {
@@ -77,17 +77,17 @@ const UserExitBtn = styled.button`
   width: 72px;
   height: 30px;
   background: transparent;
-  color: #565eef;
+  color: ${({theme}) => theme.colors.button.main};
   border-radius: 4px;
-  border: 1px solid #565eef;
+  border: 1px solid ${({theme}) => theme.colors.button.main};
   a {
-    color: #565eef;
+    color: ${({theme}) => theme.colors.button.main};
   }
   &:hover {
-    background-color: #33399b;
-    color: #fff;
+    background-color: ${({theme}) => theme.colors.button.hover};
+    color: ${({theme}) => theme.colors.button.text};
     a {
-      color: #fff;
+      color: ${({theme}) => theme.colors.button.text};
     }
   }
 `;

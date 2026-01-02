@@ -15,13 +15,16 @@ function App() {
       setLoading(false);
     }, 5000);
   }, []);
+  const openExitPopup = () => setExit(true);
+  const closeExitPopup = () => setExit(false);
+
   return (
     <>
       <div className="wrapper">
-        {exit && <PopExit />}
+        {exit && <PopExit onClose={closeExitPopup} />}
         <PopNewCard />
         <PopBrowse />
-        <Header />
+        <Header onExitClick={openExitPopup} />
         {loading ? <Loader /> : <Main />}
       </div>
     </>

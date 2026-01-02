@@ -16,7 +16,7 @@ const Card = ({ card }) => {
     <CardItem>
       <StyledCard>
         <CardHeader>
-          <CardTheme theme={card.theme}>
+          <CardTheme $category={card.theme}>
             <p>{card.theme}</p>
           </CardTheme>
           <a href="#popBrowse" target="_self">

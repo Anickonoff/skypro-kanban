@@ -1,23 +1,22 @@
 import styled from "styled-components";
-import { devices } from "../../breakpoints";
 
 const StyledCalendar = styled.div`
   width: 182px;
   margin-bottom: 20px;
-  @media screen and (${devices.md}) {
+  @media screen and (${({ theme }) => theme.devices.md}) {
     max-width: 340px;
     width: 100%;
   }
 `;
 
 const CalendarTitle = styled.p`
-  color: #000;
-  font-size: 14px;
+  color: ${({ theme }) => theme.colors.text.primary};
+  font-size: ${({ theme }) => theme.fonts.size.sm};
   font-weight: 600;
   line-height: 1;
   margin-bottom: 14px;
   padding: 0 7px;
-  @media screen and (${devices.md}) {
+  @media screen and (${({ theme }) => theme.devices.md}) {
     padding: 0;
   }
 `;
@@ -33,14 +32,14 @@ const CalendarNav = styled.div`
   justify-content: space-between;
   margin-top: 14px;
   padding: 0 7px;
-  @media screen and (${devices.md}) {
+  @media screen and (${({ theme }) => theme.devices.md}) {
     padding: 0;
   }
 `;
 
 const CalendarMonth = styled.div`
-  color: #94a6be;
-  font-size: 14px;
+  color: ${({ theme }) => theme.colors.text.secondary};
+  font-size: ${({ theme }) => theme.fonts.size.sm};
   line-height: 25px;
   font-weight: 600;
 `;
@@ -60,7 +59,7 @@ const CalendarAction = styled.div`
   align-items: center;
   justify-content: center;
   svg {
-    fill: #94a6be;
+    fill: ${({ theme }) => theme.colors.text.secondary};
   }
 `;
 
@@ -78,18 +77,18 @@ const CalendarDaysNames = styled.div`
 `;
 
 const CalendarDayName = styled.div`
-  color: #94a6be;
-  font-size: 10px;
+  color: ${({ theme }) => theme.colors.text.secondary};
+  font-size: ${({ theme }) => theme.fonts.size.xs};
   font-weight: 500;
   line-height: normal;
   letter-spacing: -0.2px;
-  @media screen and (${devices.md}) {
-    font-size: 14px;
+  @media screen and (${({ theme }) => theme.devices.md}) {
+    font-size: ${({ theme }) => theme.fonts.size.sm};
   }
 `;
 
 const CalendarDayNameWeekend = styled(CalendarDayName)`
-  color: #94a6be;
+  color: ${({ theme }) => theme.colors.calendar.weekend};
 `;
 
 const CalendarCells = styled.div`
@@ -97,7 +96,7 @@ const CalendarCells = styled.div`
   height: 126px;
   display: flex;
   flex-wrap: wrap;
-  @media screen and (${devices.md}) {
+  @media screen and (${({ theme }) => theme.devices.md}) {
     width: 344px;
     height: auto;
     justify-content: space-around;
@@ -113,21 +112,25 @@ const CalendarCell = styled.div`
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  color: ${(props) =>
-    props.$isActive ? "#fff" : props.$isWeekend ? "#94a6be" : "#94a6be"};
-  font-weight: ${(props) => (props.$isCurrent ? "700" : "normal")};
-  background-color: ${(props) => (props.$isActive ? "#94a6be" : "transparent")};
-  opacity: ${(props) => (props.$isOtherMonth ? "0" : "1")};
-  font-size: 10px;
+  color: ${({ theme, $isActive, $isWeekend}) =>
+    $isActive
+      ? theme.colors.text.inverse
+      : $isWeekend
+      ? theme.colors.calendar.weekend
+      : theme.colors.text.secondary};
+  font-weight: ${({$isCurrent}) => ($isCurrent ? "700" : "normal")};
+  background-color: ${({theme, $isActive}) => ($isActive ? theme.colors.calendar.bgActiveDay : "transparent")};
+  opacity: ${({$isOtherMonth}) => ($isOtherMonth ? "0" : "1")};
+  font-size: ${({ theme }) => theme.fonts.size.xs};
   line-height: 1;
   letter-spacing: -0.2px;
   cursor: pointer;
   &:hover {
-    background-color: #eaeef6;
-    color: #94a6be;
+    background-color: ${({theme}) => theme.colors.calendar.bgCellHover};
+    color: ${({theme}) =>theme.colors.text.secondary};
   }
-  @media screen and (${devices.md}) {
-    font-size: 14px;
+  @media screen and (${({ theme }) => theme.devices.md}) {
+    font-size: ${({ theme }) => theme.fonts.size.sm};
     width: 42px;
     height: 42px;
   }
@@ -135,23 +138,22 @@ const CalendarCell = styled.div`
 
 const CalendarDeadline = styled.div`
   padding: 0 7px;
-  @media screen and (${devices.md}) {
+  @media screen and (${({ theme }) => theme.devices.md}) {
     padding: 0;
   }
 `;
 
 const CalendarDeadlineText = styled.p`
-  color: #94a6be;
-  font-size: 10px;
+  color: ${({theme}) =>theme.colors.text.secondary};
+  font-size: ${({ theme }) => theme.fonts.size.xs};
   line-height: 1;
   span {
-    color: #000;
+    color: ${({ theme }) => theme.colors.text.primary};
   }
-  @media screen and (${devices.md}) {
-    font-size: 14px;
+  @media screen and (${({ theme }) => theme.devices.md}) {
+    font-size: ${({ theme }) => theme.fonts.size.sm};
   }
 `;
-
 
 export {
   StyledCalendar,
