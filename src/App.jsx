@@ -6,6 +6,7 @@ import PopBrowse from "./components/PopBrowse/PopBrowse";
 import PopExit from "./components/PopExit/PopExit";
 import PopNewCard from "./components/PopNewCard/PopNewCard";
 import Loader from "./components/Loader/Loader";
+import { StyledWrapper } from "./components/Wrapper/Wrapper.styled";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -19,15 +20,13 @@ function App() {
   const closeExitPopup = () => setExit(false);
 
   return (
-    <>
-      <div className="wrapper">
-        {exit && <PopExit onClose={closeExitPopup} />}
-        <PopNewCard />
-        <PopBrowse />
-        <Header onExitClick={openExitPopup} />
-        {loading ? <Loader /> : <Main />}
-      </div>
-    </>
+    <StyledWrapper>
+      {exit && <PopExit onClose={closeExitPopup} />}
+      <PopNewCard />
+      <PopBrowse />
+      <Header onExitClick={openExitPopup} />
+      {loading ? <Loader /> : <Main />}
+    </StyledWrapper>
   );
 }
 
