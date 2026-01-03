@@ -1,3 +1,5 @@
+import { StyledWrapper } from "./Wrapper.styled";
+
 const Wrapper = () => {
     return (
         <StyledWrapper>
