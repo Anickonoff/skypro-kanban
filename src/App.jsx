@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
 import PopBrowse from "./components/PopBrowse/PopBrowse";
@@ -16,14 +15,16 @@ function App() {
       setLoading(false);
     }, 5000);
   }, []);
+  const [addTask, setAddTask] = useState(false);
+  const [showTask, setShowTask] = useState(false);
   const openExitPopup = () => setExit(true);
   const closeExitPopup = () => setExit(false);
 
   return (
     <Wrapper>
       {exit && <PopExit onClose={closeExitPopup} />}
-      <PopNewCard />
-      <PopBrowse />
+      {addTask && <PopNewCard />}
+      {showTask && <PopBrowse />}
       <Header onExitClick={openExitPopup} />
       {loading ? <Loader /> : <Main />}
     </Wrapper>
