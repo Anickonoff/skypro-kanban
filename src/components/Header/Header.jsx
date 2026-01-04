@@ -9,7 +9,7 @@ import {
   StyledHeader,
 } from "./Header.styled";
 
-const Header = ({ theme = "light", onExitClick }) => {
+const Header = ({ theme = "light", onExitClick, onAddTaskClick }) => {
   const [userShown, setUserShown] = useState(false);
 
   const toggleUser = (e) => {
@@ -30,8 +30,8 @@ const Header = ({ theme = "light", onExitClick }) => {
         </HeaderLogo>
 
         <HeaderNav>
-          <HeaderBtn id="btnMainNew">
-            <a href="#popNewCard">Создать новую задачу</a>
+          <HeaderBtn onClick={onAddTaskClick} id="btnMainNew">
+            Создать новую задачу
           </HeaderBtn>
           <HeaderUser href="#" onClick={toggleUser}>
             Ivan Ivanov

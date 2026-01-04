@@ -19,13 +19,15 @@ function App() {
   const [showTask, setShowTask] = useState(false);
   const openExitPopup = () => setExit(true);
   const closeExitPopup = () => setExit(false);
+  const openAddTaskPopup = () => setAddTask(true);
+  const closeAddTaskPopup = () => setAddTask(false);
 
   return (
     <Wrapper>
       {exit && <PopExit onClose={closeExitPopup} />}
-      {addTask && <PopNewCard />}
+      {addTask && <PopNewCard onClose={closeAddTaskPopup} />}
       {showTask && <PopBrowse />}
-      <Header onExitClick={openExitPopup} />
+      <Header onExitClick={openExitPopup} onAddTaskClick={openAddTaskPopup} />
       {loading ? <Loader /> : <Main />}
     </Wrapper>
   );
