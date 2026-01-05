@@ -1,4 +1,13 @@
 import { useEffect, useRef } from "react";
+import {
+  PopUserSet,
+  UserExitBtn,
+  UserMail,
+  UserName,
+  UserTheme,
+  UserThemeTitle,
+  UserThemeBtn,
+} from "./PopUser.styled";
 
 const useClickOutside = (ref, handler) => {
   useEffect(() => {
@@ -14,25 +23,26 @@ const useClickOutside = (ref, handler) => {
   }, [ref, handler]);
 };
 
-const PopUser = ({ onClose }) => {
+const PopUser = ({ onClose, onExitClick }) => {
   const ref = useRef();
   useClickOutside(ref, onClose);
+  const handleExit = () => {
+    onClose();
+    onExitClick();
+  };
+
   return (
-    <div
-      className="header__pop-user-set pop-user-set"
-      id="user-set-target"
-      ref={ref}
-    >
-      <p className="pop-user-set__name">Ivan Ivanov</p>
-      <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
-      <div className="pop-user-set__theme">
-        <p>Темная тема</p>
-        <input type="checkbox" className="checkbox" name="checkbox" />
-      </div>
-      <button type="button" className="_hover03">
-        <a href="#popExit">Выйти</a>
-      </button>
-    </div>
+    <PopUserSet id="user-set-target" ref={ref}>
+      <UserName>Ivan Ivanov</UserName>
+      <UserMail>ivan.ivanov@gmail.com</UserMail>
+      <UserTheme>
+        <UserThemeTitle>Темная тема</UserThemeTitle>
+        <UserThemeBtn type="checkbox" name="checkbox" />
+      </UserTheme>
+      <UserExitBtn type="button" onClick={handleExit}>
+        Выйти
+      </UserExitBtn>
+    </PopUserSet>
   );
 };
 

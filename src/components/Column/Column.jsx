@@ -1,17 +1,18 @@
 import Card from "../Card/Card";
+import { ColumnCards, ColumnTitle, StyledColumn } from "./Column.styled";
 
 const Column = ({ title, cards }) => {
   return (
-    <div className="main__column column">
-      <div className="column__title">
-        <p>{title.toUpperCase()}</p>
-      </div>
-      <div className="cards">
+    <StyledColumn>
+      <ColumnTitle>
+        {title.toUpperCase()}
+      </ColumnTitle>
+      <ColumnCards>
         {cards.map((card) => (
           <Card key={card.id} card={card} />
         ))}
-      </div>
-    </div>
+      </ColumnCards>
+    </StyledColumn>
   );
 };
 export default Column;

@@ -1,5 +1,6 @@
 import Column from "../Column/Column";
 import { cardList } from "../../data";
+import { MainBlock, MainContent, StyledMain } from "./Main.styled";
 
 const Main = () => {
   const columns = [
@@ -11,23 +12,21 @@ const Main = () => {
   ];
 
   return (
-    <main className="main">
-      <div className="container">
-        <div className="main__block">
-          <div className="main__content">
-            {columns.map((status) => (
-              <Column
-                key={status}
-                title={status}
-                cards={cardList.filter(
-                  (card) => card.status.toLowerCase() === status.toLowerCase()
-                )}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-    </main>
+    <StyledMain>
+      <MainBlock>
+        <MainContent>
+          {columns.map((status) => (
+            <Column
+              key={status}
+              title={status}
+              cards={cardList.filter(
+                (card) => card.status.toLowerCase() === status.toLowerCase()
+              )}
+            />
+          ))}
+        </MainContent>
+      </MainBlock>
+    </StyledMain>
   );
 };
 
