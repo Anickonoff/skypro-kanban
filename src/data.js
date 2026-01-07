@@ -42,9 +42,3 @@ export const cardList = [
     status: "В работе",
   },
 ];
-
-// export const themes = {
-//   "Новый год": "_green",
-//   Здоровье: "_orange",
-//   Ремонт: "_purple",
-// };

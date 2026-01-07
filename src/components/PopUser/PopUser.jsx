@@ -8,6 +8,7 @@ import {
   UserThemeTitle,
   UserThemeBtn,
 } from "./PopUser.styled";
+import { useNavigate } from "react-router-dom";
 
 const useClickOutside = (ref, handler) => {
   useEffect(() => {
@@ -23,12 +24,13 @@ const useClickOutside = (ref, handler) => {
   }, [ref, handler]);
 };
 
-const PopUser = ({ onClose, onExitClick }) => {
+const PopUser = ({ onClose }) => {
   const ref = useRef();
+  const navigate = useNavigate();
   useClickOutside(ref, onClose);
   const handleExit = () => {
     onClose();
-    onExitClick();
+    navigate("/exit");
   };
 
   return (

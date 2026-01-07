@@ -10,6 +10,7 @@ const lightTheme = {
     text: {
       primary: "#000000",
       secondary: "#94a6be",
+      secondarytr: "#94a6be66",
       inverse: "#ffffff",
     },
 
@@ -71,7 +72,7 @@ const lightTheme = {
   },
 
   shadows: {
-    popExit: "0px 4px 67px -12px rgba(0, 0, 0, 0.13)",
+    pop: "0px 4px 67px -12px rgba(0, 0, 0, 0.13)",
     popUser: "0px 10px 39px 0px rgba(26, 56, 101, 0.21)",
   },
 

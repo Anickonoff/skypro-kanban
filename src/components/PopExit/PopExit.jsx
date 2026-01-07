@@ -8,7 +8,7 @@ import {
   PopExitWindow,
 } from "./PopExit.styled";
 
-const PopExit = ({ onClose }) => {
+const PopExit = () => {
   return (
     <PopExitWindow id="popExit">
       <ExitContainer>
@@ -18,7 +18,7 @@ const PopExit = ({ onClose }) => {
             <ExitBtnYes id="exitYes">
               <a href="modal/signin.html">Да, выйти</a>{" "}
             </ExitBtnYes>
-            <ExitBtnNo id="exitNo" onClick={onClose}>
+            <ExitBtnNo id="exitNo">
               Нет, остаться
             </ExitBtnNo>
           </ExitForm>
