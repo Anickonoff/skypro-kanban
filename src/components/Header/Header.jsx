@@ -8,12 +8,12 @@ import {
   HeaderUser,
   StyledHeader,
 } from "./Header.styled";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = ({ theme = "light" }) => {
   const [userShown, setUserShown] = useState(false);
   const navigate = useNavigate();
-  
+
   const toggleUser = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -30,9 +30,9 @@ const Header = ({ theme = "light" }) => {
     <StyledHeader>
       <HeaderBlock>
         <HeaderLogo>
-          <a href="" target="_self">
+          <Link to="/">
             <img src={logoUrl} alt="logo" />
-          </a>
+          </Link>
         </HeaderLogo>
 
         <HeaderNav>

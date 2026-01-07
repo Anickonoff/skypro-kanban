@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import NotFoundPage from "./pages/NotFound";
+import NotFoundPage from "./pages/NotFoundPage";
 import MainPage from "./pages/MainPage";
 import NewCardPage from "./pages/NewCardPage";
 import ViewCardPage from "./pages/ViewCardpage";
