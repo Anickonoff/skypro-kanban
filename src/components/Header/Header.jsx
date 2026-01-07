@@ -8,14 +8,20 @@ import {
   HeaderUser,
   StyledHeader,
 } from "./Header.styled";
+import { useNavigate } from "react-router-dom";
 
-const Header = ({ theme = "light", onAddTaskClick }) => {
+const Header = ({ theme = "light" }) => {
   const [userShown, setUserShown] = useState(false);
-
+  const navigate = useNavigate();
+  
   const toggleUser = (e) => {
     e.preventDefault();
     e.stopPropagation();
     userShown ? setUserShown(false) : setUserShown(true);
+  };
+
+  const hanleAddTaskClick = () => {
+    navigate("/card/new");
   };
 
   const logoUrl = theme === "dark" ? "public/logo_dark.png" : "public/logo.png";
@@ -30,7 +36,7 @@ const Header = ({ theme = "light", onAddTaskClick }) => {
         </HeaderLogo>
 
         <HeaderNav>
-          <HeaderBtn onClick={onAddTaskClick} id="btnMainNew">
+          <HeaderBtn onClick={hanleAddTaskClick} id="btnMainNew" type="button">
             Создать новую задачу
           </HeaderBtn>
           <HeaderUser href="#" onClick={toggleUser}>

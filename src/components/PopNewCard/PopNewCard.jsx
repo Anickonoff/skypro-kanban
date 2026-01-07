@@ -1,15 +1,19 @@
+import { Link } from "react-router-dom";
 import Calendar from "../Calendar/Calendar";
+import '../../App.css';
 
-const PopNewCard = ({ onClose }) => {
+const PopNewCard = () => {
   return (
     <div className="pop-new-card" id="popNewCard">
       <div className="pop-new-card__container">
         <div className="pop-new-card__block">
           <div className="pop-new-card__content">
             <h3 className="pop-new-card__ttl">Создание задачи</h3>
-            <a href="#" onClick={onClose} className="pop-new-card__close">
+            {/* <a href="#" onClick={handleClick} className="pop-new-card__close"> */}
+            <Link to="/" className="pop-new-card__close">
               &#10006;
-            </a>
+            </Link>
+            {/* </a> */}
             <div className="pop-new-card__wrap">
               <form
                 className="pop-new-card__form form-new"
