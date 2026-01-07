@@ -23,7 +23,7 @@ const AppRoutes = () => {
         <Route path="/" element={<MainPage loading={loading} />} />
         <Route path="/card/:id" element={<ViewCardPage />} />
         <Route path="/card/new" element={<NewCardPage />} />
-        <Route path="/exit" element={<SignOutPage />} />
+        <Route path="/exit" element={<SignOutPage setIsAuth={setIsAuth}/>} />
       </Route>
       <Route path="/login" element={<SignInPage setIsAuth={setIsAuth} />} />
       <Route path="/register" element={<SignUpPage />} />

@@ -1,8 +1,8 @@
 import PopExit from "../components/PopExit/PopExit"
 
-const SignOutPage = () => {
+const SignOutPage = ({setIsAuth}) => {
     return (
-        <PopExit />
+        <PopExit setIsAuth={setIsAuth} />
     )
 }
 export default SignOutPage;
