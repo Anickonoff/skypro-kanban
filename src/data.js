@@ -5,6 +5,7 @@ export const cardList = [
     title: "Купить ёлку",
     date: "26.12.2025",
     status: "Тестирование",
+    description: "Купить пушистую ёлку не менее 2м высотой",
   },
   {
     id: 2,
@@ -12,6 +13,7 @@ export const cardList = [
     title: "Подготовить подарки",
     date: "30.12.2025",
     status: "В работе",
+    description: "Подготовить подарки для близких и родных",
   },
   {
     id: 3,
@@ -19,6 +21,7 @@ export const cardList = [
     title: "Записаться к врачу",
     date: "12.01.2026",
     status: "Нужно сделать",
+    description: "Записаться к зубному на осмотр",
   },
   {
     id: 4,
@@ -26,6 +29,7 @@ export const cardList = [
     title: "Сходить в аптеку",
     date: "24.01.2026",
     status: "Готово",
+    description: "Сходить в аптеку за нурофеном и физ.раствором",
   },
   {
     id: 5,
@@ -33,6 +37,7 @@ export const cardList = [
     title: "Купить штукатурку",
     date: "15.02.2026",
     status: "Без статуса",
+    description: "Докупить 10 мешков штукатурки",
   },
   {
     id: 6,
@@ -40,5 +45,6 @@ export const cardList = [
     title: "Подготовить стены",
     date: "05.01.2026",
     status: "В работе",
+    description: "Очистить от пыли и прогрунтовать стены",
   },
 ];

@@ -1,5 +1,6 @@
 // import { themes } from "../../data";
 
+import { Link } from "react-router-dom";
 import {
   StyledCard,
   CardBtn,
@@ -19,18 +20,18 @@ const Card = ({ card }) => {
           <CardTheme $category={card.theme}>
             <p>{card.theme}</p>
           </CardTheme>
-          <a href="#popBrowse" target="_self">
+          <Link to={"/card/" + card.id}>
             <CardBtn>
               <div></div>
               <div></div>
               <div></div>
             </CardBtn>
-          </a>
+          </Link>
         </CardHeader>
         <CardContent>
-          <a href="" target="_blank">
+          <Link to={"/card/" + card.id}>
             <CardTitle>{card.title}</CardTitle>
-          </a>
+          </Link>
           <CardDate>
             <svg
               xmlns="http://www.w3.org/2000/svg"

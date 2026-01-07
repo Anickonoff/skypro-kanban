@@ -1,15 +1,24 @@
 import Calendar from "../Calendar/Calendar";
+import "../../App.css";
+import { useNavigate, useParams } from "react-router-dom";
+import { cardList } from "../../data";
 
 const PopBrowse = () => {
+  const { id } = useParams();
+  const card = cardList.find((card) => card.id == id);
+  const navigale = useNavigate();
+  const handleClose = () => {
+    navigale("/");
+  };
   return (
     <div className="pop-browse" id="popBrowse">
       <div className="pop-browse__container">
         <div className="pop-browse__block">
           <div className="pop-browse__content">
             <div className="pop-browse__top-block">
-              <h3 className="pop-browse__ttl">Название задачи</h3>
+              <h3 className="pop-browse__ttl">{card.title}</h3>
               <div className="categories__theme theme-top _orange _active-category">
-                <p className="_orange">Web Design</p>
+                <p className="_orange">{card.theme}</p>
               </div>
             </div>
             <div className="pop-browse__status status">
@@ -48,6 +57,7 @@ const PopBrowse = () => {
                     id="textArea01"
                     readOnly
                     placeholder="Введите описание задачи..."
+                    value={card.description}
                   ></textarea>
                 </div>
               </form>
@@ -68,8 +78,12 @@ const PopBrowse = () => {
                   <a href="#">Удалить задачу</a>
                 </button>
               </div>
-              <button className="btn-browse__close _btn-bg _hover01">
-                <a href="#">Закрыть</a>
+              <button
+                className="btn-browse__close _btn-bg _hover01"
+                type="button"
+                onClick={handleClose}
+              >
+                Закрыть
               </button>
             </div>
             <div className="pop-browse__btn-edit _hide">
@@ -87,8 +101,12 @@ const PopBrowse = () => {
                   <a href="#">Удалить задачу</a>
                 </button>
               </div>
-              <button className="btn-edit__close _btn-bg _hover01">
-                <a href="#">Закрыть</a>
+              <button
+                className="btn-edit__close _btn-bg _hover01"
+                type="button"
+                onClick={handleClose}
+              >
+                Закрыть
               </button>
             </div>
           </div>
