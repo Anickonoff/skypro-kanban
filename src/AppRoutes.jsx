@@ -20,10 +20,11 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route element={<PrivateRoute isAuth={isAuth} />}>
-        <Route path="/" element={<MainPage loading={loading} />} />
-        <Route path="/card/:id" element={<ViewCardPage />} />
-        <Route path="/card/new" element={<NewCardPage />} />
-        <Route path="/exit" element={<SignOutPage setIsAuth={setIsAuth}/>} />
+        <Route path="/" element={<MainPage loading={loading} />}>
+          <Route path="/card/:id" element={<ViewCardPage />} />
+          <Route path="/card/new" element={<NewCardPage />} />
+          <Route path="/exit" element={<SignOutPage setIsAuth={setIsAuth} />} />
+        </Route>
       </Route>
       <Route path="/login" element={<SignInPage setIsAuth={setIsAuth} />} />
       <Route path="/register" element={<SignUpPage />} />
