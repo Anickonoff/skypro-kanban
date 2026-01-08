@@ -33,7 +33,7 @@ const ExitBlock = styled.div`
   padding: 50px 60px;
   border-radius: 10px;
   border: 0.7px solid ${({theme}) => theme.colors.border.pop};
-  box-shadow: ${({theme}) => theme.shadows.popExit};
+  box-shadow: ${({theme}) => theme.shadows.pop};
 `;
 
 const ExitPrompt = styled.h2`
