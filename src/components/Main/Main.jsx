@@ -1,29 +1,38 @@
 import Column from "../Column/Column";
-import { cardList } from "../../data";
+// import { cardList } from "../../data";
 import { MainBlock, MainContent, StyledMain } from "./Main.styled";
 
-const Main = () => {
-  const columns = [
-    "без статуса",
-    "нужно сделать",
-    "в работе",
-    "тестирование",
-    "готово",
-  ];
+const Main = ({ cards, error }) => {
+  const columns = ["none", "todo", "inProgress", "testing", "done"];
+  const columnsRu = {
+    none: "без статуса",
+    todo: "нужно сделать",
+    inProgress: "в работе",
+    testing: "тестирование",
+    done: "готово",
+  };
 
   return (
     <StyledMain>
       <MainBlock>
         <MainContent>
-          {columns.map((status) => (
-            <Column
-              key={status}
-              title={status}
-              cards={cardList.filter(
-                (card) => card.status.toLowerCase() === status.toLowerCase()
-              )}
-            />
-          ))}
+          {error ? (
+            <p>Ошибка: {error}</p>
+          ) : (
+            columns.map((status) => (
+              <Column
+                key={status}
+                title={columnsRu[status]}
+                cards={cards.filter((card) => {
+                  return (
+                    card.status.toLowerCase() === status.toLowerCase() ||
+                    card.status.toLowerCase() ===
+                      columnsRu[status].toLowerCase()
+                  );
+                })}
+              />
+            ))
+          )}
         </MainContent>
       </MainBlock>
     </StyledMain>

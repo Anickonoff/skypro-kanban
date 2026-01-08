@@ -11,16 +11,17 @@ import {
   CardTheme,
   CardTitle,
 } from "./Card.styled";
+import { format } from "date-fns";
 
 const Card = ({ card }) => {
   return (
     <CardItem>
       <StyledCard>
         <CardHeader>
-          <CardTheme $category={card.theme}>
-            <p>{card.theme}</p>
+          <CardTheme $category={card.topic}>
+            <p>{card.topic}</p>
           </CardTheme>
-          <Link to={"/card/" + card.id}>
+          <Link to={"/card/" + card._id}>
             <CardBtn>
               <div></div>
               <div></div>
@@ -29,7 +30,7 @@ const Card = ({ card }) => {
           </Link>
         </CardHeader>
         <CardContent>
-          <Link to={"/card/" + card.id}>
+          <Link to={"/card/" + card._id}>
             <CardTitle>{card.title}</CardTitle>
           </Link>
           <CardDate>
@@ -61,7 +62,7 @@ const Card = ({ card }) => {
                 </clipPath>
               </defs>
             </svg>
-            <p>{card.date}</p>
+            <p>{format(card.date, 'dd.MM.yy')}</p>
           </CardDate>
         </CardContent>
       </StyledCard>

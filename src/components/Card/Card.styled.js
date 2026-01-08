@@ -1,9 +1,9 @@
 import styled, { css, keyframes } from "styled-components";
 
 const categoryMap = {
-  "Новый год": "newYear",
-  Здоровье: "health",
-  Ремонт: "repair",
+  Research: "newYear",
+  "Web Design": "health",
+  Copywriting: "repair",
 };
 
 const cardAnimation = keyframes`

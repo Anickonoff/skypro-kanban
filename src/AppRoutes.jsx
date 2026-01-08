@@ -6,21 +6,15 @@ import ViewCardPage from "./pages/ViewCardpage";
 import SignOutPage from "./pages/SignOutPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PrivateRoute from "./PrivateRoute";
 
 const AppRoutes = () => {
   const [isAuth, setIsAuth] = useState(false);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 5000);
-  }, []);
   return (
     <Routes>
       <Route element={<PrivateRoute isAuth={isAuth} />}>
-        <Route path="/" element={<MainPage loading={loading} />}>
+        <Route path="/" element={<MainPage />}>
           <Route path="/card/:id" element={<ViewCardPage />} />
           <Route path="/card/new" element={<NewCardPage />} />
           <Route path="/exit" element={<SignOutPage setIsAuth={setIsAuth} />} />
