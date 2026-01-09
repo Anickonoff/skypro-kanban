@@ -1,7 +1,7 @@
 import AuthWindow from "../components/AuthWindow/AuthWindow";
 
-const SignInPage = ({ setIsAuth }) => {
-  return <AuthWindow setIsAuth={setIsAuth} isSignUp={false} />;
+const SignInPage = ({ setUser }) => {
+  return <AuthWindow setUser={setUser} isSignUp={false} />;
 };
 
 export default SignInPage;

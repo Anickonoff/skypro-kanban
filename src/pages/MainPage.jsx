@@ -6,16 +6,17 @@ import Main from "../components/Main/Main";
 import { getTasks } from "../services/api";
 import { useCallback, useEffect, useState } from "react";
 
-const MainPage = () => {
+const MainPage = ({user}) => {
   const [loading, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
   const [error, setError] = useState("");
+  console.log(user);
   const getCards = useCallback(async () => {
     try {
       setLoading(true);
       const data = await getTasks({
-        token: "asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k",
-        // token: "asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c0k4k",
+        // token: "asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k",
+        token: user.token,
       });
       if (data) setCards(data);
     } catch (e) {

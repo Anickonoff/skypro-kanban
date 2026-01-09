@@ -78,7 +78,7 @@ const CalendarDaysNames = styled.div`
 
 const CalendarDayName = styled.div`
   color: ${({ theme }) => theme.colors.text.secondary};
-  font-size: ${({ theme }) => theme.fonts.size.xs};
+  font-size: ${({ theme }) => theme.fonts.size.xxs};
   font-weight: 500;
   line-height: normal;
   letter-spacing: -0.2px;
@@ -121,7 +121,7 @@ const CalendarCell = styled.div`
   font-weight: ${({$isCurrent}) => ($isCurrent ? "700" : "normal")};
   background-color: ${({theme, $isActive}) => ($isActive ? theme.colors.calendar.bgActiveDay : "transparent")};
   opacity: ${({$isOtherMonth}) => ($isOtherMonth ? "0" : "1")};
-  font-size: ${({ theme }) => theme.fonts.size.xs};
+  font-size: ${({ theme }) => theme.fonts.size.xxs};
   line-height: 1;
   letter-spacing: -0.2px;
   cursor: pointer;
@@ -145,7 +145,7 @@ const CalendarDeadline = styled.div`
 
 const CalendarDeadlineText = styled.p`
   color: ${({theme}) =>theme.colors.text.secondary};
-  font-size: ${({ theme }) => theme.fonts.size.xs};
+  font-size: ${({ theme }) => theme.fonts.size.xxs};
   line-height: 1;
   span {
     color: ${({ theme }) => theme.colors.text.primary};

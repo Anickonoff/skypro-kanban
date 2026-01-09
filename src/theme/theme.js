@@ -12,6 +12,7 @@ const lightTheme = {
       secondary: "#94a6be",
       secondarytr: "#94a6be66",
       inverse: "#ffffff",
+      error: "#f84d4d",
     },
 
     background: {
@@ -24,14 +25,16 @@ const lightTheme = {
     // Цвета кнопок
     button: {
       main: "#565eef", // Основной цвет
-      secondary:  "transparent", // Прозрачный цвет кнопки
+      secondary: "transparent", // Прозрачный цвет кнопки
       hover: "#33399b", // При наведении
+      disabled: "#94a6be", // Неактивная кнопка
       text: "#ffffff", // Цвет текста на кнопках с фоном
     },
 
     border: {
       default: "rgba(148, 166, 190, 0.4)", // Прозрачная граница форм и кнопок статуса задачи
       pop: "#d4dbe5", // Границы всплывающих окон
+      error: "#f84d4d", // Граница полей при ошибке
     },
 
     // Категории задач
@@ -51,7 +54,7 @@ const lightTheme = {
       other: {
         bg: "#94a6be",
         test: "#ffffff",
-      }
+      },
     },
 
     // Календарь
@@ -65,7 +68,8 @@ const lightTheme = {
   fonts: {
     family: '"Roboto", Arial, Helvetica, sans-serif',
     size: {
-      xs: "10px",
+      xxs: "10px",
+      xs: "12px",
       sm: "14px",
       md: "20px",
     },

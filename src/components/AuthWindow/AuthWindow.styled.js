@@ -6,34 +6,6 @@ const AuthFont = css`
   letter-spacing: -0.14px;
 `;
 
-// const AuthWrapper = styled.div`
-//   width: 100%;
-//   height: 100%;
-//   overflow-x: hidden;
-//   overflow-y: scroll;
-//   background-color: ${({ theme }) => theme.colors.background.secondary};
-// `;
-
-// const AuthContainer = styled.div`
-//   display: block;
-//   width: 100vw;
-//   max-height: 100vh;
-//   margin: 0 auto;
-// `;
-
-// const AuthModal = styled.div`
-//   width: 100%;
-//   height: 100%;
-//   min-width: 320px;
-//   min-height: 100vh;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-//   @media screen and (${({ theme }) => theme.devices.xs}) {
-//     background-color: ${({ theme }) => theme.colors.background.surface};
-//   }
-// `;
 const AuthModal = styled.div`
   width: 100%;
   min-height: 100vh;
@@ -90,7 +62,10 @@ const AuthInput = styled.input`
   height: 30px;
   min-width: 100%;
   border-radius: 8px;
-  border: 0.7px solid ${({ theme }) => theme.colors.border.default};
+  border: 0.7px solid
+    ${({ theme, $error }) => 
+      $error ? theme.colors.border.error : theme.colors.border.default
+    };
   outline: none;
   padding: 10px 8px;
   &::placeholder,
@@ -103,6 +78,14 @@ const AuthInput = styled.input`
   &:not(:last-of-type) {
     margin-bottom: 7px;
   }
+`;
+
+const AuthError = styled.p`
+  width: 100%;
+  margin-top: 7px;
+  color: ${({ theme }) => theme.colors.text.error};
+  font-size: ${({ theme }) => theme.fonts.size.xs};
+  text-align: center;
 `;
 
 const AuthBtn = styled.button`
@@ -121,6 +104,9 @@ const AuthBtn = styled.button`
   color: ${({ theme }) => theme.colors.button.text};
   &:hover {
     background-color: ${({ theme }) => theme.colors.button.hover};
+  }
+  &:disabled {
+    background-color: ${({ theme }) => theme.colors.button.disabled};
   }
   @media screen and (${({ theme }) => theme.devices.xs}) {
     height: 40px;
@@ -148,4 +134,5 @@ export {
   AuthInput,
   AuthBtn,
   AuthFooter,
+  AuthError,
 };
