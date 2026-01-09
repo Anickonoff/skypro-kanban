@@ -10,9 +10,13 @@ const MainPage = ({user}) => {
   const [loading, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
   const [error, setError] = useState("");
-  console.log(user);
+  
   const getCards = useCallback(async () => {
+    if (!user) {
+      return;
+    }
     try {
+      setError("");
       setLoading(true);
       const data = await getTasks({
         // token: "asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k",
@@ -24,7 +28,8 @@ const MainPage = ({user}) => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [user]);
+
   useEffect(() => {
     getCards();
   }, [getCards]);
