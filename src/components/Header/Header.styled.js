@@ -32,7 +32,7 @@ const HeaderLogo = styled.div`
 `;
 
 const HeaderNav = styled.nav`
-  max-width: 290px;
+  max-width: 330px;
   padding: 0;
   display: flex;
   align-items: center;
@@ -79,6 +79,7 @@ const HeaderUser = styled.a`
   justify-content: center;
   font-size: ${({theme}) => theme.fonts.size.sm};
   line-height: 20px;
+  font-weight: 500;
   &:after {
     content: "";
     display: block;

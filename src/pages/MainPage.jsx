@@ -10,7 +10,7 @@ const MainPage = ({user}) => {
   const [loading, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
   const [error, setError] = useState("");
-  
+
   const getCards = useCallback(async () => {
     if (!user) {
       return;
@@ -36,7 +36,7 @@ const MainPage = ({user}) => {
 
   return (
     <Wrapper>
-      <Header />
+      <Header user={user} />
       {loading ? <Loader /> : <Main cards={cards} error={error} />}
       <Outlet />
     </Wrapper>
