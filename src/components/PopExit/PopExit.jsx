@@ -9,10 +9,10 @@ import {
   PopExitWindow,
 } from "./PopExit.styled";
 
-const PopExit = ({ setIsAuth }) => {
+const PopExit = ({ logout }) => {
   const navigate = useNavigate();
   const handleYesClick = () => {
-    setIsAuth(false);
+    logout();
     navigate("/login");
   };
   const handleNoClick = () => {

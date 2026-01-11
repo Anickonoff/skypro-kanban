@@ -10,7 +10,7 @@ import {
 } from "./Header.styled";
 import { Link, useNavigate } from "react-router-dom";
 
-const Header = ({ theme = "light" }) => {
+const Header = ({ theme = "light", user }) => {
   const [userShown, setUserShown] = useState(false);
   const navigate = useNavigate();
 
@@ -40,10 +40,11 @@ const Header = ({ theme = "light" }) => {
             Создать новую задачу
           </HeaderBtn>
           <HeaderUser href="#" onClick={toggleUser}>
-            Ivan Ivanov
+            {user.name}
           </HeaderUser>
           {userShown && (
             <PopUser
+              user={user}
               onClose={() => {
                 setUserShown(false);
               }}

@@ -9,7 +9,7 @@ const Column = ({ title, cards }) => {
       </ColumnTitle>
       <ColumnCards>
         {cards.map((card) => (
-          <Card key={card.id} card={card} />
+          <Card key={card._id} card={card} />
         ))}
       </ColumnCards>
     </StyledColumn>

@@ -1,15 +1,47 @@
 import Calendar from "../Calendar/Calendar";
 import "../../App.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { cardList } from "../../data";
+import { useCallback, useEffect, useState } from "react";
+import { getTask } from "../../services/api";
+import Loader from "../Loader/Loader";
+// import { cardList } from "../../data";
 
 const PopBrowse = () => {
   const { id } = useParams();
-  const card = cardList.find((card) => card.id == id);
-  const navigale = useNavigate();
+  // const card = cardList.find((card) => card.id == id);
+  const [card, setCard] = useState(null);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const getCard = useCallback(async () => {
+    try {
+      setLoading(true);
+      const data = await getTask({
+        token: "asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k",
+        id,
+      });
+      if (!data) throw new Error("Задача не найдена");
+      setCard(data);
+    } catch (e) {
+      setError(e.message);
+      console.error(e.message);
+    } finally {
+      setLoading(false);
+    }
+  }, [id]);
+
+  useEffect(() => {
+    getCard();
+  }, [getCard]);
+
+  const navigate = useNavigate();
   const handleClose = () => {
-    navigale("/");
+    navigate("/");
   };
+  if (loading) return <Loader />;
+  if (error) return <div className="error">Ошибка: {error}</div>;
+  if (!card) return <div className="empty">Задача не найдена</div>;
+
   return (
     <div className="pop-browse" id="popBrowse">
       <div className="pop-browse__container">
@@ -18,7 +50,7 @@ const PopBrowse = () => {
             <div className="pop-browse__top-block">
               <h3 className="pop-browse__ttl">{card.title}</h3>
               <div className="categories__theme theme-top _orange _active-category">
-                <p className="_orange">{card.theme}</p>
+                <p className="_orange">{card.topic}</p>
               </div>
             </div>
             <div className="pop-browse__status status">
