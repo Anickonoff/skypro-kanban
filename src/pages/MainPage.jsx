@@ -4,13 +4,14 @@ import Header from "../components/Header/Header";
 import Loader from "../components/Loader/Loader";
 import Main from "../components/Main/Main";
 import { getTasks } from "../services/api";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
 
-const MainPage = ({user}) => {
+const MainPage = () => {
   const [loading, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
   const [error, setError] = useState("");
-
+  const {user} = useContext(AuthContext);
   const getCards = useCallback(async () => {
     if (!user) {
       return;
