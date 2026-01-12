@@ -1,9 +1,9 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
 import { createTask, deleteTask, getTasks, updateTask } from "../services/api";
-import { CardContext } from "./CardContext";
+import { TaskContext } from "./TaskContext";
 
-export const CardProvider = ({ children }) => {
+export const TaskProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [addLoading, setAddLoading] = useState(false);
   const [editLoading, setEditLoading] = useState(false);
@@ -91,7 +91,7 @@ export const CardProvider = ({ children }) => {
     }
   };
   return (
-    <CardContext.Provider
+    <TaskContext.Provider
       value={{
         cards,
         addCard,
@@ -106,6 +106,6 @@ export const CardProvider = ({ children }) => {
       }}
     >
       {children}
-    </CardContext.Provider>
+    </TaskContext.Provider>
   );
 };

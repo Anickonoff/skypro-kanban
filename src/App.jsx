@@ -3,13 +3,16 @@ import AppRoutes from "./AppRoutes";
 import AuthProvider from "./context/AuthPROVIDER.JSX";
 import { lightTheme } from "./theme/theme";
 import GlobalStyles from "./theme/GlobalStyles";
+import { TaskProvider } from "./context/TaskProvider";
 
 function App() {
   return (
     <ThemeProvider theme={lightTheme}>
       <GlobalStyles />
       <AuthProvider>
-        <AppRoutes />
+        <TaskProvider>
+          <AppRoutes />
+        </TaskProvider>
       </AuthProvider>
     </ThemeProvider>
   );

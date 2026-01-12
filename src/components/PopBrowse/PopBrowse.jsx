@@ -1,45 +1,20 @@
 import Calendar from "../Calendar/Calendar";
 import "../../App.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
-import { getTask } from "../../services/api";
+import { useContext } from "react";
 import Loader from "../Loader/Loader";
-// import { cardList } from "../../data";
+import { TaskContext } from "../../context/TaskContext";
 
 const PopBrowse = () => {
   const { id } = useParams();
-  // const card = cardList.find((card) => card.id == id);
-  const [card, setCard] = useState(null);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const getCard = useCallback(async () => {
-    try {
-      setLoading(true);
-      const data = await getTask({
-        token: "asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k",
-        id,
-      });
-      if (!data) throw new Error("Задача не найдена");
-      setCard(data);
-    } catch (e) {
-      setError(e.message);
-      console.error(e.message);
-    } finally {
-      setLoading(false);
-    }
-  }, [id]);
-
-  useEffect(() => {
-    getCard();
-  }, [getCard]);
-
+  const { cards, editError, editLoading } = useContext(TaskContext);
+  const card = cards.find((card) => card._id == id);
   const navigate = useNavigate();
   const handleClose = () => {
     navigate("/");
   };
-  if (loading) return <Loader />;
-  if (error) return <div className="error">Ошибка: {error}</div>;
+  if (editLoading) return <Loader />;
+  if (editError) return <div className="error">Ошибка: {editError}</div>;
   if (!card) return <div className="empty">Задача не найдена</div>;
 
   return (
