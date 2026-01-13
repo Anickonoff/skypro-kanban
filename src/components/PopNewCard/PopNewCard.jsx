@@ -1,73 +1,76 @@
-import { Link } from "react-router-dom";
 import Calendar from "../Calendar/Calendar";
-import '../../App.css';
+import "../../App.css";
+import {
+  StyledPopNewCard,
+  NewCardContainer,
+  NewCardBlock,
+  NewCardContent,
+  NewCardTtl,
+  NewCardClose,
+  NewCardWrap,
+  NewCardForm,
+  NewCardFormBlock,
+  NewCardFormLabel,
+  NewCardFormInput,
+  NewCardFormArea,
+  NewCardFormBtn,
+  NewCardCategories,
+  NewCardCategoriesTtl,
+  NewCardCategoriesThemes,
+  NewCardCategoriesTheme,
+} from "./PopNewCard.styled";
+import { categoryMap } from "../../theme/Categories";
 
 const PopNewCard = () => {
   return (
-    <div className="pop-new-card" id="popNewCard">
-      <div className="pop-new-card__container">
-        <div className="pop-new-card__block">
-          <div className="pop-new-card__content">
-            <h3 className="pop-new-card__ttl">Создание задачи</h3>
-            {/* <a href="#" onClick={handleClick} className="pop-new-card__close"> */}
-            <Link to="/" className="pop-new-card__close">
-              &#10006;
-            </Link>
-            {/* </a> */}
-            <div className="pop-new-card__wrap">
-              <form
-                className="pop-new-card__form form-new"
-                id="formNewCard"
-                action="#"
-              >
-                <div className="form-new__block">
-                  <label htmlFor="formTitle" className="subttl">
+    <StyledPopNewCard>
+      <NewCardContainer>
+        <NewCardBlock>
+          <NewCardContent>
+            <NewCardTtl>Создание задачи</NewCardTtl>
+            <NewCardClose to="/">&#10006;</NewCardClose>
+            <NewCardWrap>
+              <NewCardForm id="formNewCard" action="#">
+                <NewCardFormBlock>
+                  <NewCardFormLabel htmlFor="formTitle">
                     Название задачи
-                  </label>
-                  <input
-                    className="form-new__input"
+                  </NewCardFormLabel>
+                  <NewCardFormInput
                     type="text"
                     name="name"
                     id="formTitle"
                     placeholder="Введите название задачи..."
                     autoFocus
                   />
-                </div>
-                <div className="form-new__block">
-                  <label htmlFor="textArea" className="subttl">
+                </NewCardFormBlock>
+                <NewCardFormBlock>
+                  <NewCardFormLabel htmlFor="textArea">
                     Описание задачи
-                  </label>
-                  <textarea
-                    className="form-new__area"
+                  </NewCardFormLabel>
+                  <NewCardFormArea
                     name="text"
                     id="textArea"
                     placeholder="Введите описание задачи..."
-                  ></textarea>
-                </div>
-              </form>
+                  ></NewCardFormArea>
+                </NewCardFormBlock>
+              </NewCardForm>
               <Calendar />
-            </div>
-            <div className="pop-new-card__categories categories">
-              <p className="categories__p subttl">Категория</p>
-              <div className="categories__themes">
-                <div className="categories__theme _orange _active-category">
-                  <p className="_orange">Web Design</p>
-                </div>
-                <div className="categories__theme _green">
-                  <p className="_green">Research</p>
-                </div>
-                <div className="categories__theme _purple">
-                  <p className="_purple">Copywriting</p>
-                </div>
-              </div>
-            </div>
-            <button className="form-new__create _hover01" id="btnCreate">
-              Создать задачу
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+            </NewCardWrap>
+            <NewCardCategories>
+              <NewCardCategoriesTtl>Категория</NewCardCategoriesTtl>
+              <NewCardCategoriesThemes>
+                {Object.keys(categoryMap).map((key) => (
+                  <NewCardCategoriesTheme key={key} $category={key}>
+                    <p>{key}</p>
+                  </NewCardCategoriesTheme>
+                ))}
+              </NewCardCategoriesThemes>
+            </NewCardCategories>
+            <NewCardFormBtn id="btnCreate">Создать задачу</NewCardFormBtn>
+          </NewCardContent>
+        </NewCardBlock>
+      </NewCardContainer>
+    </StyledPopNewCard>
   );
 };
 

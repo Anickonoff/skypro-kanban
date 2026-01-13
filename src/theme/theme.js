@@ -39,15 +39,15 @@ const lightTheme = {
 
     // Категории задач
     categories: {
-      health: {
+      orange: {
         bg: "#ffe4c2",
         text: "#ff6d00",
       },
-      newYear: {
+      green: {
         bg: "#b4fdd1",
         text: "#06b16e",
       },
-      repair: {
+      purple: {
         bg: "#e9d4ff",
         text: "#9a48f1",
       },
