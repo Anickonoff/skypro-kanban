@@ -1,76 +1,72 @@
 import Calendar from "../Calendar/Calendar";
 import "../../App.css";
 import {
-  StyledPopNewCard,
-  NewCardContainer,
-  NewCardBlock,
-  NewCardContent,
   NewCardTtl,
   NewCardClose,
-  NewCardWrap,
-  NewCardForm,
-  NewCardFormBlock,
-  NewCardFormLabel,
-  NewCardFormInput,
-  NewCardFormArea,
   NewCardFormBtn,
   NewCardCategories,
   NewCardCategoriesTtl,
   NewCardCategoriesThemes,
-  NewCardCategoriesTheme,
 } from "./PopNewCard.styled";
 import { categoryMap } from "../../theme/Categories";
+import { useState } from "react";
+import Modal from "../Modal/Modal";
+import {
+  ModalCategoriesTheme,
+  ModalFieldBlock,
+  ModalForm,
+  ModalFormArea,
+  ModalFormInput,
+  ModalFormLabel,
+  ModalWrap,
+} from "../Modal/Modal.styled";
 
 const PopNewCard = () => {
+  const [selectedCategory, setSelectedCategory] = useState(null);
   return (
-    <StyledPopNewCard>
-      <NewCardContainer>
-        <NewCardBlock>
-          <NewCardContent>
-            <NewCardTtl>Создание задачи</NewCardTtl>
-            <NewCardClose to="/">&#10006;</NewCardClose>
-            <NewCardWrap>
-              <NewCardForm id="formNewCard" action="#">
-                <NewCardFormBlock>
-                  <NewCardFormLabel htmlFor="formTitle">
-                    Название задачи
-                  </NewCardFormLabel>
-                  <NewCardFormInput
-                    type="text"
-                    name="name"
-                    id="formTitle"
-                    placeholder="Введите название задачи..."
-                    autoFocus
-                  />
-                </NewCardFormBlock>
-                <NewCardFormBlock>
-                  <NewCardFormLabel htmlFor="textArea">
-                    Описание задачи
-                  </NewCardFormLabel>
-                  <NewCardFormArea
-                    name="text"
-                    id="textArea"
-                    placeholder="Введите описание задачи..."
-                  ></NewCardFormArea>
-                </NewCardFormBlock>
-              </NewCardForm>
-              <Calendar />
-            </NewCardWrap>
-            <NewCardCategories>
-              <NewCardCategoriesTtl>Категория</NewCardCategoriesTtl>
-              <NewCardCategoriesThemes>
-                {Object.keys(categoryMap).map((key) => (
-                  <NewCardCategoriesTheme key={key} $category={key}>
-                    <p>{key}</p>
-                  </NewCardCategoriesTheme>
-                ))}
-              </NewCardCategoriesThemes>
-            </NewCardCategories>
-            <NewCardFormBtn id="btnCreate">Создать задачу</NewCardFormBtn>
-          </NewCardContent>
-        </NewCardBlock>
-      </NewCardContainer>
-    </StyledPopNewCard>
+    <Modal>
+      <NewCardTtl>Создание задачи</NewCardTtl>
+      <NewCardClose to="/">&#10006;</NewCardClose>
+      <ModalWrap>
+        <ModalForm id="formNewCard" action="#">
+          <ModalFieldBlock>
+            <ModalFormLabel htmlFor="formTitle">Название задачи</ModalFormLabel>
+            <ModalFormInput
+              type="text"
+              name="name"
+              id="formTitle"
+              placeholder="Введите название задачи..."
+              autoFocus
+            />
+          </ModalFieldBlock>
+          <ModalFieldBlock>
+            <ModalFormLabel htmlFor="textArea">Описание задачи</ModalFormLabel>
+            <ModalFormArea
+              name="text"
+              id="textArea"
+              placeholder="Введите описание задачи..."
+            ></ModalFormArea>
+          </ModalFieldBlock>
+        </ModalForm>
+        <Calendar />
+      </ModalWrap>
+      <NewCardCategories>
+        <NewCardCategoriesTtl>Категория</NewCardCategoriesTtl>
+        <NewCardCategoriesThemes>
+          {Object.keys(categoryMap).map((key) => (
+            <ModalCategoriesTheme
+              key={key}
+              $category={key}
+              $isDimmed={selectedCategory && selectedCategory !== key}
+              onClick={() => setSelectedCategory(key)}
+            >
+              <p>{key}</p>
+            </ModalCategoriesTheme>
+          ))}
+        </NewCardCategoriesThemes>
+      </NewCardCategories>
+      <NewCardFormBtn id="btnCreate">Создать задачу</NewCardFormBtn>
+    </Modal>
   );
 };
 

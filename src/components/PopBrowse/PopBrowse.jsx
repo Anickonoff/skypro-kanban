@@ -4,6 +4,25 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useContext } from "react";
 import Loader from "../Loader/Loader";
 import { TaskContext } from "../../context/TaskContext";
+import Modal from "../Modal/Modal";
+import {
+  BrowseBtnPrim,
+  BrowseBtns,
+  BrowseBtnSec,
+  BrowseHeader,
+  BrowseStatus,
+  BrowseStatusItem,
+  BrowseStatusList,
+  BrowseTtl,
+} from "./PopBrowse.styled";
+import {
+  ModalCategoriesTheme,
+  ModalFieldBlock,
+  ModalForm,
+  ModalFormArea,
+  ModalFormLabel,
+  ModalWrap,
+} from "../Modal/Modal.styled";
 
 const PopBrowse = () => {
   const { id } = useParams();
@@ -13,113 +32,71 @@ const PopBrowse = () => {
   const handleClose = () => {
     navigate("/");
   };
-  if (editLoading) return <Loader />;
-  if (editError) return <div className="error">Ошибка: {editError}</div>;
-  if (!card) return <div className="empty">Задача не найдена</div>;
+  if (editLoading)
+    return (
+      <Modal>
+        <Loader />
+      </Modal>
+    );
+  if (editError)
+    return (
+      <Modal>
+        <div className="error">Ошибка: {editError}</div>
+      </Modal>
+    );
+  if (!card)
+    return (
+      <Modal>
+        <div className="empty">Задача не найдена</div>
+      </Modal>
+    );
 
   return (
-    <div className="pop-browse" id="popBrowse">
-      <div className="pop-browse__container">
-        <div className="pop-browse__block">
-          <div className="pop-browse__content">
-            <div className="pop-browse__top-block">
-              <h3 className="pop-browse__ttl">{card.title}</h3>
-              <div className="categories__theme theme-top _orange _active-category">
-                <p className="_orange">{card.topic}</p>
-              </div>
-            </div>
-            <div className="pop-browse__status status">
-              <p className="status__p subttl">Статус</p>
-              <div className="status__themes">
-                <div className="status__theme _hide">
-                  <p>Без статуса</p>
-                </div>
-                <div className="status__theme _gray">
-                  <p className="_gray">Нужно сделать</p>
-                </div>
-                <div className="status__theme _hide">
-                  <p>В работе</p>
-                </div>
-                <div className="status__theme _hide">
-                  <p>Тестирование</p>
-                </div>
-                <div className="status__theme _hide">
-                  <p>Готово</p>
-                </div>
-              </div>
-            </div>
-            <div className="pop-browse__wrap">
-              <form
-                className="pop-browse__form form-browse"
-                id="formBrowseCard"
-                action="#"
-              >
-                <div className="form-browse__block">
-                  <label htmlFor="textArea01" className="subttl">
-                    Описание задачи
-                  </label>
-                  <textarea
-                    className="form-browse__area"
-                    name="text"
-                    id="textArea01"
-                    readOnly
-                    placeholder="Введите описание задачи..."
-                    value={card.description}
-                  ></textarea>
-                </div>
-              </form>
-              <Calendar />
-            </div>
-            <div className="theme-down__categories theme-down">
-              <p className="categories__p subttl">Категория</p>
-              <div className="categories__theme _orange _active-category">
-                <p className="_orange">Web Design</p>
-              </div>
-            </div>
-            <div className="pop-browse__btn-browse ">
-              <div className="btn-group">
-                <button className="btn-browse__edit _btn-bor _hover03">
-                  <a href="#">Редактировать задачу</a>
-                </button>
-                <button className="btn-browse__delete _btn-bor _hover03">
-                  <a href="#">Удалить задачу</a>
-                </button>
-              </div>
-              <button
-                className="btn-browse__close _btn-bg _hover01"
-                type="button"
-                onClick={handleClose}
-              >
-                Закрыть
-              </button>
-            </div>
-            <div className="pop-browse__btn-edit _hide">
-              <div className="btn-group">
-                <button className="btn-edit__edit _btn-bg _hover01">
-                  <a href="#">Сохранить</a>
-                </button>
-                <button className="btn-edit__edit _btn-bor _hover03">
-                  <a href="#">Отменить</a>
-                </button>
-                <button
-                  className="btn-edit__delete _btn-bor _hover03"
-                  id="btnDelete"
-                >
-                  <a href="#">Удалить задачу</a>
-                </button>
-              </div>
-              <button
-                className="btn-edit__close _btn-bg _hover01"
-                type="button"
-                onClick={handleClose}
-              >
-                Закрыть
-              </button>
-            </div>
-          </div>
+    <Modal>
+      <BrowseHeader>
+        <BrowseTtl>{card.title}</BrowseTtl>
+        <ModalCategoriesTheme key={card.topic} $category={card.topic}>
+          <p>{card.topic}</p>
+        </ModalCategoriesTheme>
+      </BrowseHeader>
+      <BrowseStatus>
+        <p>Статус</p>
+        <BrowseStatusList>
+          <BrowseStatusItem>Нужно сделать</BrowseStatusItem>
+        </BrowseStatusList>
+      </BrowseStatus>
+      <ModalWrap>
+        <ModalForm id="formBrowseCard" action="#">
+          <ModalFieldBlock>
+            <ModalFormLabel htmlFor="textArea01">
+              Описание задачи
+            </ModalFormLabel>
+            <ModalFormArea
+              name="text"
+              id="textArea01"
+              readOnly
+              placeholder="Введите описание задачи..."
+              value={card.description}
+            ></ModalFormArea>
+          </ModalFieldBlock>
+        </ModalForm>
+        <Calendar />
+      </ModalWrap>
+      <BrowseBtns>
+        <div>
+          <BrowseBtnSec>Редактировать задачу</BrowseBtnSec>
+          <BrowseBtnSec>Удалить задачу</BrowseBtnSec>
         </div>
-      </div>
-    </div>
+        <div>
+          <BrowseBtnPrim>Сохранить</BrowseBtnPrim>
+          <BrowseBtnSec>Отменить</BrowseBtnSec>
+          <BrowseBtnSec>Удалить задачу</BrowseBtnSec>
+        </div>
+        <BrowseBtnPrim type="button" onClick={handleClose}>
+          Закрыть
+        </BrowseBtnPrim>
+      </BrowseBtns>
+    </Modal>
   );
 };
 
