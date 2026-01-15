@@ -64,7 +64,7 @@ const CalendarAction = styled.div`
 `;
 
 const CalendarContent = styled.div`
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 `;
 
 const CalendarDaysNames = styled.div`
@@ -93,7 +93,6 @@ const CalendarDayNameWeekend = styled(CalendarDayName)`
 
 const CalendarCells = styled.div`
   width: 182px;
-  height: 126px;
   display: flex;
   flex-wrap: wrap;
   @media screen and (${({ theme }) => theme.devices.md}) {
@@ -112,22 +111,23 @@ const CalendarCell = styled.div`
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  color: ${({ theme, $isActive, $isWeekend}) =>
+  color: ${({ theme, $isActive, $isWeekend }) =>
     $isActive
       ? theme.colors.text.inverse
       : $isWeekend
       ? theme.colors.calendar.weekend
       : theme.colors.text.secondary};
-  font-weight: ${({$isCurrent}) => ($isCurrent ? "700" : "normal")};
-  background-color: ${({theme, $isActive}) => ($isActive ? theme.colors.calendar.bgActiveDay : "transparent")};
-  opacity: ${({$isOtherMonth}) => ($isOtherMonth ? "0" : "1")};
+  font-weight: ${({ $isCurrent }) => ($isCurrent ? "700" : "normal")};
+  background-color: ${({ theme, $isActive }) =>
+    $isActive ? theme.colors.calendar.bgActiveDay : "transparent"};
+  opacity: ${({ $isOtherMonth }) => ($isOtherMonth ? "0" : "1")};
   font-size: ${({ theme }) => theme.fonts.size.xxs};
   line-height: 1;
   letter-spacing: -0.2px;
   cursor: pointer;
   &:hover {
-    background-color: ${({theme}) => theme.colors.calendar.bgCellHover};
-    color: ${({theme}) =>theme.colors.text.secondary};
+    background-color: ${({ theme }) => theme.colors.calendar.bgCellHover};
+    color: ${({ theme }) => theme.colors.text.secondary};
   }
   @media screen and (${({ theme }) => theme.devices.md}) {
     font-size: ${({ theme }) => theme.fonts.size.sm};
@@ -144,7 +144,7 @@ const CalendarDeadline = styled.div`
 `;
 
 const CalendarDeadlineText = styled.p`
-  color: ${({theme}) =>theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   font-size: ${({ theme }) => theme.fonts.size.xxs};
   line-height: 1;
   span {

@@ -88,8 +88,6 @@ const ModalFormLabel = styled.label`
   line-height: 1;
 `;
 
-
-
 const styledInput = css`
   width: 100%;
   outline: none;
@@ -100,12 +98,32 @@ const styledInput = css`
   font-size: 14px;
   line-height: 1;
   letter-spacing: -0.14px;
-  &::-moz-placeholder,
-  &::placeholder {
+  font-family: inherit;
+  &::-moz-placeholder {
+    font-family: inherit;
     font-weight: 400;
     font-size: 14px;
-    line-height: 1px;
+    line-height: 1;
     color: #94a6be;
+    opacity: 1;
+    letter-spacing: -0.14px;
+  }
+  &::-webkit-input-placeholder {
+    font-family: inherit;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1;
+    color: #94a6be;
+    opacity: 1;
+    letter-spacing: -0.14px;
+  }
+  &::placeholder {
+    font-family: inherit;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1;
+    color: #94a6be;
+    opacity: 1;
     letter-spacing: -0.14px;
   }
 `;
@@ -120,8 +138,7 @@ const ModalFormArea = styled.textarea`
   max-width: 370px;
   margin-top: 14px;
   height: 200px;
-  background-color: ${({ readOnly }) =>
-    readOnly ? "#eaeef6" : "transparent"};
+  background-color: ${({ readOnly }) => (readOnly ? "#eaeef6" : "transparent")};
   @media screen and (max-width: 495px) {
     max-width: 100%;
     height: 34px;

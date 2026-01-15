@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { StyledCategory } from "../Category/Category.styled";
 import { ModalTitle } from "../Modal/Modal.styled";
 
 const NewCardTtl = styled(ModalTitle)`
@@ -23,7 +22,6 @@ const NewCardFormBlock = styled.div`
   flex-direction: column;
 `;
 
-
 const NewCardFormBtn = styled.button`
   width: 132px;
   height: 30px;
@@ -38,6 +36,9 @@ const NewCardFormBtn = styled.button`
   float: right;
   &:hover {
     background-color: #33399b;
+  }
+  &:disabled {
+    background-color: ${({ theme }) => theme.colors.button.disabled};
   }
   @media screen and (max-width: 495px) {
     width: 100%;

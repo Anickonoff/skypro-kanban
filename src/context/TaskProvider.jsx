@@ -21,7 +21,6 @@ export const TaskProvider = ({ children }) => {
       setGetError("");
       setLoading(true);
       const data = await getTasks({
-        // token: "asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k",
         token: user.token,
       });
       if (data) setCards(data);
@@ -43,14 +42,14 @@ export const TaskProvider = ({ children }) => {
     getCards();
   }, [user, getCards]);
 
-  const addCard = async ({ card }) => {
+  const addCard = async (task) => {
     if (!user) {
       return;
     }
     try {
       setAddError("");
       setAddLoading(true);
-      const newCards = await createTask({ token: user?.token, card });
+      const newCards = await createTask({ token: user?.token, task });
       setCards(newCards);
     } catch (e) {
       setAddError(e.message);
@@ -59,14 +58,14 @@ export const TaskProvider = ({ children }) => {
     }
   };
 
-  const updateCard = async ({ card }) => {
+  const updateCard = async ( task ) => {
     if (!user) {
       return;
     }
     try {
       setEditError("");
       setEditLoading(true);
-      const newCards = await updateTask({ token: user?.token, card });
+      const newCards = await updateTask({ token: user?.token, task });
       setCards(newCards);
     } catch (e) {
       setEditError(e.message);
