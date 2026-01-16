@@ -58,7 +58,7 @@ const PopNewCard = () => {
     if (isSubmitted && !addLoading && addError === "") {
       navigate("/");
     }
-  }, [addLoading, addError, isSubmitted]);
+  }, [addLoading, addError, isSubmitted, navigate]);
 
   return (
     <Modal>
