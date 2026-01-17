@@ -17,7 +17,7 @@ import {
 } from "./Calendar.style";
 import CalendarFooter from "./Calendar.footer";
 
-const Calendar = ({ taskDate, setTaskDate }) => {
+const Calendar = ({ taskDate, setTaskDate, readOnly = false }) => {
   const daysName = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"];
   const monthsName = [
     "Январь",
@@ -94,6 +94,9 @@ const Calendar = ({ taskDate, setTaskDate }) => {
   };
 
   const setTaskDateHandler = (date) => {
+    if (readOnly) {
+      return;
+    }
     if (date) {
       setTaskDate(date);
     }

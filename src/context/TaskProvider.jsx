@@ -7,10 +7,12 @@ export const TaskProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [addLoading, setAddLoading] = useState(false);
   const [editLoading, setEditLoading] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
   const [cards, setCards] = useState([]);
   const [getError, setGetError] = useState("");
   const [addError, setAddError] = useState("");
   const [editError, setEditError] = useState("");
+  const [deleteError, setDeleteError] = useState("");
   const { user } = useContext(AuthContext);
 
   const getCards = useCallback(async () => {
@@ -37,6 +39,7 @@ export const TaskProvider = ({ children }) => {
       setGetError("");
       setEditError("");
       setAddError("");
+      setDeleteError("");
       return;
     }
     getCards();
@@ -58,7 +61,7 @@ export const TaskProvider = ({ children }) => {
     }
   };
 
-  const updateCard = async ( task ) => {
+  const updateCard = async (task) => {
     if (!user) {
       return;
     }
@@ -74,19 +77,19 @@ export const TaskProvider = ({ children }) => {
     }
   };
 
-  const deleteCard = async ({ id }) => {
+  const deleteCard = async (taskId) => {
     if (!user) {
       return;
     }
     try {
-      setEditError("");
-      setEditLoading(true);
-      const newCards = await deleteTask({ token: user?.token, id });
+      setDeleteError("");
+      setDeleteLoading(true);
+      const newCards = await deleteTask({ token: user?.token, taskId });
       setCards(newCards);
     } catch (e) {
-      setEditError(e.message);
+      setDeleteError(e.message);
     } finally {
-      setEditLoading(false);
+      setDeleteLoading(false);
     }
   };
   return (
@@ -100,8 +103,10 @@ export const TaskProvider = ({ children }) => {
         getError,
         addError,
         editError,
+        deleteError,
         addLoading,
         editLoading,
+        deleteLoading,
       }}
     >
       {children}

@@ -1,7 +1,7 @@
 import Calendar from "../Calendar/Calendar";
 import "../../App.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
 import { TaskContext } from "../../context/TaskContext";
 import Modal from "../Modal/Modal";
@@ -23,31 +23,135 @@ import {
   ModalFormLabel,
   ModalWrap,
 } from "../Modal/Modal.styled";
+import { columns, columnsRu } from "../../theme/Categories";
 
 const PopBrowse = () => {
   const { id } = useParams();
-  const { cards, editError, editLoading } = useContext(TaskContext);
-  const card = cards.find((card) => card._id == id);
+  const {
+    cards,
+    loading,
+    editError,
+    editLoading,
+    deleteError,
+    deleteLoading,
+    updateCard,
+    deleteCard,
+  } = useContext(TaskContext);
+  const card = cards.find((card) => card._id === id);
   const navigate = useNavigate();
+  const [taskDate, setTaskDate] = useState();
+  const [isEditor, setIsEditor] = useState(false);
+  const [newCard, setNewCard] = useState({});
+  const [snapshot, setSnapshot] = useState({});
+  const [operation, setOperation] = useState(null);
+
+  useEffect(() => {
+    if (card) {
+      setTaskDate(new Date(card.date));
+      setNewCard({
+        title: card.title,
+        topic: card.topic,
+        _id: card._id,
+        status: card.status,
+        description: card.description,
+      });
+    }
+  }, [card]);
+
+  //переход в режим редактирование, сохранение снимка данных
+  const handleEdit = () => {
+    setIsEditor(true);
+    setSnapshot({
+      status: newCard.status,
+      description: newCard.description,
+      date: taskDate.toISOString(),
+      _id: newCard._id,
+      title: newCard.title,
+      topic: newCard.topic,
+    });
+  };
+
+  // отслеживание изменения описания
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNewCard({
+      ...newCard,
+      [name]: value,
+    });
+  };
+
+  // отслеживание изменения статуса
+  const handleStatusClick = (newStatus) => {
+    setNewCard({
+      ...newCard,
+      status: newStatus,
+    });
+  };
+
+  // обработка отправки формы
+  const handleSubmit = async () => {
+    setOperation("edit");
+    console.log("Отправляю данные для редактирования задачи:");
+    console.log({
+      ...newCard,
+      date: taskDate.toISOString(),
+    });
+    await updateCard({
+      ...newCard,
+      date: taskDate.toISOString(),
+      _id: card._id,
+    });
+  };
+
+  // выход из режима редактирования с откатом введённых данных
+  const handleCancel = () => {
+    setNewCard({
+      status: snapshot.status,
+      description: snapshot.description,
+      _id: snapshot._id,
+      title: snapshot.title,
+      topic: snapshot.topic,
+    });
+    setIsEditor(false);
+    setTaskDate(new Date(snapshot.date));
+  };
+
   const handleClose = () => {
     navigate("/");
   };
-  if (editLoading)
+
+  // удаление карточки задачи
+  const handleDelete = async () => {
+    if (window.confirm("Вы уверены, что хотите удалить задачу?")) {
+      setOperation("delete");
+      await deleteCard(card._id);
+    }
+  };
+
+  // закрытие модального окна после успешного завершения операции редактирования или удаления
+  useEffect(() => {
+    if (operation === "edit" && !editLoading && editError === "") {
+      navigate("/");
+    }
+    if (operation === "delete" && !deleteLoading && deleteError === "") {
+      navigate("/");
+    }
+  }, [editLoading, editError, operation, navigate, deleteLoading, deleteError]);
+
+  if (loading)
     return (
       <Modal>
         <Loader />
       </Modal>
     );
-  if (editError)
-    return (
-      <Modal>
-        <div className="error">Ошибка: {editError}</div>
-      </Modal>
-    );
+
   if (!card)
     return (
       <Modal>
         <div className="empty">Задача не найдена</div>
+        <BrowseBtnPrim type="button" onClick={handleClose}>
+          Закрыть
+        </BrowseBtnPrim>
       </Modal>
     );
 
@@ -62,7 +166,26 @@ const PopBrowse = () => {
       <BrowseStatus>
         <p>Статус</p>
         <BrowseStatusList>
-          <BrowseStatusItem>Нужно сделать</BrowseStatusItem>
+          {!isEditor ? (
+            <BrowseStatusItem $active="true">{newCard.status}</BrowseStatusItem>
+          ) : (
+            columns.map((status) => (
+              <BrowseStatusItem
+                key={status}
+                $active={
+                  newCard.status.toLowerCase() === status.toLowerCase() ||
+                  newCard.status.toLowerCase() ===
+                    columnsRu[status].toLowerCase()
+                }
+                $isButton={true}
+                onClick={() => {
+                  handleStatusClick(columnsRu[status]);
+                }}
+              >
+                {columnsRu[status]}
+              </BrowseStatusItem>
+            ))
+          )}
         </BrowseStatusList>
       </BrowseStatus>
       <ModalWrap>
@@ -72,25 +195,41 @@ const PopBrowse = () => {
               Описание задачи
             </ModalFormLabel>
             <ModalFormArea
-              name="text"
+              name="description"
               id="textArea01"
-              readOnly
+              readOnly={!isEditor}
               placeholder="Введите описание задачи..."
-              value={card.description}
+              value={newCard.description}
+              onChange={handleChange}
             ></ModalFormArea>
           </ModalFieldBlock>
         </ModalForm>
-        <Calendar />
+        <Calendar
+          taskDate={taskDate}
+          setTaskDate={setTaskDate}
+          readOnly={!isEditor || editLoading || deleteLoading}
+        />
       </ModalWrap>
+      {editError && (
+        <div className="error">Ошибка отправки запроса: {editError}</div>
+      )}
       <BrowseBtns>
         <div>
-          <BrowseBtnSec>Редактировать задачу</BrowseBtnSec>
-          <BrowseBtnSec>Удалить задачу</BrowseBtnSec>
-        </div>
-        <div>
-          <BrowseBtnPrim>Сохранить</BrowseBtnPrim>
-          <BrowseBtnSec>Отменить</BrowseBtnSec>
-          <BrowseBtnSec>Удалить задачу</BrowseBtnSec>
+          {isEditor ? (
+            <>
+              <BrowseBtnPrim onClick={handleSubmit} disabled={editLoading || deleteLoading} $loading={editLoading}>
+                Сохранить
+              </BrowseBtnPrim>
+              <BrowseBtnSec onClick={handleCancel}>Отменить</BrowseBtnSec>
+            </>
+          ) : (
+            <BrowseBtnSec onClick={handleEdit}>
+              Редактировать задачу
+            </BrowseBtnSec>
+          )}
+          <BrowseBtnSec onClick={handleDelete} disabled={deleteLoading || editLoading} $loading={deleteLoading}>
+            Удалить задачу
+          </BrowseBtnSec>
         </div>
         <BrowseBtnPrim type="button" onClick={handleClose}>
           Закрыть

@@ -26,9 +26,11 @@ const lightTheme = {
     button: {
       main: "#565eef", // Основной цвет
       secondary: "transparent", // Прозрачный цвет кнопки
+      status: "#94a6be", // Цвет кнопки статуса
       hover: "#33399b", // При наведении
       disabled: "#94a6be", // Неактивная кнопка
       text: "#ffffff", // Цвет текста на кнопках с фоном
+      statusText: "#94a6be", // Цвет текста статуса на кнопке без фона
     },
 
     border: {
