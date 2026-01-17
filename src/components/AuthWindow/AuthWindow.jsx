@@ -35,7 +35,7 @@ const AuthWindow = ({ isSignUp }) => {
   const validateForm = () => {
     const newErrors = { name: "", login: "", password: "" };
     let isValid = true;
-    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (isSignUp && formData.name.trim() === "") {
       newErrors.name = true;
@@ -50,12 +50,12 @@ const AuthWindow = ({ isSignUp }) => {
       setError(
         "Введенные вами данные не корректны. Чтобы завершить регистрацию, заполните все поля в форме."
       );
-      // } else if (!emailRegex.test(formData.login)) {
-      //   newErrors.login = true;
-      //   isValid = false;
-      //   setError(
-      //     "Введенные вами данные не корректны. Чтобы завершить регистрацию, введите данные корректно и повторите попытку."
-      //   );
+      } else if (!emailRegex.test(formData.login)) {
+        newErrors.login = true;
+        isValid = false;
+        setError(
+          "Введенные вами данные не корректны. Чтобы завершить регистрацию, введите данные корректно и повторите попытку."
+        );
     }
     if (formData.password.trim() === "") {
       newErrors.password = true;

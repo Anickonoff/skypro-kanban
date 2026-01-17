@@ -217,7 +217,11 @@ const PopBrowse = () => {
         <div>
           {isEditor ? (
             <>
-              <BrowseBtnPrim onClick={handleSubmit} disabled={editLoading || deleteLoading} $loading={editLoading}>
+              <BrowseBtnPrim
+                onClick={handleSubmit}
+                disabled={editLoading || deleteLoading}
+                $loading={editLoading}
+              >
                 Сохранить
               </BrowseBtnPrim>
               <BrowseBtnSec onClick={handleCancel}>Отменить</BrowseBtnSec>
@@ -227,7 +231,11 @@ const PopBrowse = () => {
               Редактировать задачу
             </BrowseBtnSec>
           )}
-          <BrowseBtnSec onClick={handleDelete} disabled={deleteLoading || editLoading} $loading={deleteLoading}>
+          <BrowseBtnSec
+            onClick={handleDelete}
+            disabled={deleteLoading || editLoading}
+            $loading={deleteLoading}
+          >
             Удалить задачу
           </BrowseBtnSec>
         </div>
