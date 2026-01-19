@@ -26,9 +26,11 @@ const lightTheme = {
     button: {
       main: "#565eef", // Основной цвет
       secondary: "transparent", // Прозрачный цвет кнопки
+      status: "#94a6be", // Цвет кнопки статуса
       hover: "#33399b", // При наведении
       disabled: "#94a6be", // Неактивная кнопка
       text: "#ffffff", // Цвет текста на кнопках с фоном
+      statusText: "#94a6be", // Цвет текста статуса на кнопке без фона
     },
 
     border: {
@@ -39,15 +41,15 @@ const lightTheme = {
 
     // Категории задач
     categories: {
-      health: {
+      orange: {
         bg: "#ffe4c2",
         text: "#ff6d00",
       },
-      newYear: {
+      green: {
         bg: "#b4fdd1",
         text: "#06b16e",
       },
-      repair: {
+      purple: {
         bg: "#e9d4ff",
         text: "#9a48f1",
       },

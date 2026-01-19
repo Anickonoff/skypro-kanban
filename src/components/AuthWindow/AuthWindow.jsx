@@ -9,16 +9,12 @@ import {
   AuthModal,
   AuthTitle,
 } from "./AuthWindow.styled";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { signIn, signUp } from "../../services/auth";
+import { AuthContext } from "../../context/AuthContext";
 
-const AuthWindow = ({ setUser, isSignUp }) => {
+const AuthWindow = ({ isSignUp }) => {
   const navigate = useNavigate();
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   setIsAuth(true);
-  //   navigate("/");
-  // };
 
   const [errors, setErrors] = useState({
     name: "",
@@ -34,10 +30,12 @@ const AuthWindow = ({ setUser, isSignUp }) => {
 
   const [error, setError] = useState("");
 
+  const { login } = useContext(AuthContext);
+
   const validateForm = () => {
     const newErrors = { name: "", login: "", password: "" };
     let isValid = true;
-    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (isSignUp && formData.name.trim() === "") {
       newErrors.name = true;
@@ -52,12 +50,12 @@ const AuthWindow = ({ setUser, isSignUp }) => {
       setError(
         "Введенные вами данные не корректны. Чтобы завершить регистрацию, заполните все поля в форме."
       );
-    // } else if (!emailRegex.test(formData.login)) {
-    //   newErrors.login = true;
-    //   isValid = false;
-    //   setError(
-    //     "Введенные вами данные не корректны. Чтобы завершить регистрацию, введите данные корректно и повторите попытку."
-    //   );
+      } else if (!emailRegex.test(formData.login)) {
+        newErrors.login = true;
+        isValid = false;
+        setError(
+          "Введенные вами данные не корректны. Чтобы завершить регистрацию, введите данные корректно и повторите попытку."
+        );
     }
     if (formData.password.trim() === "") {
       newErrors.password = true;
@@ -98,10 +96,8 @@ const AuthWindow = ({ setUser, isSignUp }) => {
           });
 
       if (data) {
-        const userData = JSON.stringify(data);
-        setUser(data);
-        localStorage.setItem("user", userData);
-        navigate("/");
+        const success = login(data);
+        if (success) navigate("/");
       }
     } catch (err) {
       if (err.message === "Неверный логин или пароль") {

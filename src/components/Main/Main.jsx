@@ -1,23 +1,16 @@
+import { useContext } from "react";
 import Column from "../Column/Column";
-// import { cardList } from "../../data";
 import { MainBlock, MainContent, StyledMain } from "./Main.styled";
-
-const Main = ({ cards, error }) => {
-  const columns = ["none", "todo", "inProgress", "testing", "done"];
-  const columnsRu = {
-    none: "без статуса",
-    todo: "нужно сделать",
-    inProgress: "в работе",
-    testing: "тестирование",
-    done: "готово",
-  };
-
+import { TaskContext } from "../../context/TaskContext";
+import { columns, columnsRu } from "../../theme/Categories";
+const Main = () => {
+  const { cards, getError } = useContext(TaskContext);
   return (
     <StyledMain>
       <MainBlock>
         <MainContent>
-          {error ? (
-            <p>Ошибка: {error}</p>
+          {getError ? (
+            <p>Ошибка: {getError}</p>
           ) : (
             columns.map((status) => (
               <Column

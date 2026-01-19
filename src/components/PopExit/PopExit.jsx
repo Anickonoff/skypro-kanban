@@ -8,8 +8,11 @@ import {
   ExitPrompt,
   PopExitWindow,
 } from "./PopExit.styled";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
-const PopExit = ({ logout }) => {
+const PopExit = () => {
+  const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const handleYesClick = () => {
     logout();

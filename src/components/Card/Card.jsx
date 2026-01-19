@@ -12,6 +12,7 @@ import {
   CardTitle,
 } from "./Card.styled";
 import { format } from "date-fns";
+// import Category from "../Category/Category";
 
 const Card = ({ card }) => {
   return (
@@ -62,7 +63,7 @@ const Card = ({ card }) => {
                 </clipPath>
               </defs>
             </svg>
-            <p>{format(card.date, 'dd.MM.yy')}</p>
+            <p>{format(card.date, "dd.MM.yy")}</p>
           </CardDate>
         </CardContent>
       </StyledCard>

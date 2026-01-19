@@ -1,150 +1,249 @@
 import Calendar from "../Calendar/Calendar";
 import "../../App.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
-import { getTask } from "../../services/api";
+import { useContext, useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
-// import { cardList } from "../../data";
+import { TaskContext } from "../../context/TaskContext";
+import Modal from "../Modal/Modal";
+import {
+  BrowseBtnPrim,
+  BrowseBtns,
+  BrowseBtnSec,
+  BrowseHeader,
+  BrowseStatus,
+  BrowseStatusItem,
+  BrowseStatusList,
+  BrowseTtl,
+} from "./PopBrowse.styled";
+import {
+  ModalCategoriesTheme,
+  ModalFieldBlock,
+  ModalForm,
+  ModalFormArea,
+  ModalFormLabel,
+  ModalWrap,
+} from "../Modal/Modal.styled";
+import { columns, columnsRu } from "../../theme/Categories";
 
 const PopBrowse = () => {
   const { id } = useParams();
-  // const card = cardList.find((card) => card.id == id);
-  const [card, setCard] = useState(null);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const getCard = useCallback(async () => {
-    try {
-      setLoading(true);
-      const data = await getTask({
-        token: "asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k",
-        id,
-      });
-      if (!data) throw new Error("Задача не найдена");
-      setCard(data);
-    } catch (e) {
-      setError(e.message);
-      console.error(e.message);
-    } finally {
-      setLoading(false);
-    }
-  }, [id]);
+  const {
+    cards,
+    loading,
+    editError,
+    editLoading,
+    deleteError,
+    deleteLoading,
+    updateCard,
+    deleteCard,
+  } = useContext(TaskContext);
+  const card = cards.find((card) => card._id === id);
+  const navigate = useNavigate();
+  const [taskDate, setTaskDate] = useState();
+  const [isEditor, setIsEditor] = useState(false);
+  const [newCard, setNewCard] = useState({});
+  const [snapshot, setSnapshot] = useState({});
+  const [operation, setOperation] = useState(null);
 
   useEffect(() => {
-    getCard();
-  }, [getCard]);
+    if (card) {
+      setTaskDate(new Date(card.date));
+      setNewCard({
+        title: card.title,
+        topic: card.topic,
+        _id: card._id,
+        status: card.status,
+        description: card.description,
+      });
+    }
+  }, [card]);
 
-  const navigate = useNavigate();
+  //переход в режим редактирование, сохранение снимка данных
+  const handleEdit = () => {
+    setIsEditor(true);
+    setSnapshot({
+      status: newCard.status,
+      description: newCard.description,
+      date: taskDate.toISOString(),
+      _id: newCard._id,
+      title: newCard.title,
+      topic: newCard.topic,
+    });
+  };
+
+  // отслеживание изменения описания
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNewCard({
+      ...newCard,
+      [name]: value,
+    });
+  };
+
+  // отслеживание изменения статуса
+  const handleStatusClick = (newStatus) => {
+    setNewCard({
+      ...newCard,
+      status: newStatus,
+    });
+  };
+
+  // обработка отправки формы
+  const handleSubmit = async () => {
+    setOperation("edit");
+    console.log("Отправляю данные для редактирования задачи:");
+    console.log({
+      ...newCard,
+      date: taskDate.toISOString(),
+    });
+    await updateCard({
+      ...newCard,
+      date: taskDate.toISOString(),
+      _id: card._id,
+    });
+  };
+
+  // выход из режима редактирования с откатом введённых данных
+  const handleCancel = () => {
+    setNewCard({
+      status: snapshot.status,
+      description: snapshot.description,
+      _id: snapshot._id,
+      title: snapshot.title,
+      topic: snapshot.topic,
+    });
+    setIsEditor(false);
+    setTaskDate(new Date(snapshot.date));
+  };
+
   const handleClose = () => {
     navigate("/");
   };
-  if (loading) return <Loader />;
-  if (error) return <div className="error">Ошибка: {error}</div>;
-  if (!card) return <div className="empty">Задача не найдена</div>;
+
+  // удаление карточки задачи
+  const handleDelete = async () => {
+    if (window.confirm("Вы уверены, что хотите удалить задачу?")) {
+      setOperation("delete");
+      await deleteCard(card._id);
+    }
+  };
+
+  // закрытие модального окна после успешного завершения операции редактирования или удаления
+  useEffect(() => {
+    if (operation === "edit" && !editLoading && editError === "") {
+      navigate("/");
+    }
+    if (operation === "delete" && !deleteLoading && deleteError === "") {
+      navigate("/");
+    }
+  }, [editLoading, editError, operation, navigate, deleteLoading, deleteError]);
+
+  if (loading)
+    return (
+      <Modal>
+        <Loader />
+      </Modal>
+    );
+
+  if (!card)
+    return (
+      <Modal>
+        <div className="empty">Задача не найдена</div>
+        <BrowseBtnPrim type="button" onClick={handleClose}>
+          Закрыть
+        </BrowseBtnPrim>
+      </Modal>
+    );
 
   return (
-    <div className="pop-browse" id="popBrowse">
-      <div className="pop-browse__container">
-        <div className="pop-browse__block">
-          <div className="pop-browse__content">
-            <div className="pop-browse__top-block">
-              <h3 className="pop-browse__ttl">{card.title}</h3>
-              <div className="categories__theme theme-top _orange _active-category">
-                <p className="_orange">{card.topic}</p>
-              </div>
-            </div>
-            <div className="pop-browse__status status">
-              <p className="status__p subttl">Статус</p>
-              <div className="status__themes">
-                <div className="status__theme _hide">
-                  <p>Без статуса</p>
-                </div>
-                <div className="status__theme _gray">
-                  <p className="_gray">Нужно сделать</p>
-                </div>
-                <div className="status__theme _hide">
-                  <p>В работе</p>
-                </div>
-                <div className="status__theme _hide">
-                  <p>Тестирование</p>
-                </div>
-                <div className="status__theme _hide">
-                  <p>Готово</p>
-                </div>
-              </div>
-            </div>
-            <div className="pop-browse__wrap">
-              <form
-                className="pop-browse__form form-browse"
-                id="formBrowseCard"
-                action="#"
+    <Modal>
+      <BrowseHeader>
+        <BrowseTtl>{card.title}</BrowseTtl>
+        <ModalCategoriesTheme key={card.topic} $category={card.topic}>
+          <p>{card.topic}</p>
+        </ModalCategoriesTheme>
+      </BrowseHeader>
+      <BrowseStatus>
+        <p>Статус</p>
+        <BrowseStatusList>
+          {!isEditor ? (
+            <BrowseStatusItem $active="true">{newCard.status}</BrowseStatusItem>
+          ) : (
+            columns.map((status) => (
+              <BrowseStatusItem
+                key={status}
+                $active={
+                  newCard.status.toLowerCase() === status.toLowerCase() ||
+                  newCard.status.toLowerCase() ===
+                    columnsRu[status].toLowerCase()
+                }
+                $isButton={true}
+                onClick={() => {
+                  handleStatusClick(columnsRu[status]);
+                }}
               >
-                <div className="form-browse__block">
-                  <label htmlFor="textArea01" className="subttl">
-                    Описание задачи
-                  </label>
-                  <textarea
-                    className="form-browse__area"
-                    name="text"
-                    id="textArea01"
-                    readOnly
-                    placeholder="Введите описание задачи..."
-                    value={card.description}
-                  ></textarea>
-                </div>
-              </form>
-              <Calendar />
-            </div>
-            <div className="theme-down__categories theme-down">
-              <p className="categories__p subttl">Категория</p>
-              <div className="categories__theme _orange _active-category">
-                <p className="_orange">Web Design</p>
-              </div>
-            </div>
-            <div className="pop-browse__btn-browse ">
-              <div className="btn-group">
-                <button className="btn-browse__edit _btn-bor _hover03">
-                  <a href="#">Редактировать задачу</a>
-                </button>
-                <button className="btn-browse__delete _btn-bor _hover03">
-                  <a href="#">Удалить задачу</a>
-                </button>
-              </div>
-              <button
-                className="btn-browse__close _btn-bg _hover01"
-                type="button"
-                onClick={handleClose}
+                {columnsRu[status]}
+              </BrowseStatusItem>
+            ))
+          )}
+        </BrowseStatusList>
+      </BrowseStatus>
+      <ModalWrap>
+        <ModalForm id="formBrowseCard" action="#">
+          <ModalFieldBlock>
+            <ModalFormLabel htmlFor="textArea01">
+              Описание задачи
+            </ModalFormLabel>
+            <ModalFormArea
+              name="description"
+              id="textArea01"
+              readOnly={!isEditor}
+              placeholder="Введите описание задачи..."
+              value={newCard.description}
+              onChange={handleChange}
+            ></ModalFormArea>
+          </ModalFieldBlock>
+        </ModalForm>
+        <Calendar
+          taskDate={taskDate}
+          setTaskDate={setTaskDate}
+          readOnly={!isEditor || editLoading || deleteLoading}
+        />
+      </ModalWrap>
+      {editError && (
+        <div className="error">Ошибка отправки запроса: {editError}</div>
+      )}
+      <BrowseBtns>
+        <div>
+          {isEditor ? (
+            <>
+              <BrowseBtnPrim
+                onClick={handleSubmit}
+                disabled={editLoading || deleteLoading}
+                $loading={editLoading}
               >
-                Закрыть
-              </button>
-            </div>
-            <div className="pop-browse__btn-edit _hide">
-              <div className="btn-group">
-                <button className="btn-edit__edit _btn-bg _hover01">
-                  <a href="#">Сохранить</a>
-                </button>
-                <button className="btn-edit__edit _btn-bor _hover03">
-                  <a href="#">Отменить</a>
-                </button>
-                <button
-                  className="btn-edit__delete _btn-bor _hover03"
-                  id="btnDelete"
-                >
-                  <a href="#">Удалить задачу</a>
-                </button>
-              </div>
-              <button
-                className="btn-edit__close _btn-bg _hover01"
-                type="button"
-                onClick={handleClose}
-              >
-                Закрыть
-              </button>
-            </div>
-          </div>
+                Сохранить
+              </BrowseBtnPrim>
+              <BrowseBtnSec onClick={handleCancel}>Отменить</BrowseBtnSec>
+            </>
+          ) : (
+            <BrowseBtnSec onClick={handleEdit}>
+              Редактировать задачу
+            </BrowseBtnSec>
+          )}
+          <BrowseBtnSec
+            onClick={handleDelete}
+            disabled={deleteLoading || editLoading}
+            $loading={deleteLoading}
+          >
+            Удалить задачу
+          </BrowseBtnSec>
         </div>
-      </div>
-    </div>
+        <BrowseBtnPrim type="button" onClick={handleClose}>
+          Закрыть
+        </BrowseBtnPrim>
+      </BrowseBtns>
+    </Modal>
   );
 };
 

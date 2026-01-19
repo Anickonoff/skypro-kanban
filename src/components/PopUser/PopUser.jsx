@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import {
   PopUserSet,
   UserExitBtn,
@@ -9,6 +9,7 @@ import {
   UserThemeBtn,
 } from "./PopUser.styled";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 const useClickOutside = (ref, handler) => {
   useEffect(() => {
@@ -24,9 +25,10 @@ const useClickOutside = (ref, handler) => {
   }, [ref, handler]);
 };
 
-const PopUser = ({ onClose, user }) => {
+const PopUser = ({ onClose }) => {
   const ref = useRef();
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
   useClickOutside(ref, onClose);
   const handleExit = () => {
     onClose();

@@ -1,5 +1,5 @@
 import PopUser from "../PopUser/PopUser";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   HeaderBlock,
   HeaderBtn,
@@ -9,10 +9,12 @@ import {
   StyledHeader,
 } from "./Header.styled";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
-const Header = ({ theme = "light", user }) => {
+const Header = ({ theme = "light" }) => {
   const [userShown, setUserShown] = useState(false);
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
   const toggleUser = (e) => {
     e.preventDefault();

@@ -1,73 +1,119 @@
-import { Link } from "react-router-dom";
 import Calendar from "../Calendar/Calendar";
-import '../../App.css';
+import "../../App.css";
+import {
+  NewCardTtl,
+  NewCardClose,
+  NewCardFormBtn,
+  NewCardCategories,
+  NewCardCategoriesTtl,
+  NewCardCategoriesThemes,
+} from "./PopNewCard.styled";
+import { categoryMap } from "../../theme/Categories";
+import { useContext, useEffect, useState } from "react";
+import Modal from "../Modal/Modal";
+import {
+  ModalCategoriesTheme,
+  ModalFieldBlock,
+  ModalForm,
+  ModalFormArea,
+  ModalFormInput,
+  ModalFormLabel,
+  ModalWrap,
+} from "../Modal/Modal.styled";
+import { TaskContext } from "../../context/TaskContext";
+import { useNavigate } from "react-router-dom";
 
 const PopNewCard = () => {
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [taskDate, setTaskDate] = useState(null);
+  const { addCard, addError, addLoading } = useContext(TaskContext);
+  const [newCard, setNewCard] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNewCard({
+      ...newCard,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async () => {
+    setIsSubmitted(true);
+    console.log("Отправляю данные:");
+    console.log({
+      ...newCard,
+      date: taskDate.toISOString(),
+      topic: selectedCategory,
+    });
+    await addCard({
+      ...newCard,
+      date: taskDate.toISOString(),
+      topic: selectedCategory,
+    });
+  };
+
+  useEffect(() => {
+    if (isSubmitted && !addLoading && addError === "") {
+      navigate("/");
+    }
+  }, [addLoading, addError, isSubmitted, navigate]);
+
   return (
-    <div className="pop-new-card" id="popNewCard">
-      <div className="pop-new-card__container">
-        <div className="pop-new-card__block">
-          <div className="pop-new-card__content">
-            <h3 className="pop-new-card__ttl">Создание задачи</h3>
-            {/* <a href="#" onClick={handleClick} className="pop-new-card__close"> */}
-            <Link to="/" className="pop-new-card__close">
-              &#10006;
-            </Link>
-            {/* </a> */}
-            <div className="pop-new-card__wrap">
-              <form
-                className="pop-new-card__form form-new"
-                id="formNewCard"
-                action="#"
-              >
-                <div className="form-new__block">
-                  <label htmlFor="formTitle" className="subttl">
-                    Название задачи
-                  </label>
-                  <input
-                    className="form-new__input"
-                    type="text"
-                    name="name"
-                    id="formTitle"
-                    placeholder="Введите название задачи..."
-                    autoFocus
-                  />
-                </div>
-                <div className="form-new__block">
-                  <label htmlFor="textArea" className="subttl">
-                    Описание задачи
-                  </label>
-                  <textarea
-                    className="form-new__area"
-                    name="text"
-                    id="textArea"
-                    placeholder="Введите описание задачи..."
-                  ></textarea>
-                </div>
-              </form>
-              <Calendar />
-            </div>
-            <div className="pop-new-card__categories categories">
-              <p className="categories__p subttl">Категория</p>
-              <div className="categories__themes">
-                <div className="categories__theme _orange _active-category">
-                  <p className="_orange">Web Design</p>
-                </div>
-                <div className="categories__theme _green">
-                  <p className="_green">Research</p>
-                </div>
-                <div className="categories__theme _purple">
-                  <p className="_purple">Copywriting</p>
-                </div>
-              </div>
-            </div>
-            <button className="form-new__create _hover01" id="btnCreate">
-              Создать задачу
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Modal>
+      <NewCardTtl>Создание задачи</NewCardTtl>
+      <NewCardClose to="/">&#10006;</NewCardClose>
+      {addError && <p>Ошибка: {addError}</p>}
+      <ModalWrap>
+        <ModalForm>
+          <ModalFieldBlock>
+            <ModalFormLabel htmlFor="formTitle">Название задачи</ModalFormLabel>
+            <ModalFormInput
+              type="text"
+              name="title"
+              onChange={handleChange}
+              value={newCard.title || ""}
+              placeholder="Введите название задачи..."
+              autoFocus
+            />
+          </ModalFieldBlock>
+          <ModalFieldBlock>
+            <ModalFormLabel htmlFor="textArea">Описание задачи</ModalFormLabel>
+            <ModalFormArea
+              name="description"
+              onChange={handleChange}
+              value={newCard.description || ""}
+              id="textArea"
+              placeholder="Введите описание задачи..."
+            ></ModalFormArea>
+          </ModalFieldBlock>
+        </ModalForm>
+        <Calendar taskDate={taskDate} setTaskDate={setTaskDate} />
+      </ModalWrap>
+      <NewCardCategories>
+        <NewCardCategoriesTtl>Категория</NewCardCategoriesTtl>
+        <NewCardCategoriesThemes>
+          {Object.keys(categoryMap).map((key) => (
+            <ModalCategoriesTheme
+              key={key}
+              $category={key}
+              $isDimmed={selectedCategory && selectedCategory !== key}
+              onClick={() => setSelectedCategory(key)}
+            >
+              <p>{key}</p>
+            </ModalCategoriesTheme>
+          ))}
+        </NewCardCategoriesThemes>
+      </NewCardCategories>
+      <NewCardFormBtn
+        type="button"
+        onClick={handleSubmit}
+        disabled={addLoading}
+      >
+        Создать задачу
+      </NewCardFormBtn>
+    </Modal>
   );
 };
 

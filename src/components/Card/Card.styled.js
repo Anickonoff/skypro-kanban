@@ -1,10 +1,5 @@
-import styled, { css, keyframes } from "styled-components";
-
-const categoryMap = {
-  Research: "newYear",
-  "Web Design": "health",
-  Copywriting: "repair",
-};
+import styled, { keyframes } from "styled-components";
+import { StyledCategory } from "../Category/Category.styled";
 
 const cardAnimation = keyframes`
   0% {
@@ -27,7 +22,7 @@ const CardItem = styled.div`
 const StyledCard = styled.div`
   width: 220px;
   height: 130px;
-  background-color: ${({theme}) => theme.colors.background.surface}; 
+  background-color: ${({ theme }) => theme.colors.background.surface};
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -45,20 +40,11 @@ const CardHeader = styled.div`
   justify-content: space-between;
 `;
 
-const CardTheme = styled.div`
+const CardTheme = styled(StyledCategory)`
   width: auto;
   height: 20px;
   padding: 5px 14px;
   border-radius: 18px;
-  ${({theme, $category}) => {
-    const key = categoryMap[$category] ?? "other";
-    const colors = theme.colors.categories[key];
-    return css`
-      background-color: ${colors.bg};
-      color: ${colors.text};
-    `;
-    }
-  }
   p {
     font-size: 10px;
     font-weight: 600;
@@ -77,7 +63,7 @@ const CardBtn = styled.div`
     width: 4px;
     height: 4px;
     border-radius: 50%;
-    background-color: ${({theme}) => theme.colors.text.secondary};
+    background-color: ${({ theme }) => theme.colors.text.secondary};
   }
 `;
 
@@ -90,10 +76,10 @@ const CardContent = styled.div`
 `;
 
 const CardTitle = styled.h3`
-  font-size: ${({theme}) => theme.fonts.size.sm};
+  font-size: ${({ theme }) => theme.fonts.size.sm};
   font-weight: 500;
   line-height: 18px;
-  color: ${({theme})=> theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin-bottom: 10px;
 `;
 
@@ -108,7 +94,7 @@ const CardDate = styled.div`
     margin-left: 6px;
     font-size: 10px;
     line-height: 13px;
-    color: ${({theme}) => theme.colors.text.secondary};
+    color: ${({ theme }) => theme.colors.text.secondary};
     letter-spacing: 0.2px;
   }
 `;
