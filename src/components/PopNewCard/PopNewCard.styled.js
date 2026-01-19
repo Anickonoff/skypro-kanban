@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ModalTitle } from "../Modal/Modal.styled";
+import { BtnPrim } from "../Button/Button.styled";
 
 const NewCardTtl = styled(ModalTitle)`
   margin-bottom: 20px;
@@ -22,28 +23,32 @@ const NewCardFormBlock = styled.div`
   flex-direction: column;
 `;
 
-const NewCardFormBtn = styled.button`
-  width: 132px;
-  height: 30px;
-  background-color: #565eef;
-  border-radius: 4px;
-  border: 0;
-  outline: none;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1;
-  color: #ffffff;
+// const NewCardFormBtn = styled.button`
+//   width: 132px;
+//   height: 30px;
+//   background-color: #565eef;
+//   border-radius: 4px;
+//   border: 0;
+//   outline: none;
+//   font-size: 14px;
+//   font-weight: 500;
+//   line-height: 1;
+//   color: #ffffff;
+//   float: right;
+//   &:hover {
+//     background-color: #33399b;
+//   }
+//   &:disabled {
+//     background-color: ${({ theme }) => theme.colors.button.disabled};
+//   }
+//   @media screen and (max-width: 495px) {
+//     width: 100%;
+//     height: 40px;
+//   }
+// `;
+const NewCardFormBtn = styled(BtnPrim)`
   float: right;
-  &:hover {
-    background-color: #33399b;
-  }
-  &:disabled {
-    background-color: ${({ theme }) => theme.colors.button.disabled};
-  }
-  @media screen and (max-width: 495px) {
-    width: 100%;
-    height: 40px;
-  }
+  padding: 10px 14px;
 `;
 
 const NewCardCategories = styled.div`

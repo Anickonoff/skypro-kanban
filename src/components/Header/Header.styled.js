@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BtnPrim } from "../Button/Button.styled";
 
 const StyledHeader = styled.header`
   width: 100%;
@@ -40,33 +41,16 @@ const HeaderNav = styled.nav`
   position: relative;
 `;
 
-const HeaderBtn = styled.button`
-  width: 178px;
-  height: 30px;
-  border-radius: 4px;
-  background-color: ${({theme}) => theme.colors.button.main};
-  color: ${({theme}) => theme.colors.button.text};
-  border: none;
-  font-size: ${({theme}) => theme.fonts.size.sm};
-  line-height: 1;
-  font-weight: 500;
+const HeaderBtn = styled(BtnPrim)`
+  padding: 10px 14px;
   margin-right: 20px;
-  a {
-    color: ${({theme}) => theme.colors.button.text};
-  }
-  &:hover {
-    background-color: ${({theme}) => theme.colors.button.hover};
-  }
-  @media screen and (${({theme}) => theme.devices.sm}) {
+  @media screen and (${({ theme }) => theme.devices.sm}) {
     z-index: 3;
     position: fixed;
     left: 16px;
     bottom: 30px;
     top: auto;
     width: calc(100vw - 32px);
-    height: 40px;
-    border-radius: 4px;
-    margin-right: 0;
   }
 `;
 

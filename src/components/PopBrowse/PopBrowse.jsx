@@ -9,6 +9,7 @@ import {
   BrowseBtnPrim,
   BrowseBtns,
   BrowseBtnSec,
+  BrowseFuncBtns,
   BrowseHeader,
   BrowseStatus,
   BrowseStatusItem,
@@ -214,7 +215,7 @@ const PopBrowse = () => {
         <div className="error">Ошибка отправки запроса: {editError}</div>
       )}
       <BrowseBtns>
-        <div>
+        <BrowseFuncBtns>
           {isEditor ? (
             <>
               <BrowseBtnPrim
@@ -238,7 +239,7 @@ const PopBrowse = () => {
           >
             Удалить задачу
           </BrowseBtnSec>
-        </div>
+        </BrowseFuncBtns>
         <BrowseBtnPrim type="button" onClick={handleClose}>
           Закрыть
         </BrowseBtnPrim>
