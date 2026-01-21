@@ -49,7 +49,7 @@ const AnimateButton = css`
     background-position: 0 0;
     border-radius: 6px;
     background-image: ${({ theme }) => `linear-gradient
-      (90deg, #000, ${theme.colors.button.main}, #fff, ${theme.colors.button.main}, #000)`};
+      (90deg, #000, ${theme.colors.button.bgPrimary}, #fff, ${theme.colors.button.bgPrimary}, #000)`};
     animation: ${Animation} 2s linear infinite;
   }
 
@@ -69,28 +69,25 @@ const AnimateButton = css`
 
 const BtnSec = styled.button`
   ${StyledButton}
-  border: 0.7px solid ${({ theme }) => theme.colors.button.main};
-  background: ${({ theme }) => theme.colors.button.secondary};
-  color: ${({ theme }) => theme.colors.button.main};
+  border: 0.7px solid ${({ theme }) => theme.colors.button.borderSecondary};
+  background: ${({ theme }) => theme.colors.button.bgSecondary};
+  color: ${({ theme }) => theme.colors.button.textSecondary};
   &:hover {
-    background-color: ${({ theme }) => theme.colors.button.hover};
-    color: ${({ theme }) => theme.colors.button.text};
+    background-color: ${({ theme }) => theme.colors.button.hoverSecondary};
+    color: ${({ theme }) => theme.colors.button.textPrimary};
   }
   ${({ $loading }) => ($loading ? AnimateButton : "")}
 `;
 
 const BtnPrim = styled.button`
   ${StyledButton}
-  background: ${({ theme }) => theme.colors.button.main};
+  background: ${({ theme }) => theme.colors.button.bgPrimary};
   border: none;
-  color: ${({ theme }) => theme.colors.button.text};
+  color: ${({ theme }) => theme.colors.button.textPrimary};
   &:hover {
-    background-color: ${({ theme }) => theme.colors.button.hover};
+    background-color: ${({ theme }) => theme.colors.button.hoverPrimary};
   }
   ${({ $loading }) => ($loading ? AnimateButton : "")}
 `;
 
-export {
-    BtnSec,
-    BtnPrim,
-}
+export { BtnSec, BtnPrim };

@@ -15,8 +15,8 @@ const BrowseStatus = styled.div`
   margin-bottom: 18px;
   p {
     margin-bottom: 14px;
-    color: #000;
-    font-size: 14px;
+    color: ${({ theme }) => theme.colors.text.primary};
+    font-size: ${({ theme }) => theme.fonts.size.sm};
     font-weight: 600;
     line-height: 1;
   }
@@ -35,11 +35,15 @@ const BrowseStatusItem = styled.div`
   height: 30px;
   border: 0.7px solid ${({ theme }) => theme.colors.border.default};
   background-color: ${({ theme, $active }) =>
-    $active ? theme.colors.button.status : theme.colors.button.secondary};
+    $active
+      ? theme.colors.button.bgStatusPrimary
+      : theme.colors.button.bgStatusSecondary};
   color: ${({ theme, $active }) =>
-    $active ? theme.colors.button.text : theme.colors.button.statusText};
+    $active
+      ? theme.colors.button.textStatusPrimary
+      : theme.colors.button.textStatusSecondary};
   padding: 10px 14px;
-  font-size: 14px;
+  font-size: ${({ theme }) => theme.fonts.size.sm};
   line-height: 10px;
   letter-spacing: -0.14px;
   text-align: center;
@@ -59,11 +63,11 @@ const BrowseBtns = styled.div`
 `;
 
 const BrowseFuncBtns = styled.div`
-display: flex;
-flex-wrap: wrap;
-align-items: flex-start;
-gap: 10px;
-justify-content: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 10px;
+  justify-content: flex-start;
 `;
 
 const BrowseBtnSec = styled(BtnSec)`
