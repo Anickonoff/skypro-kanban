@@ -92,11 +92,6 @@ const PopBrowse = () => {
   // обработка отправки формы
   const handleSubmit = async () => {
     setOperation("edit");
-    console.log("Отправляю данные для редактирования задачи:");
-    console.log({
-      ...newCard,
-      date: taskDate.toISOString(),
-    });
     await updateCard({
       ...newCard,
       date: taskDate.toISOString(),

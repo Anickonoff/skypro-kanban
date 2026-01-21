@@ -41,12 +41,6 @@ const PopNewCard = () => {
 
   const handleSubmit = async () => {
     setIsSubmitted(true);
-    console.log("Отправляю данные:");
-    console.log({
-      ...newCard,
-      date: taskDate.toISOString(),
-      topic: selectedCategory,
-    });
     await addCard({
       ...newCard,
       date: taskDate.toISOString(),
@@ -110,6 +104,7 @@ const PopNewCard = () => {
         type="button"
         onClick={handleSubmit}
         disabled={addLoading}
+        $loading={addLoading}
       >
         Создать задачу
       </NewCardFormBtn>
