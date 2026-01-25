@@ -9,14 +9,14 @@ const ThemeModeProvider = ({ children }) => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
       try {
-        return savedTheme ? JSON.parse(savedTheme) : "light";
+        return JSON.parse(savedTheme);
       } catch {
         localStorage.removeItem("theme");
-        return "light";
       }
-    } else {
-      return "light";
     }
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
   });
 
   const toggleTheme = () => {

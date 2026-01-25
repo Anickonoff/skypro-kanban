@@ -92,6 +92,7 @@ const styledInput = css`
   width: 100%;
   outline: none;
   padding: 14px;
+  color: ${({ theme }) => theme.colors.text.secondary};
   background: transparent;
   border: 0.7px solid ${({ theme }) => theme.colors.border.default};
   border-radius: 8px;
@@ -138,7 +139,8 @@ const ModalFormArea = styled.textarea`
   max-width: 370px;
   margin-top: 14px;
   height: 200px;
-  background-color: ${({ readOnly }) => (readOnly ? "#eaeef6" : "transparent")};
+  background-color: ${({ readOnly, theme }) =>
+    readOnly ? theme.colors.background.secondary : "transparent"};
   @media screen and (max-width: 495px) {
     max-width: 100%;
     height: 34px;
