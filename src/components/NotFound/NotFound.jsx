@@ -8,9 +8,13 @@ import {
   NFTextBlock,
   NFTitle,
 } from "./NotFound.styled";
+import { useContext } from "react";
+import { ThemeModeContext } from "../../context/ThemeModeContext";
 
-const NotFound = (theme = "light") => {
-  const logoUrl = theme === "dark" ? "public/logo_dark.png" : "public/logo.png";
+const NotFound = () => {
+  const { theme } = useContext(ThemeModeContext);
+  const logoUrl = theme === "dark" ? "/logo_dark.png" : "/logo.png";
+  const notFoundUrl = theme === "dark" ? "/404_dark.png" : "/404.png";
   return (
     <>
       <StyledHeader>
@@ -23,7 +27,7 @@ const NotFound = (theme = "light") => {
         </HeaderBlock>
       </StyledHeader>
       <NFBlock>
-        <NFImg src="public/404.png" />
+        <NFImg src={notFoundUrl} />
         <NFTextBlock>
           <NFTitle>404</NFTitle>
           <NFText>Страница не найдена</NFText>

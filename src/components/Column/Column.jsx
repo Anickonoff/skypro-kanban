@@ -4,13 +4,11 @@ import { ColumnCards, ColumnTitle, StyledColumn } from "./Column.styled";
 const Column = ({ title, cards }) => {
   return (
     <StyledColumn>
-      <ColumnTitle>
-        {title.toUpperCase()}
-      </ColumnTitle>
+      <ColumnTitle>{title.toUpperCase()}</ColumnTitle>
       <ColumnCards>
-        {cards.map((card) => (
-          <Card key={card._id} card={card} />
-        ))}
+        {cards.length === 0
+          ? "Новых задач нет"
+          : cards.map((card) => <Card key={card._id} card={card} />)}
       </ColumnCards>
     </StyledColumn>
   );
