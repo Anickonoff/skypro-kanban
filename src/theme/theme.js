@@ -16,7 +16,7 @@ const lightTheme = {
     },
 
     background: {
-      page: "#F1F1F1", // wrapper
+      page: "#EAEEF6", // wrapper
       secondary: "#EAEEF6", // Вторичный фон (main, input, day calendar)
       surface: "#ffffff",
       overlay: "#00000066", // Полупрозрачный оверлей
@@ -108,7 +108,7 @@ const darkTheme = {
 
     //!
     background: {
-      page: "#F1F1F1", // wrapper
+      page: "#151419", // wrapper
       secondary: "#151419", // Вторичный фон (main, input, day calendar)
       surface: "#20202C",
       overlay: "#000000CC", // Полупрозрачный оверлей

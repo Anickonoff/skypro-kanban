@@ -55,13 +55,13 @@ const HeaderBtn = styled(BtnPrim)`
 `;
 
 const HeaderUser = styled.a`
-  color: ${({theme}) => theme.colors.button.main};
+  color: ${({ theme }) => theme.colors.button.textSecondary};
   display: flex;
   align-items: center;
   height: 20px;
   flex-wrap: nowrap;
   justify-content: center;
-  font-size: ${({theme}) => theme.fonts.size.sm};
+  font-size: ${({ theme }) => theme.fonts.size.sm};
   line-height: 20px;
   font-weight: 500;
   &:after {
@@ -70,17 +70,18 @@ const HeaderUser = styled.a`
     width: 6px;
     height: 6px;
     border-radius: 1px;
-    border-left: 1.9px solid ${({theme}) => theme.colors.button.main};
-    border-bottom: 1.9px solid ${({theme}) => theme.colors.button.main};
+    border-left: 1.9px solid ${({ theme }) => theme.colors.button.textSecondary};
+    border-bottom: 1.9px solid
+      ${({ theme }) => theme.colors.button.textSecondary};
     transform: rotate(-45deg);
     margin: -6px 0 0 5px;
     padding: 0;
   }
-  &:hover {
-    color: ${({theme}) => theme.colors.button.hover};
+  &:hover, &:visited {
+    color: ${({ theme }) => theme.colors.button.textSecondary};
     &:after {
-      border-left-color: ${({theme}) => theme.colors.button.hover};
-      border-bottom-color: ${({theme}) => theme.colors.button.hover};
+      border-left-color: ${({ theme }) => theme.colors.button.textSecondary};
+      border-bottom-color: ${({ theme }) => theme.colors.button.textSecondary};
     }
   }
 `;

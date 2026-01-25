@@ -10,11 +10,13 @@ import {
 } from "./Header.styled";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import { ThemeModeContext } from "../../context/ThemeModeContext";
 
-const Header = ({ theme = "light" }) => {
+const Header = () => {
   const [userShown, setUserShown] = useState(false);
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
+  const { theme } = useContext(ThemeModeContext);
 
   const toggleUser = (e) => {
     e.preventDefault();
@@ -26,7 +28,7 @@ const Header = ({ theme = "light" }) => {
     navigate("/card/new");
   };
 
-  const logoUrl = theme === "dark" ? "public/logo_dark.png" : "public/logo.png";
+  const logoUrl = theme === "dark" ? "/logo_dark.png" : "/logo.png";
 
   return (
     <StyledHeader>

@@ -66,11 +66,12 @@ const UserThemeBtn = styled.input`
     width: 11px;
     height: 11px;
     border-radius: 50%;
-    background-color: ${({ theme }) => theme.colors.text.secondary};
+    background-color: ${({ theme }) => theme.colors.button.disabled};
     transition: 0.5s;
   }
   &:checked:before {
     left: 12px;
+    background-color: ${({ theme }) => theme.colors.button.bgPrimary};
   }
 `;
 
