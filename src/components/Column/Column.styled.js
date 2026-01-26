@@ -26,7 +26,6 @@ const ColumnCards = styled.div`
   display: block;
   position: relative;
   color: ${({ theme }) => theme.colors.text.secondary};
-  font-style: italic;
   text-align: center;
   @media screen and (${({ theme }) => theme.devices.lg}) {
     display: flex;
