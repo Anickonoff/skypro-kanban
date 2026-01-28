@@ -46,21 +46,24 @@ const lightTheme = {
 
     // Категории задач
     categories: {
-      orange: {
+      "web design": {
+        label: "Web Design",
         bg: "#ffe4c2",
         text: "#ff6d00",
       },
-      green: {
+      research: {
+        label: "Research",
         bg: "#b4fdd1",
         text: "#06b16e",
       },
-      purple: {
+      copywriting: {
+        label: "Copywriting",
         bg: "#e9d4ff",
         text: "#9a48f1",
       },
       other: {
         bg: "#94a6be",
-        test: "#ffffff",
+        text: "#ffffff",
       },
     },
 
@@ -139,15 +142,18 @@ const darkTheme = {
 
     //! Категории задач
     categories: {
-      orange: {
+      "web design": {
+        label: "Web Design",
         bg: "#ff6d00",
         text: "#FFE4C2",
       },
-      green: {
+      research: {
+        label: "Research",
         bg: "#06B16E",
         text: "#B4FDD1",
       },
-      purple: {
+      copywriting: {
+        label: "Copywriting",
         bg: "#9A48F1",
         text: "#E9D4FF",
       },
