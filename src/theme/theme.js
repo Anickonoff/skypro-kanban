@@ -62,6 +62,7 @@ const lightTheme = {
         text: "#9a48f1",
       },
       other: {
+        label: "Other",
         bg: "#94a6be",
         text: "#ffffff",
       },

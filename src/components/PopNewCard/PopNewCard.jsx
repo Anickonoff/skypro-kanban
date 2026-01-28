@@ -8,7 +8,7 @@ import {
   NewCardCategoriesTtl,
   NewCardCategoriesThemes,
 } from "./PopNewCard.styled";
-import { categoryMap } from "../../theme/Categories";
+// import { categoryMap } from "../../theme/Categories";
 import { useContext, useEffect, useState } from "react";
 import Modal from "../Modal/Modal";
 import {
@@ -22,6 +22,7 @@ import {
 } from "../Modal/Modal.styled";
 import { TaskContext } from "../../context/TaskContext";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "styled-components";
 
 const PopNewCard = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -30,6 +31,7 @@ const PopNewCard = () => {
   const [newCard, setNewCard] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -88,14 +90,14 @@ const PopNewCard = () => {
       <NewCardCategories>
         <NewCardCategoriesTtl>Категория</NewCardCategoriesTtl>
         <NewCardCategoriesThemes>
-          {Object.keys(categoryMap).map((key) => (
+          {Object.keys(theme.colors.categories).map((key) => (
             <ModalCategoriesTheme
               key={key}
               $category={key}
               $isDimmed={selectedCategory && selectedCategory !== key}
               onClick={() => setSelectedCategory(key)}
             >
-              <p>{key}</p>
+              <p>{theme.colors.categories[key].label}</p>
             </ModalCategoriesTheme>
           ))}
         </NewCardCategoriesThemes>
