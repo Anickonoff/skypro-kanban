@@ -19,6 +19,37 @@ const ThemeModeProvider = ({ children }) => {
       : "light";
   });
 
+  const [userCategories, setUserCategories] = useState(() => {
+    const savedCategory = localStorage.getItem("categories");
+    if (savedCategory) {
+      try {
+        return JSON.parse(savedCategory);
+      } catch {
+        localStorage.removeItem("categories");
+      }
+    }
+  });
+
+  const mergeCategories = (theme, newCategories) => {
+    const fullTheme = {
+      ...theme,
+      colors: {
+        ...theme.colors,
+        categories: { ...theme.colors.categories, ...newCategories.categories },
+      },
+    };
+    return fullTheme;
+  };
+
+  const updateUserCategories = (category) => {
+    setUserCategories(category);
+    if (category) {
+      localStorage.setItem("categories", JSON.stringify(category));
+    } else {
+      localStorage.removeItem("categories");
+    }
+  };
+
   const toggleTheme = () => {
     setTheme((theme) => {
       const newTheme = theme === "light" ? "dark" : "light";
@@ -26,9 +57,16 @@ const ThemeModeProvider = ({ children }) => {
       return newTheme;
     });
   };
+
+  const fullTheme = theme === "light" ?
+    mergeCategories(lightTheme, userCategories?.light || {}) :
+    mergeCategories(darkTheme, userCategories?.dark || {});
+
   return (
-    <ThemeModeContext.Provider value={{ theme, toggleTheme }}>
-      <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+    <ThemeModeContext.Provider
+      value={{ theme, toggleTheme, updateUserCategories }}
+    >
+      <ThemeProvider theme={fullTheme}>
         <GlobalStyles />
         {children}
       </ThemeProvider>
