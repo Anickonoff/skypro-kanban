@@ -134,6 +134,11 @@ const ModalFormInput = styled.input`
   margin: 20px 0;
 `;
 
+const ModalFormSelect = styled.select`
+  ${styledInput}
+  margin: 20px 0;
+`;
+
 const ModalFormArea = styled.textarea`
   ${styledInput}
   max-width: 370px;
@@ -177,4 +182,5 @@ export {
   ModalFormArea,
   ModalFormLabel,
   ModalCategoriesTheme,
+  ModalFormSelect,
 };

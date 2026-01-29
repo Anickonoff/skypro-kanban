@@ -64,7 +64,7 @@ const PopNewCard = () => {
       <ModalWrap>
         <ModalForm>
           <ModalFieldBlock>
-            <ModalFormLabel htmlFor="formTitle">Название задачи</ModalFormLabel>
+            <ModalFormLabel htmlFor="title">Название задачи</ModalFormLabel>
             <ModalFormInput
               type="text"
               name="title"

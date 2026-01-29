@@ -48,23 +48,67 @@ const lightTheme = {
     categories: {
       "web design": {
         label: "Web Design",
-        bg: "#ffe4c2",
-        text: "#ff6d00",
+        presetId: "orange",
       },
       research: {
         label: "Research",
-        bg: "#b4fdd1",
-        text: "#06b16e",
+        presetId: "green",
       },
       copywriting: {
         label: "Copywriting",
-        bg: "#e9d4ff",
-        text: "#9a48f1",
+        presetId: "pink",
       },
       other: {
         label: "Other",
+        presetId: "gray",
+      },
+    },
+
+    categoriesPresets: {
+      orange: {
+        label: "Orange",
+        bg: "#ffe4c2",
+        text: "#ff6d00",
+      },
+      green: {
+        label: "Green",
+        bg: "#b4fdd1",
+        text: "#06b16e",
+      },
+      pink: {
+        label: "Pink",
+        bg: "#e9d4ff",
+        text: "#9a48f1",
+      },
+      gray: {
+        label: "Gray",
         bg: "#94a6be",
         text: "#ffffff",
+      },
+      blue: {
+        label: "Blue",
+        bg: "#d1e9ff",
+        text: "#0a6cda",
+      },
+      red: {
+        label: "Red",
+        bg: "#ffdede",
+        text: "#d6394c",
+      },
+      tian: {
+        label: "Tian",
+        bg: "#e0f2f1",
+        text: "#007c6d",
+      },
+      brown: {
+        label: "Brown",
+        bg: "#f5e9de",
+        text: "#8d5524",
+      },
+      purple: {
+        label: "Purple",
+        bg: "#f0d9f9",
+        text: "#8e24aa",
       },
     },
 
@@ -145,22 +189,67 @@ const darkTheme = {
     categories: {
       "web design": {
         label: "Web Design",
-        bg: "#ff6d00",
-        text: "#FFE4C2",
+        presetId: "orange",
       },
       research: {
         label: "Research",
-        bg: "#06B16E",
-        text: "#B4FDD1",
+        presetId: "green",
       },
       copywriting: {
         label: "Copywriting",
-        bg: "#9A48F1",
-        text: "#E9D4FF",
+        presetId: "pink",
       },
       other: {
-        bg: "#94a6be",
-        text: "#ffffff",
+        label: "Other",
+        presetId: "gray",
+      },
+    },
+
+    categoriesPresets: {
+      orange: {
+        label: "Orange",
+        text: "#ffe4c2",
+        bg: "#ff6d00",
+      },
+      green: {
+        label: "Green",
+        text: "#b4fdd1",
+        bg: "#06b16e",
+      },
+      pink: {
+        label: "Pink",
+        text: "#e9d4ff",
+        bg: "#9a48f1",
+      },
+      gray: {
+        label: "Gray",
+        text: "#94a6be",
+        bg: "#ffffff",
+      },
+      blue: {
+        label: "Blue",
+        text: "#d1e9ff",
+        bg: "#0a6cda",
+      },
+      red: {
+        label: "Red",
+        text: "#ffdede",
+        bg: "#d6394c",
+      },
+      tian: {
+        label: "Tian",
+        text: "#e0f2f1",
+        bg: "#007c6d",
+      },
+      brown: {
+        label: "Brown",
+        text: "#f5e9de",
+        bg: "#8d5524",
+      },
+      purple: {
+        label: "Purple",
+        text: "#f0d9f9",
+        bg: "#8e24aa",
       },
     },
 

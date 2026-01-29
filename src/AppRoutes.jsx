@@ -6,6 +6,7 @@ import ViewCardPage from "./pages/ViewCardPage";
 import SignOutPage from "./pages/SignOutPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
+import CategoriesPage from "./pages/CategoriesPage";
 import PrivateRoute from "./PrivateRoute";
 
 const AppRoutes = () => {
@@ -16,6 +17,7 @@ const AppRoutes = () => {
           <Route path="card/:id" element={<ViewCardPage />} />
           <Route path="card/new" element={<NewCardPage />} />
           <Route path="exit" element={<SignOutPage />} />
+          <Route path="categories" element={<CategoriesPage />} />
         </Route>
       </Route>
       <Route path="/login" element={<SignInPage />} />
