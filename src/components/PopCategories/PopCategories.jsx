@@ -1,17 +1,22 @@
-import { use, useContext, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useTheme } from "styled-components";
 import { ThemeModeContext } from "../../context/ThemeModeContext";
 import { useNavigate } from "react-router-dom";
 import Modal from "../Modal/Modal";
+import { lightTheme } from "../../theme/theme";
 import {
   CategoriesBtnPrim,
+  CategoriesBtns,
   CategoriesBtnSec,
+  CategoriesEl,
+  CategoriesCheck,
   CategoriesList,
   CategoriesListTitle,
   CategoriesTitle,
+  CategoriesSelect,
+  CategoriesInputWrap,
 } from "./PopCategories.styled";
 import {
-  ModalCategoriesTheme,
   ModalFieldBlock,
   ModalForm,
   ModalFormInput,
@@ -24,16 +29,21 @@ const PopCategories = () => {
   const fullTheme = useTheme();
   const { updateUserCategories } = useContext(ThemeModeContext);
   const navigate = useNavigate();
+  const baseCategories = Object.keys(lightTheme.colors.categories);
   const [categoriesDraft, setCategoriesDraft] = useState(() => {
     let initCounter = 0;
     const draft = { categories: {} };
     Object.keys(fullTheme.colors.categories).forEach((key) => {
-      draft.categories[initCounter++] = { ...fullTheme.colors.categories[key] };
+      draft.categories[initCounter] = { ...fullTheme.colors.categories[key] };
+      if (baseCategories.includes(key)) {
+        draft.categories[initCounter].isBase = true;
+      }
+      initCounter += 1;
     });
     return draft;
   }); //черновик категорий из существующей темы
   let categoryId = useRef(Object.keys(categoriesDraft.categories).length); //счетчик id для новых категорий
-  let currentId = useRef(null); //текущий редактируемый id
+  const [currentId, setCurrentId] = useState(""); //текущий редактируемый id
   const [newCategory, setNewCategory] = useState({ label: "", presetId: "" }); //редактируемая категория
   const [isEditor, setIsEditor] = useState(false); //режим редактирования категории
   const presets = { presets: { ...fullTheme.colors.categoriesPresets } }; //список пресетов
@@ -51,36 +61,98 @@ const PopCategories = () => {
     navigate("/");
   };
 
+  // открытие категории для редактирование
   const handleEditorLoad = (Id) => {
-    if (isEditor) {
-      updateCategoriesDraft(currentId.current, newCategory);
-    } else {
+    if (!isEditor) {
       setIsEditor(true);
+    } else {
+      if (isValidCategory) {
+        updateCategoriesDraft(currentId, newCategory);
+      }
     }
     if (Id !== undefined) {
+      setCurrentId(Id);
       setNewCategory({ ...categoriesDraft.categories[Id] });
-      currentId.current = Id;
     } else {
-      setNewCategory({ label: "", presetId: "orange" });
       const tmpId = categoryId.current;
-      currentId.current = tmpId;
+      setCurrentId(String(tmpId));
       categoryId.current += 1;
+      setNewCategory({ label: "", presetId: "orange" });
     }
-    console.log("currentId: ", currentId.current);
-    console.log("categoryId: ", categoryId.current);
   };
 
+  //отслеживане изменений в форме
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setNewCategory({
+    const nextCategory = {
       ...newCategory,
       [name]: value,
+    };
+    setNewCategory(nextCategory);
+    if (validateCategoryLabel(nextCategory)) {
+      updateCategoriesDraft(currentId, nextCategory);
+    }
+  };
+
+  const validateCategoryLabel = (category = newCategory) => {
+    let checkResult = true;
+    if (category.label.trim() === "") {
+      checkResult = false;
+    } else {
+      Object.keys(categoriesDraft.categories).forEach((key) => {
+        if (
+          categoriesDraft.categories[key].label.toLowerCase() ===
+            category.label.trim().toLowerCase() &&
+          key !== currentId
+        ) {
+          checkResult = false;
+        }
+      });
+    }
+    return checkResult;
+  };
+
+  let isValidCategory = validateCategoryLabel();
+  let errorMessage = !isValidCategory
+    ? newCategory.label.trim() === ""
+      ? "Название категории не может быть пустым."
+      : "Категория с таким названием уже существует."
+    : "";
+
+  //удаление выбранной категории или сброс базовой категории
+  const handleDelete = (id) => {
+    const updatedCategories = { ...categoriesDraft.categories };
+
+    if (!updatedCategories[id]?.isBase) {
+      delete updatedCategories[id];
+    } else {
+      const baseCategoryKey = Object.keys(lightTheme.colors.categories).find(
+        (key) =>
+          lightTheme.colors.categories[key].label.toLowerCase() ===
+          updatedCategories[id].label.toLowerCase(),
+      );
+      updatedCategories[id] = {
+        ...lightTheme.colors.categories[baseCategoryKey],
+        isBase: true,
+      };
+    }
+    setCategoriesDraft({ categories: updatedCategories });
+    setIsEditor(false);
+    setCurrentId("");
+  };
+
+  const handleSave = () => {
+    const userCategories = { categories: {} };
+    Object.keys(categoriesDraft.categories).forEach((key) => {
+      userCategories.categories[
+        categoriesDraft.categories[key].label.toLowerCase()
+      ] = {
+        label: categoriesDraft.categories[key].label,
+        presetId: categoriesDraft.categories[key].presetId,
+      };
     });
-    // setErrors({
-    //   ...errors,
-    //   [name]: false,
-    // });
-    // setError("");
+    updateUserCategories(userCategories);
+    navigate("/");
   };
 
   return (
@@ -91,14 +163,15 @@ const PopCategories = () => {
       </CategoriesListTitle>
       <CategoriesList>
         {Object.keys(categoriesDraft.categories).map((key) => (
-          <ModalCategoriesTheme
+          <CategoriesEl
             key={key}
             $presetId={categoriesDraft.categories[key].presetId}
             onClick={() => handleEditorLoad(key)}
+            $editing={currentId === key && isEditor}
           >
             {" "}
             <p>{categoriesDraft.categories[key].label}</p>{" "}
-          </ModalCategoriesTheme>
+          </CategoriesEl>
         ))}
       </CategoriesList>
       <CategoriesListTitle>
@@ -114,20 +187,26 @@ const PopCategories = () => {
               <ModalFormLabel htmlFor="label">
                 Название категории
               </ModalFormLabel>
-              <ModalFormInput
-                type="text"
-                name="label"
-                onChange={handleChange}
-                value={newCategory.label || ""}
-                placeholder="Введите название категории..."
-                autoFocus
-              />
+              <CategoriesInputWrap>
+                <ModalFormInput
+                  type="text"
+                  name="label"
+                  onChange={handleChange}
+                  value={newCategory.label || ""}
+                  placeholder="Введите название категории..."
+                  autoFocus
+                />
+                <CategoriesCheck
+                  $message={errorMessage}
+                  $error={!isValidCategory}
+                />
+              </CategoriesInputWrap>
             </ModalFieldBlock>
             <ModalFieldBlock>
               <ModalFormLabel htmlFor="presetId">
                 Выберите цветовую палитру
               </ModalFormLabel>
-              <ModalFormSelect
+              <CategoriesSelect
                 name="presetId"
                 id="presetId"
                 onChange={handleChange}
@@ -141,27 +220,29 @@ const PopCategories = () => {
                     {presets.presets[key].label}
                   </option>
                 ))}
-              </ModalFormSelect>
+              </CategoriesSelect>
             </ModalFieldBlock>
-            <CategoriesBtnSec>Удалить категорию</CategoriesBtnSec>
+            <CategoriesBtnSec onClick={() => handleDelete(currentId)}>
+              {!categoriesDraft.categories[currentId]?.isBase
+                ? "Удалить категорию"
+                : "Сбросить настройки базовой категории"}
+            </CategoriesBtnSec>
           </ModalForm>
-          <ModalCategoriesTheme $presetId={newCategory.presetId || "orange"}>
-            {" "}
-            <p>{newCategory.label}</p>{" "}
-          </ModalCategoriesTheme>
         </ModalWrap>
       )}
-      <CategoriesBtnPrim
-        type="button"
-        onClick={() => {
-          // Handle save action
-        }}
-      >
-        Сохранить категории
-      </CategoriesBtnPrim>
-      <CategoriesBtnPrim type="button" onClick={handleClose}>
-        Закрыть без сохранения
-      </CategoriesBtnPrim>
+      <CategoriesBtns>
+        <CategoriesBtnPrim
+          type="button"
+          onClick={() => {
+            handleSave();
+          }}
+        >
+          Сохранить категории
+        </CategoriesBtnPrim>
+        <CategoriesBtnPrim type="button" onClick={handleClose}>
+          Закрыть без сохранения
+        </CategoriesBtnPrim>
+      </CategoriesBtns>
     </Modal>
   );
 };

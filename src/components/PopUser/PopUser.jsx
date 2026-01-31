@@ -7,6 +7,7 @@ import {
   UserTheme,
   UserThemeTitle,
   UserThemeBtn,
+  UserCategoriesBtn,
 } from "./PopUser.styled";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
@@ -50,6 +51,9 @@ const PopUser = ({ onClose }) => {
           checked={theme === "dark"}
         />
       </UserTheme>
+      <UserCategoriesBtn type="button" onClick={() => navigate("/categories")}>
+        Редактировать категории
+      </UserCategoriesBtn>
       <UserExitBtn type="button" onClick={handleExit}>
         Выйти
       </UserExitBtn>

@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { BtnSec } from "../Button/Button.styled";
+import { BtnPrim, BtnSec } from "../Button/Button.styled";
 
 const fontStyles = css`
   font-size: ${({ theme }) => theme.fonts.size.sm};
@@ -13,7 +13,7 @@ const PopUserSet = styled.div`
   top: 41px;
   right: 0;
   min-width: 213px;
-  height: 205px;
+  /* height: 240px; */
   border-radius: 10px;
   border: 0.7px solid ${({ theme }) => theme.colors.border.default};
   background: ${({ theme }) => theme.colors.background.surface};
@@ -40,7 +40,7 @@ const UserTheme = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 30px;
+  margin-bottom: 5px;
 `;
 
 const UserThemeTitle = styled.p`
@@ -80,6 +80,11 @@ const UserExitBtn = styled(BtnSec)`
   margin: 0 auto;
 `;
 
+const UserCategoriesBtn = styled(BtnPrim)`
+  padding: 10px 14px;
+  margin: 0px auto 10px;
+`;
+
 export {
   PopUserSet,
   UserName,
@@ -88,4 +93,5 @@ export {
   UserThemeTitle,
   UserThemeBtn,
   UserExitBtn,
+  UserCategoriesBtn,
 };
