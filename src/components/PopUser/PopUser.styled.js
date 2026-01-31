@@ -12,7 +12,7 @@ const PopUserSet = styled.div`
   position: absolute;
   top: 41px;
   right: 0;
-  min-width: 213px;
+  min-width: 266px;
   /* height: 240px; */
   border-radius: 10px;
   border: 0.7px solid ${({ theme }) => theme.colors.border.default};

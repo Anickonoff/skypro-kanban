@@ -108,21 +108,25 @@ const CategoriesCheck = styled.span`
         $error ? theme.colors.border.error : theme.colors.border.success};
     border-radius: 50%;
   }
-  ${({$error}) => $error && css`
-    &:hover::after {
-      content: "${({ $message }) => $message}";
-      color: red;
-      position: absolute;
-      top: -30px;
-      right: 0;
-      white-space: nowrap;
-      font-size: ${({ theme }) => theme.fonts.size.xs};
-      background-color: ${({ theme }) => theme.colors.background.surface};
-      padding: 4px 8px;
-      border-radius: 4px;
-      border: 1px solid ${({ theme }) => theme.colors.border.error};
-    }
-  `}
+  ${({ $error }) =>
+    $error &&
+    css`
+      &:hover::after,
+      &:focus::after,
+      &:active::after {
+        content: "${({ $message }) => $message}";
+        color: red;
+        position: absolute;
+        top: -30px;
+        right: 0;
+        white-space: nowrap;
+        font-size: ${({ theme }) => theme.fonts.size.xs};
+        background-color: ${({ theme }) => theme.colors.background.surface};
+        padding: 4px 8px;
+        border-radius: 4px;
+        border: 1px solid ${({ theme }) => theme.colors.border.error};
+      }
+    `}
 `;
 
 export {

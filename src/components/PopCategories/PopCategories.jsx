@@ -191,6 +191,7 @@ const PopCategories = () => {
                 <ModalFormInput
                   type="text"
                   name="label"
+                  id="label"
                   onChange={handleChange}
                   value={newCategory.label || ""}
                   placeholder="Введите название категории..."
@@ -210,12 +211,12 @@ const PopCategories = () => {
                 name="presetId"
                 id="presetId"
                 onChange={handleChange}
+                value={newCategory.presetId || ""}
               >
                 {Object.keys(presets.presets).map((key) => (
                   <option
                     key={key}
                     value={key}
-                    selected={newCategory.presetId === key}
                   >
                     {presets.presets[key].label}
                   </option>

@@ -47,7 +47,7 @@ const PopUser = ({ onClose }) => {
         <UserThemeBtn
           type="checkbox"
           name="checkbox"
-          onClick={toggleTheme}
+          onChange={toggleTheme}
           checked={theme === "dark"}
         />
       </UserTheme>

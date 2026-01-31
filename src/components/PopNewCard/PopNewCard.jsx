@@ -75,12 +75,14 @@ const PopNewCard = () => {
             />
           </ModalFieldBlock>
           <ModalFieldBlock>
-            <ModalFormLabel htmlFor="textArea">Описание задачи</ModalFormLabel>
+            <ModalFormLabel htmlFor="description">
+              Описание задачи
+            </ModalFormLabel>
             <ModalFormArea
               name="description"
               onChange={handleChange}
               value={newCard.description || ""}
-              id="textArea"
+              id="description"
               placeholder="Введите описание задачи..."
             ></ModalFormArea>
           </ModalFieldBlock>

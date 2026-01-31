@@ -187,7 +187,7 @@ const PopBrowse = () => {
       <ModalWrap>
         <ModalForm id="formBrowseCard" action="#">
           <ModalFieldBlock>
-            <ModalFormLabel htmlFor="textArea01">
+            <ModalFormLabel htmlFor="description">
               Описание задачи
             </ModalFormLabel>
             <ModalFormArea

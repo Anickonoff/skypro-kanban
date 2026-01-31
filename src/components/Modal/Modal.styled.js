@@ -36,6 +36,8 @@ const ModalCard = styled.div`
 
   @media screen and (max-width: 660px) {
     border-radius: 0;
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
   }
 
   @media screen and (max-width: 495px) {
@@ -127,6 +129,10 @@ const styledInput = css`
     opacity: 1;
     letter-spacing: -0.14px;
   }
+  @media screen and (max-width: 495px) {
+    height: 37px;
+    padding: 10px 8px;
+  }
 `;
 
 const ModalFormInput = styled.input`
@@ -148,7 +154,6 @@ const ModalFormArea = styled.textarea`
     readOnly ? theme.colors.background.secondary : "transparent"};
   @media screen and (max-width: 495px) {
     max-width: 100%;
-    height: 34px;
   }
 `;
 
