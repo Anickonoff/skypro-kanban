@@ -192,7 +192,7 @@ const PopBrowse = () => {
             </ModalFormLabel>
             <ModalFormArea
               name="description"
-              id="textArea01"
+              id="description"
               readOnly={!isEditor}
               placeholder="Введите описание задачи..."
               value={newCard.description}

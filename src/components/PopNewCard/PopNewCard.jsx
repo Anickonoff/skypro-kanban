@@ -8,7 +8,6 @@ import {
   NewCardCategoriesTtl,
   NewCardCategoriesThemes,
 } from "./PopNewCard.styled";
-// import { categoryMap } from "../../theme/Categories";
 import { useContext, useEffect, useState } from "react";
 import Modal from "../Modal/Modal";
 import {
@@ -46,7 +45,7 @@ const PopNewCard = () => {
     await addCard({
       ...newCard,
       date: taskDate.toISOString(),
-      topic: selectedCategory,
+      topic: theme.colors.categories[selectedCategory].label,
     });
   };
 
@@ -68,6 +67,7 @@ const PopNewCard = () => {
             <ModalFormInput
               type="text"
               name="title"
+              id="title"
               onChange={handleChange}
               value={newCard.title || ""}
               placeholder="Введите название задачи..."

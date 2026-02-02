@@ -42,7 +42,8 @@ const NewCardCategoriesTtl = styled.p`
 
 const NewCardCategoriesThemes = styled.div`
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  row-gap: 7px;
   align-items: flex-start;
   justify-content: flex-start;
 `;

@@ -28,6 +28,7 @@ const ThemeModeProvider = ({ children }) => {
         localStorage.removeItem("categories");
       }
     }
+    return {};
   });
 
   const mergeCategories = (theme, newCategories) => {
@@ -59,8 +60,8 @@ const ThemeModeProvider = ({ children }) => {
   };
 
   const fullTheme = theme === "light" ?
-    mergeCategories(lightTheme, userCategories?.light || {}) :
-    mergeCategories(darkTheme, userCategories?.dark || {});
+    mergeCategories(lightTheme, userCategories || {}) :
+    mergeCategories(darkTheme, userCategories || {});
 
   return (
     <ThemeModeContext.Provider

@@ -37,9 +37,10 @@ const CategoriesList = styled.div`
 const CategoriesBtns = styled.div`
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: center;
   gap: 10px;
   justify-content: flex-end;
+  margin-bottom: 10px;
 `;
 
 const CategoriesBtnSec = styled(BtnSec)`
@@ -72,6 +73,12 @@ const pulseAnimation = keyframes`
 `;
 
 const CategoriesEl = styled(ModalCategoriesTheme)`
+  ${({ $hasError }) =>
+    $hasError &&
+    css`
+      animation: none;
+      box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.border.error};
+    `}
   ${({ $editing }) =>
     $editing &&
     css`
@@ -129,6 +136,28 @@ const CategoriesCheck = styled.span`
     `}
 `;
 
+const CategoriesImportLabel = styled.label`
+  display: inline-block;
+  padding: 0px 10px;
+  height: 30px;
+  line-height: 30px;
+  background-color: ${({ theme }) => theme.colors.button.bgSecondary};
+  color: ${({ theme }) => theme.colors.button.textSecondary};
+  font-size: ${({ theme }) => theme.fonts.size.sm};
+  font-weight: 600;
+  border: 1px solid ${({ theme }) => theme.colors.button.borderSecondary};
+  border-radius: 4px;
+  cursor: pointer;
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.button.hoverSecondary};
+    color: ${({ theme }) => theme.colors.button.textPrimary};
+  }
+`;
+
+const CategoriesImportInput = styled.input`
+  display: none;
+`;
+
 export {
   CategoriesHeader,
   CategoriesTitle,
@@ -141,4 +170,6 @@ export {
   CategoriesBtns,
   CategoriesSelect,
   CategoriesInputWrap,
+  CategoriesImportLabel,
+  CategoriesImportInput,
 };
