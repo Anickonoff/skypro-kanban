@@ -3,8 +3,9 @@ import Card from "../Card/Card";
 import CardSkeleton from "../Card/CardSkeleton";
 import { ColumnCards, ColumnTitle, StyledColumn } from "./Column.styled";
 import { TaskContext } from "../../context/TaskContext";
+import { useDroppable } from "@dnd-kit/core";
 
-const Column = ({ title, cards }) => {
+const Column = ({ title, cards, id }) => {
   const [skeletonCount, setSkeletonCount] = useState(()=> {
     return Math.floor(Math.random() * 3) + 1;
   });
@@ -12,9 +13,11 @@ const Column = ({ title, cards }) => {
   const skeletonCards = new Array(skeletonCount)
     .fill(0)
     .map((_, i) => <CardSkeleton key={i} />);
-
+  const {setNodeRef} = useDroppable({
+    id: id,
+  });
   return (
-    <StyledColumn>
+    <StyledColumn ref={setNodeRef}>
       <ColumnTitle>{title.toUpperCase()}</ColumnTitle>
       <ColumnCards>
         {loading
