@@ -19,7 +19,7 @@ const Column = ({ title, cards, id, idDragging, showPlace }) => {
   });
   return (
     <StyledColumn ref={setNodeRef}>
-      <ColumnTitle>{title.toUpperCase() + " " + cards.length}</ColumnTitle>
+      <ColumnTitle>{title.toUpperCase()}</ColumnTitle>
       <ColumnCards>
         {loading
           ? skeletonCards

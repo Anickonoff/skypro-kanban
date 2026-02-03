@@ -35,9 +35,7 @@ const Main = () => {
     if (!over) return;
     const activeId = active.id;
     const overId = over.id;
-    console.log(`Dragged item ${activeId} over ${overId}`);
     const draggedCard = cards.find((card) => card._id === activeId);
-    console.log("Dragged card:", draggedCard);
     if (draggedCard) {
       const newStatus = overId;
       if (
@@ -45,7 +43,6 @@ const Main = () => {
         draggedCard.status.toLowerCase() !== columnsRu[newStatus].toLowerCase()
       ) {
         const updatedCard = { ...draggedCard, status: columnsRu[newStatus] };
-        console.log("Updating card:", updatedCard);
         updateCard(updatedCard);
       }
     }
@@ -53,7 +50,6 @@ const Main = () => {
 
   const handleDragStart = (event) => {
     const { active } = event;
-    console.log(`Drag started for item ${active.id}`);
     setIdDragging(active.id);
   };
 
