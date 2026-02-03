@@ -1,17 +1,6 @@
 import styled, { css, keyframes } from "styled-components";
 import { StyledCategory } from "../Category/Category.styled";
 
-const cardAnimation = keyframes`
-  0% {
-    height: 0;
-    opacity: 0;
-  }
-  100% {
-    height: auto;
-    opacity: 1;
-  }
-`;
-
 const skeletonAnimation = keyframes`
 100% {
   transform: translateX(100%);
@@ -38,9 +27,6 @@ const skeletonStyle = css`
 
 const CardItem = styled.div`
   padding: 5px;
-  animation-name: ${cardAnimation};
-  animation-duration: 500ms;
-  animation-timing-function: linear;
 `;
 
 const StyledCard = styled.div`
@@ -53,6 +39,14 @@ const StyledCard = styled.div`
   align-items: flex-start;
   justify-content: stretch;
   padding: 15px 13px 19px;
+`;
+
+const StyledCardPlace = styled.div`
+  width: 220px;
+  height: 130px;
+  background-color: transparent;
+  border-radius: 10px;
+  border: 1px dashed ${({ theme }) => theme.colors.border.primary};
 `;
 
 const CardHeader = styled.div`
@@ -85,9 +79,9 @@ const CardBtn = styled.div`
   justify-content: space-around;
   padding: 2px;
   div {
-    width: ${({$skeleton}) => $skeleton ? "100%" : "4px"};
+    width: ${({ $skeleton }) => ($skeleton ? "100%" : "4px")};
     height: 4px;
-    border-radius: ${({$skeleton}) => $skeleton ? "0" : "50%"};
+    border-radius: ${({ $skeleton }) => ($skeleton ? "0" : "50%")};
     background-color: ${({ theme }) => theme.colors.text.secondary};
     ${({ $skeleton }) => $skeleton && skeletonStyle}
   }
@@ -136,4 +130,5 @@ export {
   CardContent,
   CardTitle,
   CardDate,
+  StyledCardPlace,
 };
