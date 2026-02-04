@@ -4,6 +4,7 @@ import { ThemeModeContext } from "../../context/ThemeModeContext";
 import { useNavigate } from "react-router-dom";
 import Modal from "../Modal/Modal";
 import { lightTheme } from "../../theme/theme";
+import { toast } from "react-toastify";
 import {
   CategoriesBtnPrim,
   CategoriesBtns,
@@ -190,35 +191,48 @@ const PopCategories = () => {
   };
 
   const handleSave = () => {
-    const invalid = Object.keys(categoriesDraft.categories).some((key) => {
-      const category = categoriesDraft.categories[key];
-      return category.hasError;
-    });
-    if (!invalid) {
-      updateUserCategories(draftToUserCategories());
-      navigate("/");
+    const invalidCount = validateDraft();
+    if (invalidCount > 0) {
+      toast.error(
+        `Нельзя сохранить: исправьте ошибки в ${invalidCount} категориях.`,
+      );
+      return;
     }
+
+    updateUserCategories(draftToUserCategories());
+    toast.success("Категории сохранены.");
+    navigate("/");
   };
 
   const exportUserCategories = () => {
-    let element = document.createElement("a");
-    const file = new Blob([JSON.stringify(draftToUserCategories())], {
-      type: "application/json",
-    });
-    element.href = URL.createObjectURL(file);
-    element.download = "userCategories.json";
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
-    URL.revokeObjectURL(element.href);
+    try {
+      let element = document.createElement("a");
+      const file = new Blob([JSON.stringify(draftToUserCategories())], {
+        type: "application/json",
+      });
+      element.href = URL.createObjectURL(file);
+      element.download = "userCategories.json";
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+      URL.revokeObjectURL(element.href);
+      toast.success("Категории экспортированы в файл userCategories.json.");
+    } catch (error) {
+      toast.error(`Ошибка при экспорте категорий: ${error.message}`);
+    }
   };
 
   const handleImport = (event) => {
     //загрузка файла и сохранение в переменную
     const file = event.target.files[0];
+    if (!file) {
+      setInputKey(Date.now());
+      return;
+    }
     const reader = new FileReader();
     reader.onerror = () => {
-      console.error("Ошибка при чтении файла");
+      toast.error("Ошибка при чтении файла");
+      setInputKey(Date.now());
     };
     reader.onload = (e) => {
       try {
@@ -229,13 +243,13 @@ const PopCategories = () => {
         }
       } catch (error) {
         if (error instanceof SyntaxError) {
-          console.error("Ошибка синтаксиса JSON:", error.message);
+          toast.error("Ошибка синтаксиса JSON: " + error.message);
         } else {
-          console.error("Некорректный файл JSON:", error.message);
+          toast.error("Некорректный файл JSON: " + error.message);
         }
       } finally {
-        setInputKey(Date.now());
-      } //сброс инпута загрузки файла
+        setInputKey(Date.now()); //сброс инпута загрузки файла
+      }
     };
     reader.readAsText(file);
   };
@@ -358,6 +372,17 @@ const PopCategories = () => {
       }
     });
     setCategoriesDraft(importedDraft);
+    const errorCount = Object.values(importedDraft.categories).filter(
+      (c) => c?.hasError,
+    ).length;
+
+    if (errorCount > 0) {
+      toast.warn(
+        `Импорт выполнен, но есть проблемы: ${errorCount} категорий требуют исправления.`,
+      );
+    } else {
+      toast.success("Категории успешно импортированы.");
+    }
   };
 
   return (

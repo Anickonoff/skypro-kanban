@@ -1,5 +1,4 @@
 import Calendar from "../Calendar/Calendar";
-import "../../App.css";
 import {
   NewCardTtl,
   NewCardClose,

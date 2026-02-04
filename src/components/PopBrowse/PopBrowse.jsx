@@ -1,5 +1,4 @@
 import Calendar from "../Calendar/Calendar";
-import "../../App.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
