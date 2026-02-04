@@ -110,8 +110,6 @@ const AuthFooter = styled.div`
 `;
 
 export {
-  // AuthWrapper,
-  // AuthContainer,
   AuthModal,
   AuthBlock,
   AuthTitle,

@@ -150,8 +150,8 @@ const lightTheme = {
 const darkTheme = {
   colors: {
     text: {
-      primary: "#ffffff", //!
-      secondary: "#94a6be", //!
+      primary: "#ffffff", 
+      secondary: "#94a6be",
       secondarytr: "#94a6be66",
       inverse: "#151419",
       error: "#f84d4d",
@@ -166,7 +166,7 @@ const darkTheme = {
       overlay: "#000000CC", // Полупрозрачный оверлей
     },
 
-    //! Цвета кнопок
+    //Цвета кнопок
     button: {
       bgPrimary: "#565eef", // Основной цвет
       bgSecondary: "transparent", // Прозрачный цвет кнопки
@@ -182,7 +182,7 @@ const darkTheme = {
       textStatusSecondary: "#94a6be", // Цвет текста статуса на кнопке без фона
     },
 
-    //! Границы
+    //Границы
     border: {
       default: "rgba(148, 166, 190, 0.4)", // Прозрачная граница форм и кнопок статуса задачи
       pop: "#4E5566", // Границы всплывающих окон
@@ -190,7 +190,7 @@ const darkTheme = {
       success: "#06b16e", // Граница полей при успешном вводе
     },
 
-    //! Категории задач
+    //Категории задач
     categories: {
       "web design": {
         label: "Web Design",
@@ -258,7 +258,7 @@ const darkTheme = {
       },
     },
 
-    //! Календарь
+    //Календарь
     calendar: {
       weekend: "#94a6be", // Выходные на будущее
       bgActiveDay: "#94a6be", // Выбранная дата в календаре
@@ -276,7 +276,7 @@ const darkTheme = {
     },
   },
 
-  //!
+  //Тени
   shadows: {
     pop: "0px 4px 67px -12px #00000021",
     popUser: "0px 10px 39px 0px #94A6BE66",

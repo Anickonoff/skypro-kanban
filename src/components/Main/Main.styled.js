@@ -4,7 +4,7 @@ const StyledMain = styled.main`
   width: 100%;
   background-color: ${({theme}) => theme.colors.background.secondary};
 `;
-//add container style here
+
 const MainBlock = styled.div`
   max-width: 1260px;
   width: 100%;

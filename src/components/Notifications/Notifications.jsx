@@ -2,7 +2,6 @@ import { useContext, useEffect, useRef } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { ThemeModeContext } from "../../context/ThemeModeContext";
 import { TaskContext } from "../../context/TaskContext";
-import StyledToastContainer from "./Notifications.styled";
 import { useTheme } from "styled-components";
 
 const Notifications = () => {

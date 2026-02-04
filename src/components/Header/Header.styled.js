@@ -7,7 +7,6 @@ const StyledHeader = styled.header`
   background-color: ${({theme}) => theme.colors.background.surface};
 `;
 
-//add container style here
 const HeaderBlock = styled.div`
   max-width: 1260px;
   width: 100%;

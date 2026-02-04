@@ -44,8 +44,8 @@ const PopNewCard = () => {
     setIsSubmitted(true);
     await addCard({
       ...newCard,
-      date: taskDate.toISOString(),
-      topic: theme.colors.categories[selectedCategory].label,
+      date: taskDate?.toISOString(),
+      topic: theme.colors.categories[selectedCategory]?.label,
     });
   };
 

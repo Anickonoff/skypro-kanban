@@ -23,7 +23,6 @@ import {
   ModalForm,
   ModalFormInput,
   ModalFormLabel,
-  ModalFormSelect,
   ModalWrap,
 } from "../Modal/Modal.styled";
 
@@ -33,7 +32,7 @@ const PopCategories = () => {
   const navigate = useNavigate();
   const baseCategoriesList = Object.keys(lightTheme.colors.categories); //список id базовых категорий
   const [categoriesDraft, setCategoriesDraft] = useState(() => {
-    //нет валидации пресетов пользовательских категорий на соответствие глобальным темам (если тема вдруг поменяется на новую)
+    //нет валидации пресетов пользовательских категорий на соответствие глобальным темам (если тема вдруг поменяется на новую). Делать лень, добавлю, если буду тему менять динамически
     let initCounter = 0;
     const draft = { categories: {} };
     Object.keys(fullTheme.colors.categories).forEach((key) => {

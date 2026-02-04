@@ -52,7 +52,6 @@ const CalendarActions = styled.div`
 `;
 
 const CalendarAction = styled.div`
-  /* width: 18px; */
   height: 25px;
   cursor: pointer;
   display: flex;

@@ -13,7 +13,7 @@ import {
 } from "@dnd-kit/core";
 import Card from "../Card/Card";
 const Main = () => {
-  const { cards, getError, updateCard, editError, editLoading } =
+  const { cards, getError, updateCard } =
     useContext(TaskContext);
 
   const [idDragging, setIdDragging] = useState(null);
