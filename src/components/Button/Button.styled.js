@@ -21,52 +21,6 @@ const StyledButton = css`
   }
 `;
 
-const Animation = keyframes`
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-`;
-
-const AnimateButton = css`
-  position: relative;
-  z-index: 1;
-  cursor: wait;
-  &::before {
-    position: absolute;
-    content: "";
-    top: -2px;
-    left: -2px;
-    z-index: -2;
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    background-size: 100% 100%;
-    background-position: 0 0;
-    border-radius: 6px;
-    background-image: ${({ theme }) => `linear-gradient
-      (90deg, #000, ${theme.colors.button.bgPrimary}, #fff, ${theme.colors.button.bgPrimary}, #000)`};
-    animation: ${Animation} 2s linear infinite;
-  }
-
-  &::after {
-    position: absolute;
-    content: "";
-    height: 100%;
-    width: 100%;
-    border-radius: 4px;
-    background: ${({ theme }) => theme.colors.button.disabled};
-    z-index: -1;
-    left: 0px;
-    top: 0px;
-    cursor: wait;
-  }
-`;
-
 const BtnSec = styled.button`
   ${StyledButton}
   border: 0.7px solid ${({ theme }) => theme.colors.button.borderSecondary};
@@ -76,7 +30,6 @@ const BtnSec = styled.button`
     background-color: ${({ theme }) => theme.colors.button.hoverSecondary};
     color: ${({ theme }) => theme.colors.button.textPrimary};
   }
-  ${({ $loading }) => ($loading ? AnimateButton : "")}
 `;
 
 const BtnPrim = styled.button`
@@ -87,7 +40,6 @@ const BtnPrim = styled.button`
   &:hover {
     background-color: ${({ theme }) => theme.colors.button.hoverPrimary};
   }
-  ${({ $loading }) => ($loading ? AnimateButton : "")}
 `;
 
 export { BtnSec, BtnPrim };

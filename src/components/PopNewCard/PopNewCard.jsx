@@ -59,7 +59,6 @@ const PopNewCard = () => {
     <Modal>
       <NewCardTtl>Создание задачи</NewCardTtl>
       <NewCardClose to="/">&#10006;</NewCardClose>
-      {addError && <p>Ошибка: {addError}</p>}
       <ModalWrap>
         <ModalForm>
           <ModalFieldBlock>

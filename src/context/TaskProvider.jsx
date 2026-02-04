@@ -71,7 +71,11 @@ export const TaskProvider = ({ children }) => {
       const newCards = await updateTask({ token: user?.token, task });
       setCards(newCards);
     } catch (e) {
+      if (e.response && e.response.data && e.response.data.error) {
+      setEditError(e.response.data.error);
+      } else {
       setEditError(e.message);
+      }
     } finally {
       setEditLoading(false);
     }

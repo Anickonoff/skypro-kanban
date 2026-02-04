@@ -206,9 +206,6 @@ const PopBrowse = () => {
           readOnly={!isEditor || editLoading || deleteLoading}
         />
       </ModalWrap>
-      {editError && (
-        <div className="error">Ошибка отправки запроса: {editError}</div>
-      )}
       <BrowseBtns>
         <BrowseFuncBtns>
           {isEditor ? (
@@ -216,7 +213,6 @@ const PopBrowse = () => {
               <BrowseBtnPrim
                 onClick={handleSubmit}
                 disabled={editLoading || deleteLoading}
-                $loading={editLoading}
               >
                 Сохранить
               </BrowseBtnPrim>
@@ -230,7 +226,6 @@ const PopBrowse = () => {
           <BrowseBtnSec
             onClick={handleDelete}
             disabled={deleteLoading || editLoading}
-            $loading={deleteLoading}
           >
             Удалить задачу
           </BrowseBtnSec>
