@@ -1,5 +1,5 @@
 import AppRoutes from "./AppRoutes";
-import AuthProvider from "./context/AuthPROVIDER.JSX";
+import AuthProvider from "./context/AuthProvider";
 import { TaskProvider } from "./context/TaskProvider";
 import ThemeModeProvider from "./context/ThemeModeProvider";
 
