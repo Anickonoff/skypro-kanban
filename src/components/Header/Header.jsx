@@ -44,7 +44,7 @@ const Header = () => {
             Создать новую задачу
           </HeaderBtn>
           <HeaderUser href="#" onClick={toggleUser}>
-            {user.name}
+            <span>{user.name}</span>
           </HeaderUser>
           {userShown && (
             <PopUser

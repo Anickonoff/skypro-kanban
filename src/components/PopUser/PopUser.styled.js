@@ -75,6 +75,12 @@ const UserThemeBtn = styled.input`
   }
 `;
 
+const UserBtns = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const UserExitBtn = styled(BtnSec)`
   padding: 10px 14px;
   margin: 0 auto;
@@ -94,4 +100,5 @@ export {
   UserThemeBtn,
   UserExitBtn,
   UserCategoriesBtn,
+  UserBtns,
 };
