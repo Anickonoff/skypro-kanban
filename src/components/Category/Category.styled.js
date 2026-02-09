@@ -1,13 +1,12 @@
 import styled, { css } from "styled-components";
-import { categoryMap } from "../../theme/Categories";
 
 const StyledCategory = styled.div`
-  ${({ theme, $category }) => {
-    const key = categoryMap[$category];
-    const colors = theme.colors.categories[key] ?? theme.colors.categories.other;
+  ${({ theme, $category = "other", $presetId }) => {
+    const category = theme.colors.categories[$category.toLowerCase()] || theme.colors.categories.other;
+    const presetId = $presetId || category.presetId || theme.colors.categories.other.presetId;
     return css`
-      background-color: ${colors.bg};
-      color: ${colors.text};
+      background-color: ${theme.colors.categoriesPresets[presetId].bg};
+      color: ${theme.colors.categoriesPresets[presetId].text};
     `;
   }}
 `;

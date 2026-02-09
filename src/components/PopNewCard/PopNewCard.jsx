@@ -1,5 +1,4 @@
 import Calendar from "../Calendar/Calendar";
-import "../../App.css";
 import {
   NewCardTtl,
   NewCardClose,
@@ -8,7 +7,6 @@ import {
   NewCardCategoriesTtl,
   NewCardCategoriesThemes,
 } from "./PopNewCard.styled";
-import { categoryMap } from "../../theme/Categories";
 import { useContext, useEffect, useState } from "react";
 import Modal from "../Modal/Modal";
 import {
@@ -22,6 +20,7 @@ import {
 } from "../Modal/Modal.styled";
 import { TaskContext } from "../../context/TaskContext";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "styled-components";
 
 const PopNewCard = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -30,6 +29,7 @@ const PopNewCard = () => {
   const [newCard, setNewCard] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,16 +41,10 @@ const PopNewCard = () => {
 
   const handleSubmit = async () => {
     setIsSubmitted(true);
-    console.log("Отправляю данные:");
-    console.log({
-      ...newCard,
-      date: taskDate.toISOString(),
-      topic: selectedCategory,
-    });
     await addCard({
       ...newCard,
-      date: taskDate.toISOString(),
-      topic: selectedCategory,
+      date: taskDate?.toISOString(),
+      topic: theme.colors.categories[selectedCategory]?.label,
     });
   };
 
@@ -64,14 +58,14 @@ const PopNewCard = () => {
     <Modal>
       <NewCardTtl>Создание задачи</NewCardTtl>
       <NewCardClose to="/">&#10006;</NewCardClose>
-      {addError && <p>Ошибка: {addError}</p>}
       <ModalWrap>
         <ModalForm>
           <ModalFieldBlock>
-            <ModalFormLabel htmlFor="formTitle">Название задачи</ModalFormLabel>
+            <ModalFormLabel htmlFor="title">Название задачи</ModalFormLabel>
             <ModalFormInput
               type="text"
               name="title"
+              id="title"
               onChange={handleChange}
               value={newCard.title || ""}
               placeholder="Введите название задачи..."
@@ -79,12 +73,14 @@ const PopNewCard = () => {
             />
           </ModalFieldBlock>
           <ModalFieldBlock>
-            <ModalFormLabel htmlFor="textArea">Описание задачи</ModalFormLabel>
+            <ModalFormLabel htmlFor="description">
+              Описание задачи
+            </ModalFormLabel>
             <ModalFormArea
               name="description"
               onChange={handleChange}
               value={newCard.description || ""}
-              id="textArea"
+              id="description"
               placeholder="Введите описание задачи..."
             ></ModalFormArea>
           </ModalFieldBlock>
@@ -94,14 +90,14 @@ const PopNewCard = () => {
       <NewCardCategories>
         <NewCardCategoriesTtl>Категория</NewCardCategoriesTtl>
         <NewCardCategoriesThemes>
-          {Object.keys(categoryMap).map((key) => (
+          {Object.keys(theme.colors.categories).map((key) => (
             <ModalCategoriesTheme
               key={key}
               $category={key}
               $isDimmed={selectedCategory && selectedCategory !== key}
               onClick={() => setSelectedCategory(key)}
             >
-              <p>{key}</p>
+              <p>{theme.colors.categories[key].label}</p>
             </ModalCategoriesTheme>
           ))}
         </NewCardCategoriesThemes>
@@ -110,6 +106,7 @@ const PopNewCard = () => {
         type="button"
         onClick={handleSubmit}
         disabled={addLoading}
+        $loading={addLoading}
       >
         Создать задачу
       </NewCardFormBtn>

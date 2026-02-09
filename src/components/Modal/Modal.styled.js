@@ -15,7 +15,7 @@ const ModalRoot = styled.div`
 const ModalOverlay = styled.div`
   width: 100%;
   min-height: 100vh;
-  background: rgba(0, 0, 0, 0.4);
+  background: ${({ theme }) => theme.colors.background.overlay};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,16 +26,18 @@ const ModalOverlay = styled.div`
 `;
 
 const ModalCard = styled.div`
-  background: #ffffff;
+  background: ${({ theme }) => theme.colors.background.surface};
   width: 100%;
   max-width: 630px;
   border-radius: 10px;
-  border: 0.7px solid #d4dbe5;
+  border: 0.7px solid ${({ theme }) => theme.colors.border.pop};
   padding: 40px 30px 48px;
   position: relative;
 
   @media screen and (max-width: 660px) {
     border-radius: 0;
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
   }
 
   @media screen and (max-width: 495px) {
@@ -53,7 +55,7 @@ const ModalTitle = styled.h3`
   font-size: 20px;
   font-weight: 600;
   line-height: 24px;
-  color: #000;
+  color: ${({ theme }) => theme.colors.text.primary};
 `;
 
 const ModalWrap = styled.div`
@@ -82,7 +84,7 @@ const ModalFieldBlock = styled.div`
 `;
 
 const ModalFormLabel = styled.label`
-  color: #000;
+  color: ${({ theme }) => theme.colors.text.primary};
   font-size: 14px;
   font-weight: 600;
   line-height: 1;
@@ -92,8 +94,9 @@ const styledInput = css`
   width: 100%;
   outline: none;
   padding: 14px;
+  color: ${({ theme }) => theme.colors.text.secondary};
   background: transparent;
-  border: 0.7px solid rgba(148, 166, 190, 0.4);
+  border: 0.7px solid ${({ theme }) => theme.colors.border.default};
   border-radius: 8px;
   font-size: 14px;
   line-height: 1;
@@ -104,7 +107,7 @@ const styledInput = css`
     font-weight: 400;
     font-size: 14px;
     line-height: 1;
-    color: #94a6be;
+    color: ${({ theme }) => theme.colors.text.secondary};
     opacity: 1;
     letter-spacing: -0.14px;
   }
@@ -113,7 +116,7 @@ const styledInput = css`
     font-weight: 400;
     font-size: 14px;
     line-height: 1;
-    color: #94a6be;
+    color: ${({ theme }) => theme.colors.text.secondary};
     opacity: 1;
     letter-spacing: -0.14px;
   }
@@ -122,13 +125,22 @@ const styledInput = css`
     font-weight: 400;
     font-size: 14px;
     line-height: 1;
-    color: #94a6be;
+    color: ${({ theme }) => theme.colors.text.secondary};
     opacity: 1;
     letter-spacing: -0.14px;
+  }
+  @media screen and (max-width: 495px) {
+    height: 37px;
+    padding: 10px 8px;
   }
 `;
 
 const ModalFormInput = styled.input`
+  ${styledInput}
+  margin: 20px 0;
+`;
+
+const ModalFormSelect = styled.select`
   ${styledInput}
   margin: 20px 0;
 `;
@@ -138,10 +150,10 @@ const ModalFormArea = styled.textarea`
   max-width: 370px;
   margin-top: 14px;
   height: 200px;
-  background-color: ${({ readOnly }) => (readOnly ? "#eaeef6" : "transparent")};
+  background-color: ${({ readOnly, theme }) =>
+    readOnly ? theme.colors.background.secondary : "transparent"};
   @media screen and (max-width: 495px) {
     max-width: 100%;
-    height: 34px;
   }
 `;
 
@@ -175,4 +187,5 @@ export {
   ModalFormArea,
   ModalFormLabel,
   ModalCategoriesTheme,
+  ModalFormSelect,
 };

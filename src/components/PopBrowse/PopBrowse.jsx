@@ -1,5 +1,4 @@
 import Calendar from "../Calendar/Calendar";
-import "../../App.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
@@ -9,6 +8,7 @@ import {
   BrowseBtnPrim,
   BrowseBtns,
   BrowseBtnSec,
+  BrowseFuncBtns,
   BrowseHeader,
   BrowseStatus,
   BrowseStatusItem,
@@ -91,11 +91,6 @@ const PopBrowse = () => {
   // обработка отправки формы
   const handleSubmit = async () => {
     setOperation("edit");
-    console.log("Отправляю данные для редактирования задачи:");
-    console.log({
-      ...newCard,
-      date: taskDate.toISOString(),
-    });
     await updateCard({
       ...newCard,
       date: taskDate.toISOString(),
@@ -191,12 +186,12 @@ const PopBrowse = () => {
       <ModalWrap>
         <ModalForm id="formBrowseCard" action="#">
           <ModalFieldBlock>
-            <ModalFormLabel htmlFor="textArea01">
+            <ModalFormLabel htmlFor="description">
               Описание задачи
             </ModalFormLabel>
             <ModalFormArea
               name="description"
-              id="textArea01"
+              id="description"
               readOnly={!isEditor}
               placeholder="Введите описание задачи..."
               value={newCard.description}
@@ -210,17 +205,13 @@ const PopBrowse = () => {
           readOnly={!isEditor || editLoading || deleteLoading}
         />
       </ModalWrap>
-      {editError && (
-        <div className="error">Ошибка отправки запроса: {editError}</div>
-      )}
       <BrowseBtns>
-        <div>
+        <BrowseFuncBtns>
           {isEditor ? (
             <>
               <BrowseBtnPrim
                 onClick={handleSubmit}
                 disabled={editLoading || deleteLoading}
-                $loading={editLoading}
               >
                 Сохранить
               </BrowseBtnPrim>
@@ -234,11 +225,10 @@ const PopBrowse = () => {
           <BrowseBtnSec
             onClick={handleDelete}
             disabled={deleteLoading || editLoading}
-            $loading={deleteLoading}
           >
             Удалить задачу
           </BrowseBtnSec>
-        </div>
+        </BrowseFuncBtns>
         <BrowseBtnPrim type="button" onClick={handleClose}>
           Закрыть
         </BrowseBtnPrim>

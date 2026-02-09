@@ -1,22 +1,32 @@
-import styled, { keyframes } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { StyledCategory } from "../Category/Category.styled";
 
-const cardAnimation = keyframes`
-  0% {
-    height: 0;
-    opacity: 0;
-  }
-  100% {
-    height: auto;
-    opacity: 1;
+const skeletonAnimation = keyframes`
+100% {
+  transform: translateX(100%);
+}
+`;
+
+const skeletonStyle = css`
+  position: relative;
+  overflow: hidden;
+  background-color: #c1cddc;
+  color: transparent;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, #c1cddc, #e9eef7, #c1cddc);
+    animation: ${skeletonAnimation} 2.2s infinite;
   }
 `;
 
 const CardItem = styled.div`
   padding: 5px;
-  animation-name: ${cardAnimation};
-  animation-duration: 500ms;
-  animation-timing-function: linear;
 `;
 
 const StyledCard = styled.div`
@@ -29,6 +39,14 @@ const StyledCard = styled.div`
   align-items: flex-start;
   justify-content: stretch;
   padding: 15px 13px 19px;
+`;
+
+const StyledCardPlace = styled.div`
+  width: 220px;
+  height: 130px;
+  background-color: transparent;
+  border-radius: 10px;
+  border: 1px dashed ${({ theme }) => theme.colors.border.primary};
 `;
 
 const CardHeader = styled.div`
@@ -45,6 +63,7 @@ const CardTheme = styled(StyledCategory)`
   height: 20px;
   padding: 5px 14px;
   border-radius: 18px;
+  ${({ $skeleton }) => $skeleton && skeletonStyle}
   p {
     font-size: 10px;
     font-weight: 600;
@@ -60,10 +79,11 @@ const CardBtn = styled.div`
   justify-content: space-around;
   padding: 2px;
   div {
-    width: 4px;
+    width: ${({ $skeleton }) => ($skeleton ? "100%" : "4px")};
     height: 4px;
-    border-radius: 50%;
+    border-radius: ${({ $skeleton }) => ($skeleton ? "0" : "50%")};
     background-color: ${({ theme }) => theme.colors.text.secondary};
+    ${({ $skeleton }) => $skeleton && skeletonStyle}
   }
 `;
 
@@ -81,12 +101,14 @@ const CardTitle = styled.h3`
   line-height: 18px;
   color: ${({ theme }) => theme.colors.text.primary};
   margin-bottom: 10px;
+  ${({ $skeleton }) => $skeleton && skeletonStyle}
 `;
 
 const CardDate = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  color: ${({ theme }) => theme.colors.text.secondary};
   svg {
     width: 13px;
   }
@@ -94,9 +116,9 @@ const CardDate = styled.div`
     margin-left: 6px;
     font-size: 10px;
     line-height: 13px;
-    color: ${({ theme }) => theme.colors.text.secondary};
     letter-spacing: 0.2px;
   }
+  ${({ $skeleton }) => $skeleton && skeletonStyle}
 `;
 
 export {
@@ -108,4 +130,5 @@ export {
   CardContent,
   CardTitle,
   CardDate,
+  StyledCardPlace,
 };

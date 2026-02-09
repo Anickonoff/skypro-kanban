@@ -1,5 +1,3 @@
-// import { themes } from "../../data";
-
 import { Link } from "react-router-dom";
 import {
   StyledCard,
@@ -12,11 +10,17 @@ import {
   CardTitle,
 } from "./Card.styled";
 import { format } from "date-fns";
-// import Category from "../Category/Category";
+import { useDraggable } from "@dnd-kit/core";
 
 const Card = ({ card }) => {
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: card._id,
+  });
+  const style = transform
+      ? { transform:  `translate3d(${transform.x}px, ${transform.y}px, 0)` }
+      : undefined;
   return (
-    <CardItem>
+    <CardItem ref={setNodeRef} style={style} {...attributes} {...listeners}>
       <StyledCard>
         <CardHeader>
           <CardTheme $category={card.topic}>
@@ -31,9 +35,7 @@ const Card = ({ card }) => {
           </Link>
         </CardHeader>
         <CardContent>
-          <Link to={"/card/" + card._id}>
-            <CardTitle>{card.title}</CardTitle>
-          </Link>
+          <CardTitle>{card.title}</CardTitle>
           <CardDate>
             <svg
               xmlns="http://www.w3.org/2000/svg"

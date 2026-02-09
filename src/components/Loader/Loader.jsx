@@ -1,6 +1,5 @@
 import { Sloader, Sspan } from "./Loader.styled";
 
-// import './Loader.css';
 const Loader = () => {
   return (
     <Sloader>

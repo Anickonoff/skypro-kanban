@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ModalTitle } from "../Modal/Modal.styled";
+import { BtnPrim } from "../Button/Button.styled";
 
 const NewCardTtl = styled(ModalTitle)`
   margin-bottom: 20px;
@@ -10,10 +11,10 @@ const NewCardClose = styled(Link)`
   position: absolute;
   top: 20px;
   right: 30px;
-  color: #94a6be;
+  color: ${({ theme }) => theme.colors.text.secondary};
   cursor: pointer;
   &:hover {
-    color: #000000;
+    color: ${({ theme }) => theme.colors.text.primary};
   }
 `;
 
@@ -22,28 +23,9 @@ const NewCardFormBlock = styled.div`
   flex-direction: column;
 `;
 
-const NewCardFormBtn = styled.button`
-  width: 132px;
-  height: 30px;
-  background-color: #565eef;
-  border-radius: 4px;
-  border: 0;
-  outline: none;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1;
-  color: #ffffff;
+const NewCardFormBtn = styled(BtnPrim)`
   float: right;
-  &:hover {
-    background-color: #33399b;
-  }
-  &:disabled {
-    background-color: ${({ theme }) => theme.colors.button.disabled};
-  }
-  @media screen and (max-width: 495px) {
-    width: 100%;
-    height: 40px;
-  }
+  padding: 10px 14px;
 `;
 
 const NewCardCategories = styled.div`
@@ -52,15 +34,16 @@ const NewCardCategories = styled.div`
 
 const NewCardCategoriesTtl = styled.p`
   margin-bottom: 14px;
-  color: #000;
-  font-size: 14px;
+  color: ${({ theme }) => theme.colors.text.primary};
+  font-size: ${({ theme }) => theme.fonts.size.sm};
   font-weight: 600;
   line-height: 1;
 `;
 
 const NewCardCategoriesThemes = styled.div`
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  row-gap: 7px;
   align-items: flex-start;
   justify-content: flex-start;
 `;

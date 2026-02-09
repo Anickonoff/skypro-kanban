@@ -1,20 +1,17 @@
-import { ThemeProvider } from "styled-components";
 import AppRoutes from "./AppRoutes";
-import AuthProvider from "./context/AuthPROVIDER.JSX";
-import { lightTheme } from "./theme/theme";
-import GlobalStyles from "./theme/GlobalStyles";
+import AuthProvider from "./context/AuthProvider";
 import { TaskProvider } from "./context/TaskProvider";
+import ThemeModeProvider from "./context/ThemeModeProvider";
 
 function App() {
   return (
-    <ThemeProvider theme={lightTheme}>
-      <GlobalStyles />
+    <ThemeModeProvider>
       <AuthProvider>
         <TaskProvider>
           <AppRoutes />
         </TaskProvider>
       </AuthProvider>
-    </ThemeProvider>
+    </ThemeModeProvider>
   );
 }
 

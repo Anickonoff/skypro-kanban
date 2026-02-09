@@ -1,7 +1,8 @@
 import styled, { css } from "styled-components";
+import { BtnPrim, BtnSec } from "../Button/Button.styled";
 
 const fontStyles = css`
-  font-size: ${({theme})=>theme.fonts.size.sm};
+  font-size: ${({ theme }) => theme.fonts.size.sm};
   line-height: 21px;
   letter-spacing: -0.14px;
 `;
@@ -11,12 +12,12 @@ const PopUserSet = styled.div`
   position: absolute;
   top: 41px;
   right: 0;
-  min-width: 213px;
-  height: 205px;
+  min-width: 266px;
+  /* height: 240px; */
   border-radius: 10px;
-  border: 0.7px solid ${({theme}) => theme.colors.border.default};
-  background: ${({theme}) => theme.colors.background.surface};
-  box-shadow: ${({theme})=>theme.shadows.popUser};
+  border: 0.7px solid ${({ theme }) => theme.colors.border.default};
+  background: ${({ theme }) => theme.colors.background.surface};
+  box-shadow: ${({ theme }) => theme.shadows.popUser};
   padding: 34px;
   text-align: center;
   z-index: 2;
@@ -24,14 +25,14 @@ const PopUserSet = styled.div`
 
 const UserName = styled.p`
   ${fontStyles}
-  color: ${({theme}) => theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin-bottom: 4px;
   font-weight: 500;
 `;
 
 const UserMail = styled.p`
   ${fontStyles}
-  color: ${({theme}) => theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   margin-bottom: 10px;
 `;
 
@@ -39,12 +40,12 @@ const UserTheme = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 30px;
+  margin-bottom: 5px;
 `;
 
 const UserThemeTitle = styled.p`
   ${fontStyles}
-  color: ${({theme}) => theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
 `;
 
 const UserThemeBtn = styled.input`
@@ -52,7 +53,7 @@ const UserThemeBtn = styled.input`
   width: 24px;
   height: 13px;
   border-radius: 100px;
-  background: ${({theme}) => theme.colors.background.secondary};
+  background: ${({ theme }) => theme.colors.background.secondary};
   outline: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -65,39 +66,39 @@ const UserThemeBtn = styled.input`
     width: 11px;
     height: 11px;
     border-radius: 50%;
-    background-color: ${({theme}) => theme.colors.text.secondary};
+    background-color: ${({ theme }) => theme.colors.button.disabled};
     transition: 0.5s;
   }
   &:checked:before {
     left: 12px;
+    background-color: ${({ theme }) => theme.colors.button.bgPrimary};
   }
 `;
 
-const UserExitBtn = styled.button`
-  width: 72px;
-  height: 30px;
-  background: transparent;
-  color: ${({theme}) => theme.colors.button.main};
-  border-radius: 4px;
-  border: 1px solid ${({theme}) => theme.colors.button.main};
-  a {
-    color: ${({theme}) => theme.colors.button.main};
-  }
-  &:hover {
-    background-color: ${({theme}) => theme.colors.button.hover};
-    color: ${({theme}) => theme.colors.button.text};
-    a {
-      color: ${({theme}) => theme.colors.button.text};
-    }
-  }
+const UserBtns = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const UserExitBtn = styled(BtnSec)`
+  padding: 10px 14px;
+  margin: 0 auto;
+`;
+
+const UserCategoriesBtn = styled(BtnPrim)`
+  padding: 10px 14px;
+  margin: 0px auto 10px;
 `;
 
 export {
-    PopUserSet,
-    UserName,
-    UserMail,
-    UserTheme,
-    UserThemeTitle,
-    UserThemeBtn,
-    UserExitBtn,
-}
+  PopUserSet,
+  UserName,
+  UserMail,
+  UserTheme,
+  UserThemeTitle,
+  UserThemeBtn,
+  UserExitBtn,
+  UserCategoriesBtn,
+  UserBtns,
+};

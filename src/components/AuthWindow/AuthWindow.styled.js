@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { BtnPrim } from "../Button/Button.styled";
 
 const AuthFont = css`
   font-size: ${({ theme }) => theme.fonts.size.sm};
@@ -63,13 +64,17 @@ const AuthInput = styled.input`
   min-width: 100%;
   border-radius: 8px;
   border: 0.7px solid
-    ${({ theme, $error }) => 
-      $error ? theme.colors.border.error : theme.colors.border.default
-    };
+    ${({ theme, $error }) =>
+      $error ? theme.colors.border.error : theme.colors.border.default};
   outline: none;
   padding: 10px 8px;
-  &::placeholder,
   &::-moz-placeholder {
+    font-family: ${({ theme }) => theme.fonts.family};
+    font-weight: 400;
+    color: ${({ theme }) => theme.colors.text.secondary};
+    ${AuthFont}
+  }
+  &::placeholder {
     font-family: ${({ theme }) => theme.fonts.family};
     font-weight: 400;
     color: ${({ theme }) => theme.colors.text.secondary};
@@ -88,29 +93,9 @@ const AuthError = styled.p`
   text-align: center;
 `;
 
-const AuthBtn = styled.button`
+const AuthBtn = styled(BtnPrim)`
   width: 100%;
-  height: 30px;
-  background-color: ${({ theme }) => theme.colors.button.main};
-  border-radius: 4px;
   margin: 20px 0;
-  border: none;
-  outline: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 500;
-  ${AuthFont}
-  color: ${({ theme }) => theme.colors.button.text};
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.button.hover};
-  }
-  &:disabled {
-    background-color: ${({ theme }) => theme.colors.button.disabled};
-  }
-  @media screen and (${({ theme }) => theme.devices.xs}) {
-    height: 40px;
-  }
 `;
 
 const AuthFooter = styled.div`
@@ -125,8 +110,6 @@ const AuthFooter = styled.div`
 `;
 
 export {
-  // AuthWrapper,
-  // AuthContainer,
   AuthModal,
   AuthBlock,
   AuthTitle,

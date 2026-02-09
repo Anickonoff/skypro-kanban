@@ -18,7 +18,7 @@ export async function getTasks({ token }) {
 
 export async function getTask({ token, id }) {
   try {
-    const data = await axios.get(API_URL+"/"+id, {
+    const data = await axios.get(API_URL + "/" + id, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "text/html",
@@ -40,7 +40,7 @@ export async function updateTask({ token, task }) {
     });
     return data.data.tasks;
   } catch (e) {
-    throw new Error(e.message);
+    throw e;
   }
 }
 
